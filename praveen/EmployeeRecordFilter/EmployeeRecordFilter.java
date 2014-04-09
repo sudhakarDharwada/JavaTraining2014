@@ -60,7 +60,7 @@ public class EmployeeRecordFilter {
 			System.out.println("File Read Error");
 		}
 	}
-
+        /*This method can read the file and store the recods ina collection*/
 	public List<EmployeeRecord> fileInput(String path)
 			throws FileNotFoundException, IOException {
 		BufferedReader input = new BufferedReader(new FileReader(path));
@@ -87,7 +87,7 @@ public class EmployeeRecordFilter {
 		}
 		return list;
 	}
-
+        /*This method is used to search the Employee in a particular date*/
 	public void searchByDate(List<EmployeeRecord> list) {
 		Scanner s = new Scanner(System.in);
 		System.out.print("\nEnter the Date to serach\nYear:");
@@ -108,6 +108,7 @@ public class EmployeeRecordFilter {
 		}
 		System.out.println("\n Employees present in this Date\n"+set);
 	}
+        /*This method is used to Search The Employee in a particular time*/
 	public void searchByTime(List<EmployeeRecord> list) {
 		Scanner s = new Scanner(System.in);
 		System.out.print("\nEnter the Date to serach");
@@ -129,7 +130,7 @@ public class EmployeeRecordFilter {
 		}
 		System.out.println("\n Employees present in this Time\n"+set);
 	}
-
+        /*This method is usefull to display all records in the file*/
 	public void displayAll(List<EmployeeRecord> list) {
 		java.util.Iterator<EmployeeRecord> itr = list.iterator();
 		if (list.isEmpty()) {
@@ -146,6 +147,7 @@ public class EmployeeRecordFilter {
 		}
 
 	}
+        /*This method is used to find the employees working hours*/
 	public void workingHours(List<EmployeeRecord> list) {
 		Scanner s=new Scanner(System.in);
 		System.out.println("Enter The Employee ID");
