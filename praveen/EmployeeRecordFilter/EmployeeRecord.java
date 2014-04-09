@@ -1,7 +1,7 @@
 package com.vlabs.employee.bean;
 
 import java.util.Date;
-
+/*Bean */
 public class EmployeeRecord {
 	private int Id;
 	private String status;
