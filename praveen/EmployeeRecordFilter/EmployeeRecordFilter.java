@@ -30,8 +30,7 @@ public class EmployeeRecordFilter {
 			path = s.next();
 			list = eRecordFilter.fileInput(path);
 			while (condition != 5) {
-				System.out
-						.println("\n\n  Menu\n 1)search by Date \n 2)search by Time\n 3)Working hours \n 4)display all \n 5)EXIT");
+				System.out.println("\n\n  Menu\n 1)search by Date \n 2)search by Time\n 3)Working hours \n 4)display all \n 5)EXIT");
 				System.out.println("\n\nEnter your Option:");
 				option = s.nextInt();
 				if (option == 1) {
