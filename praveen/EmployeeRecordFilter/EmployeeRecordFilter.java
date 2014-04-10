@@ -164,7 +164,6 @@ public class EmployeeRecordFilter {
 						EmployeeRecord employeeRecord2 = (EmployeeRecord) itr2.next();
 						if(((employeeRecord2.getStatus().equalsIgnoreCase("out")))&&((employeeRecord2.getD().getDate())==employeeRecord1.getD().getDate())&&((employeeRecord2.getId())==eid))
 						{
-							System.out.println("Im in in");
 							hour+=employeeRecord2.getD().getHours()-employeeRecord1.getD().getHours();
 							minutes+=Math.abs(employeeRecord2.getD().getMinutes()-employeeRecord1.getD().getMinutes());
 							break;
