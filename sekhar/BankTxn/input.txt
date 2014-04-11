@@ -1,0 +1,12 @@
+101 Deposit 100
+102 Deposit 200
+103 Deposit 300
+102 Withdra 100
+103 Withdra 200
+101 Withdra 50
+101 Deposit 200
+102 Deposit 300
+103 Deposit 400
+102 Withdra 100
+103 Withdra 200
+101 Withdra 50

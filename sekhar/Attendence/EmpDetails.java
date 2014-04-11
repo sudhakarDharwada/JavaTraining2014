@@ -1,26 +1,13 @@
-import java.sql.Date;
-import java.sql.Time;
-
-
 public class EmpDetails
 {
 	private int empid;
 	private boolean status;
-	private Date date;
-	private Time time;
-	
-	public EmpDetails(int empid,boolean status,String date,String time)
+	private String dates;
+	public EmpDetails(int empid,boolean status,String dates)
 	{
 		this.empid=empid;
-		this.time=Time.valueOf(time);
-		this.date=Date.valueOf(date);
+		this.dates=dates;
 		this.status=status;
-	}
-	public Time getTime() {
-		return time;
-	}
-	public void setTime(Time time) {
-		this.time = time;
 	}
 	public void setId(int empid) {
 		this.empid= empid;
@@ -28,11 +15,11 @@ public class EmpDetails
 	public int getempId() {
 		return this.empid;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setDate(String dates) {
+		this.dates = dates;
 	}
-	public Date getDate() {
-		return this.date;
+	public String getDate() {
+		return this.dates;
 	}
 	public boolean getStatus() {
 		return status;
