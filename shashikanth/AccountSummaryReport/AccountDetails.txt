@@ -1,0 +1,9 @@
+AccountId	Transaction	Amount
+
+1001		withdraw	100
+1002		withdraw	200
+1001		deposit		300
+1002		deposit		500
+1003		withdraw	200
+1003		withdraw	300
+1003		deposit		1000
