@@ -12,8 +12,8 @@ import java.util.Scanner;
 
 
 public class BankAccountDetailes {
-	public void readBankDetailes() throws FileNotFoundException{
-		FileReader fr=new FileReader("/home/valuelabs/Desktop/AccountDetailes.txt");
+	public void readBankDetailes(String filePath) throws FileNotFoundException{
+		FileReader fr=new FileReader(filePath);
 		BufferedReader br=new BufferedReader(fr);
 		Scanner sc=new Scanner(br);
 		List<BankAccount> list=new ArrayList<BankAccount>();
@@ -68,15 +68,18 @@ public class BankAccountDetailes {
 			}
 			result=money-amount;
 			int balance=Math.abs(result);
-			System.out.println(balance+": final balance result :"+key);
+			System.out.println(balance+": final balance for account :"+key);
 			money=0;
 			amount=0;
 		}
 	}
 	public static void main(String[] args) {
 		BankAccountDetailes bad=new BankAccountDetailes();
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter File Location");
+		String filePath=sc.next();
 		try {
-			bad.readBankDetailes();
+			bad.readBankDetailes(filePath);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
