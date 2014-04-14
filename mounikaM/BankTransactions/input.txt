@@ -1,0 +1,12 @@
+11111 deposit 2000
+11112 deposit 1000
+11113 deposit 3000
+11112 withdrawl 300
+11111 withdrawl 300
+11112 withdrawl 500
+11113 withdrawl 1000
+11114 deposit 200
+11113 withdrawl 300
+11114 deposit 400
+11115 deposit 600
+11115 withdrawl 200
