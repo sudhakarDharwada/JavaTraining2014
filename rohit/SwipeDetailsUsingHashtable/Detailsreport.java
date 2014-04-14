@@ -19,8 +19,6 @@ public class Detailsreport
 			Fileread f=new Fileread();
 			Detailsreport dr=new Detailsreport();
 			String file=args[0];
-			Hashtable<Integer,ArrayList<Student>> idtable=f.idtableread(file);
-			Hashtable<Date,ArrayList<Student>> datetable=f.datetableread(file);
 			Scanner sc1=new Scanner(System.in);
 			Date d;
 			String cont="y";
@@ -32,22 +30,22 @@ public class Detailsreport
 				{
 					System.out.println("enter id:");
 					int id=sc1.nextInt();
-					dr.workingtime(idtable,id);
+					dr.workingtime(f.idtableread(file),id);
 				}
 				else if(choice==2)
 				{
 					System.out.println("enter date in 'yyyy-MM-dd' format:");
 					d=Date.valueOf(sc1.next().trim());
-					dr.studentpresent(datetable, d);
+					dr.studentpresent(f.datetableread(file), d);
 				}
 				else if(choice==3)
 				{
-					TreeMap<Time,Integer> tm=dr.workinghours(idtable);
+					TreeMap<Time,Integer> tm=dr.workinghours(f.idtableread(file));
 					System.out.println(tm.lastEntry().getValue()+" worked maximum time : "+tm.lastEntry().getKey());
 				}
 				else if(choice==4)
 				{
-					TreeMap<Time,Integer> tm=dr.workinghours(idtable);
+					TreeMap<Time,Integer> tm=dr.workinghours(f.idtableread(file));
 					System.out.println(tm.firstEntry().getValue()+" worked minimum time : "+tm.firstEntry().getKey());
 				}
 				else
