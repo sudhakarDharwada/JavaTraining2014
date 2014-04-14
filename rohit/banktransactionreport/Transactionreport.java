@@ -44,31 +44,31 @@ public class Transactionreport
 				Balance v=accdetails.get(i);
 				if(v==null)
 				{
+                    Balance b = null;
 					if(s1.equalsIgnoreCase("Cr"))
 					{
-						Balance b=new Balance(0+amount);
-						accdetails.put(i,b);
+						b=new Balance(0+amount);
 					}
 					else
 					{
-						Balance b=new Balance(0-amount);
-						accdetails.put(i,b);
+						b=new Balance(0-amount);
 					}
+                    accdetails.put(i,b);
 				}
 				else
 				{
 					if(s1.equalsIgnoreCase("Cr"))
 					{
 						
-						Balance b=new Balance(accdetails.get(i).amount);
-						b.increment(amount);
+						//Balance b=new Balance(accdetails.get(i).amount);
+						v.increment(amount);
 						System.out.println(b.amount);
 						//accdetails.put(i,(Integer)accdetails.get(i)+amount);
 					}
 					else
 					{
-						Balance b=new Balance(accdetails.get(i).amount);
-						b.decrement(amount);
+						//Balance b=new Balance(accdetails.get(i).amount);
+						v.decrement(amount);
 						System.out.println(b.amount);
 						//accdetails.put(i,(Integer)accdetails.get(i)-amount);
 					}
