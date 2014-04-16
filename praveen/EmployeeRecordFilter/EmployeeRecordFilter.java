@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -22,41 +21,30 @@ public class EmployeeRecordFilter {
 		String path = null;
 		int condition = 1;
 		int option = 0;
-		try {
-			path = s.next();
-			while (condition != 3) {
-				System.out
-						.println("\n\n  Menu\n 1)search by Date \n 2)Working hours \n 3)EXIT");
-				System.out.println("\n\nEnter your Option:");
-				option = s.nextInt();
-				if (option == 1) {
-					eRecordFilter.searchByDate(path);
-
-				} else if (option == 2) {
-					System.out.print("\n\nEnter The Employee ID:");
-					int Eid = s.nextInt();
-					eRecordFilter.workingHours(path, Eid);
-
-				}  else if (option == 3) {
-					condition = option;
-				} else {
-					System.out.println("wrong option");
-				}
-
-			}
-		} catch (InputMismatchException e) {
+		path = s.next();
+		while (condition != 3) {
 			System.out
-					.println("The path should not be number \n Try again ....!");
-		} catch (FileNotFoundException e) {
-			System.out.println("The file is not found \n try again ....!");
-		} catch (IOException e) {
-			System.out.println("File Read Error");
+					.println("\n\n  Menu\n 1)search by Date \n 2)Working hours \n 3)EXIT");
+			System.out.println("\n\nEnter your Option:");
+			option = s.nextInt();
+			if (option == 1) {
+				eRecordFilter.searchByDate(path);
+
+			} else if (option == 2) {
+				System.out.print("\n\nEnter The Employee ID:");
+				int Eid = s.nextInt();
+				eRecordFilter.workingHours(path, Eid);
+
+			} else if (option == 3) {
+				condition = option;
+			} else {
+				System.out.println("wrong option");
+			}
 		}
 	}
-
-	public void searchByDate(String path) throws NumberFormatException,
-			IOException {
+	public void searchByDate(String path) {
 		Scanner s = new Scanner(System.in);
+		BufferedReader input = null;
 		System.out.print("\nEnter the Date to serach\nYear:");
 		int yyyy = s.nextInt();
 		System.out.print("\nMonth:");
@@ -64,26 +52,39 @@ public class EmployeeRecordFilter {
 		System.out.println("\ndate");
 		int dd = s.nextInt();
 		Date requieDate = new Date(yyyy, mm, dd);
-		BufferedReader input = new BufferedReader(new FileReader(path));
-		String str = null;
-		String arg[] = new String[3];
-		StringTokenizer sTokenizer = null;
-		EmployeeRecord eRecord = null;
-		Set<Integer> set = new HashSet<Integer>();
-		while ((str = input.readLine()) != null) {
-			sTokenizer = new StringTokenizer(str, ",");
-			for (int i = 0; sTokenizer.hasMoreTokens(); i++) {
-				arg[i] = sTokenizer.nextToken();
-			}
-			if (arg[0] != null) {
-				int id = Integer.parseInt(arg[0]);
-				String status = arg[1];
-				long time = Date.parse(arg[2]);
-				Date date = new Date(time);
-				eRecord = new EmployeeRecord(id, status, date);
-				if (eRecord.compareTo(requieDate)) {
-					set.add(eRecord.getId());
+		Set<Integer> set = null;
+		try {
+			input = new BufferedReader(new FileReader(path));
+			String str = null;
+			String arg[] = new String[3];
+			StringTokenizer sTokenizer = null;
+			EmployeeRecord eRecord = null;
+			set = new HashSet<Integer>();
+			while ((str = input.readLine()) != null) {
+				sTokenizer = new StringTokenizer(str, ",");
+				for (int i = 0; sTokenizer.hasMoreTokens(); i++) {
+					arg[i] = sTokenizer.nextToken();
 				}
+				if (arg[0] != null) {
+					int id = Integer.parseInt(arg[0]);
+					String status = arg[1];
+					long time = Date.parse(arg[2]);
+					Date date = new Date(time);
+					eRecord = new EmployeeRecord(id, status, date);
+					if (eRecord.compareTo(requieDate)) {
+						set.add(eRecord.getId());
+					}
+				}
+			}
+		} catch (NumberFormatException e) {
+			System.out.println("File Formate In correct");
+		} catch (IOException e) {
+			System.out.println("file not found error");
+		} finally {
+			try {
+				input.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 		if (set.isEmpty()) {
@@ -93,59 +94,74 @@ public class EmployeeRecordFilter {
 		}
 	}
 
-	public void workingHours(String path, int eid)
-			throws NumberFormatException, IOException {
+	public void workingHours(String path, int eid) {
+		BufferedReader input = null;
 		int hour = 0, minutes = 0;
-		BufferedReader input = new BufferedReader(new FileReader(path));
-		String str = null;
-		String arg[] = new String[3];
-		StringTokenizer sTokenizer = null;
-		EmployeeRecord eRecord = null;
-		while ((str = input.readLine()) != null) {
-			sTokenizer = new StringTokenizer(str, ",");
-			for (int i = 0; sTokenizer.hasMoreTokens(); i++) {
-				arg[i] = sTokenizer.nextToken();
-			}
-			if (arg[0] != null) {
-				int id = Integer.parseInt(arg[0]);
-				String status = arg[1];
-				long time = Date.parse(arg[2]);
-				Date date = new Date(time);
-				eRecord = new EmployeeRecord(id, status, date);
-				if (((eRecord.getId()) == eid)
-						&& ((eRecord.getStatus()).equalsIgnoreCase("in"))) {
-					String str2 = null;
-					String arg1[] = new String[3];
-					StringTokenizer sTokenizer2 = null;
-					EmployeeRecord eRecord2 = null;
-					while ((str2 = input.readLine()) != null) {
-						sTokenizer2 = new StringTokenizer(str2, ",");
-						for (int i = 0; sTokenizer2.hasMoreTokens(); i++) {
-							arg1[i] = sTokenizer2.nextToken();
-						}
-						if (arg1[0] != null) {
-							int empid = Integer.parseInt(arg1[0]);
-							String estatus = arg1[1];
-							long etime = Date.parse(arg1[2]);
-							Date edate = new Date(etime);
-							eRecord2 = new EmployeeRecord(empid, estatus, edate);
-							if (((eRecord2.getStatus().equalsIgnoreCase("out")))
-									&& ((eRecord2.getD().getDate()) == eRecord
-											.getD().getDate())
-									&& ((eRecord2.getId()) == eid)) {
-								hour += eRecord2.getD().getHours()
-										- eRecord.getD().getHours();
-								minutes += Math.abs(eRecord2.getD()
-										.getMinutes()
-										- eRecord.getD().getMinutes());
-								break;
+		try {
+			input = new BufferedReader(new FileReader(path));
+			String str = null;
+			String arg[] = new String[3];
+			StringTokenizer sTokenizer = null;
+			EmployeeRecord eRecord = null;
+			while ((str = input.readLine()) != null) {
+				sTokenizer = new StringTokenizer(str, ",");
+				for (int i = 0; sTokenizer.hasMoreTokens(); i++) {
+					arg[i] = sTokenizer.nextToken();
+				}
+				if (arg[0] != null) {
+					int id = Integer.parseInt(arg[0]);
+					String status = arg[1];
+					long time = Date.parse(arg[2]);
+					Date date = new Date(time);
+					eRecord = new EmployeeRecord(id, status, date);
+					if (((eRecord.getId()) == eid)
+							&& ((eRecord.getStatus()).equalsIgnoreCase("in"))) {
+						String str2 = null;
+						String arg1[] = new String[3];
+						StringTokenizer sTokenizer2 = null;
+						EmployeeRecord eRecord2 = null;
+						while ((str2 = input.readLine()) != null) {
+							sTokenizer2 = new StringTokenizer(str2, ",");
+							for (int i = 0; sTokenizer2.hasMoreTokens(); i++) {
+								arg1[i] = sTokenizer2.nextToken();
+							}
+							if (arg1[0] != null) {
+								int empid = Integer.parseInt(arg1[0]);
+								String estatus = arg1[1];
+								long etime = Date.parse(arg1[2]);
+								Date edate = new Date(etime);
+								eRecord2 = new EmployeeRecord(empid, estatus,
+										edate);
+								if (((eRecord2.getStatus()
+										.equalsIgnoreCase("out")))
+										&& ((eRecord2.getD().getDate()) == eRecord
+												.getD().getDate())
+										&& ((eRecord2.getId()) == eid)) {
+									hour += eRecord2.getD().getHours()
+											- eRecord.getD().getHours();
+									minutes += Math.abs(eRecord2.getD()
+											.getMinutes()
+											- eRecord.getD().getMinutes());
+									break;
+								}
 							}
 						}
 					}
 				}
 			}
+		} catch (NumberFormatException e) {
+			System.out.println("File Formate In correct");
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+		} catch (IOException e) {
+			System.out.println("File read error");
+		} finally {
+			try {
+				input.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-
 		if (minutes > 60) {
 			hour += minutes / 60;
 			minutes = minutes % 60;
@@ -158,7 +174,6 @@ public class EmployeeRecordFilter {
 	}
 
 }
-/*
- * /home/praveen/Desktop/training/EmployeeRecordsFilter/src/com/vlabs/employee/bean
- * /Myinputfile
- */
+
+  /*/home/praveen/Desktop/training/EmployeeRecordsFilter/src/com/vlabs/employee/bean/Myinputfile*/
+ 
