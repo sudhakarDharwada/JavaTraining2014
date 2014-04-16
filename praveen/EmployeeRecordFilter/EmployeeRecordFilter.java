@@ -23,8 +23,7 @@ public class EmployeeRecordFilter {
 		int option = 0;
 		path = s.next();
 		while (condition != 3) {
-			System.out
-					.println("\n\n  Menu\n 1)search by Date \n 2)Working hours \n 3)EXIT");
+			System.out.println("\n\n  Menu\n 1)search by Date \n 2)Working hours \n 3)EXIT");
 			System.out.println("\n\nEnter your Option:");
 			option = s.nextInt();
 			if (option == 1) {
@@ -114,8 +113,7 @@ public class EmployeeRecordFilter {
 					long time = Date.parse(arg[2]);
 					Date date = new Date(time);
 					eRecord = new EmployeeRecord(id, status, date);
-					if (((eRecord.getId()) == eid)
-							&& ((eRecord.getStatus()).equalsIgnoreCase("in"))) {
+					if (((eRecord.getId()) == eid)&& ((eRecord.getStatus()).equalsIgnoreCase("in"))) {
 						String str2 = null;
 						String arg1[] = new String[3];
 						StringTokenizer sTokenizer2 = null;
@@ -130,18 +128,10 @@ public class EmployeeRecordFilter {
 								String estatus = arg1[1];
 								long etime = Date.parse(arg1[2]);
 								Date edate = new Date(etime);
-								eRecord2 = new EmployeeRecord(empid, estatus,
-										edate);
-								if (((eRecord2.getStatus()
-										.equalsIgnoreCase("out")))
-										&& ((eRecord2.getD().getDate()) == eRecord
-												.getD().getDate())
-										&& ((eRecord2.getId()) == eid)) {
-									hour += eRecord2.getD().getHours()
-											- eRecord.getD().getHours();
-									minutes += Math.abs(eRecord2.getD()
-											.getMinutes()
-											- eRecord.getD().getMinutes());
+								eRecord2 = new EmployeeRecord(empid, estatus,edate);
+								if (((eRecord2.getStatus().equalsIgnoreCase("out")))&& ((eRecord2.getD().getDate()) == eRecord.getD().getDate())&& ((eRecord2.getId()) == eid)) {
+                                                                        hour += eRecord2.getD().getHours() - eRecord.getD().getHours();
+	                                                                minutes += Math.abs(eRecord2.getD().getMinutes() - eRecord.getD().getMinutes());
 									break;
 								}
 							}
@@ -165,11 +155,9 @@ public class EmployeeRecordFilter {
 		if (minutes > 60) {
 			hour += minutes / 60;
 			minutes = minutes % 60;
-			System.out.println("Working hours : " + hour + " hours " + minutes
-					+ " Minutes");
+			System.out.println("Working hours : " + hour + " hours " + minutes + " Minutes");
 		} else {
-			System.out.println("Working hours : " + hour + " hours " + minutes
-					+ " Minutes");
+			System.out.println("Working hours : " + hour + " hours " + minutes + " Minutes");
 		}
 	}
 
