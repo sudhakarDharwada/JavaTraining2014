@@ -1,3 +1,4 @@
+
 package com.inputfiles.tests;
 
 import java.io.BufferedReader;
@@ -41,6 +42,7 @@ public class EmployeeRecordFilter {
 			}
 		}
 	}
+
 	public void searchByDate(String path) {
 		Scanner s = new Scanner(System.in);
 		BufferedReader input = null;
@@ -68,10 +70,9 @@ public class EmployeeRecordFilter {
 					int id = Integer.parseInt(arg[0]);
 					String status = arg[1];
 					long time = Date.parse(arg[2]);
-					Date date = new Date(time);
-					eRecord = new EmployeeRecord(id, status, date);
-					if (eRecord.compareTo(requieDate)) {
-						set.add(eRecord.getId());
+					Date currentdate = new Date(time);
+					if (compareTo(requieDate,currentdate)) {
+						set.add(id);
 					}
 				}
 			}
@@ -98,40 +99,36 @@ public class EmployeeRecordFilter {
 		int hour = 0, minutes = 0;
 		try {
 			input = new BufferedReader(new FileReader(path));
-			String str = null;
-			String arg[] = new String[3];
+			String str1 = null;
+			String arg1[] = new String[3];
 			StringTokenizer sTokenizer = null;
-			EmployeeRecord eRecord = null;
-			while ((str = input.readLine()) != null) {
-				sTokenizer = new StringTokenizer(str, ",");
+			while ((str1 = input.readLine()) != null) {
+				sTokenizer = new StringTokenizer(str1, ",");
 				for (int i = 0; sTokenizer.hasMoreTokens(); i++) {
-					arg[i] = sTokenizer.nextToken();
+					arg1[i] = sTokenizer.nextToken();
 				}
-				if (arg[0] != null) {
-					int id = Integer.parseInt(arg[0]);
-					String status = arg[1];
-					long time = Date.parse(arg[2]);
-					Date date = new Date(time);
-					eRecord = new EmployeeRecord(id, status, date);
-					if (((eRecord.getId()) == eid)&& ((eRecord.getStatus()).equalsIgnoreCase("in"))) {
+				if (arg1[0] != null) {
+					int id1 = Integer.parseInt(arg1[0]);
+					String status1 = arg1[1];
+					long time1 = Date.parse(arg1[2]);
+					Date date1 = new Date(time1);
+					if (((id1) == eid) && (status1.equalsIgnoreCase("in"))) {
 						String str2 = null;
-						String arg1[] = new String[3];
+						String arg2[] = new String[3];
 						StringTokenizer sTokenizer2 = null;
-						EmployeeRecord eRecord2 = null;
 						while ((str2 = input.readLine()) != null) {
 							sTokenizer2 = new StringTokenizer(str2, ",");
 							for (int i = 0; sTokenizer2.hasMoreTokens(); i++) {
-								arg1[i] = sTokenizer2.nextToken();
+								arg2[i] = sTokenizer2.nextToken();
 							}
-							if (arg1[0] != null) {
-								int empid = Integer.parseInt(arg1[0]);
-								String estatus = arg1[1];
-								long etime = Date.parse(arg1[2]);
-								Date edate = new Date(etime);
-								eRecord2 = new EmployeeRecord(empid, estatus,edate);
-								if (((eRecord2.getStatus().equalsIgnoreCase("out")))&& ((eRecord2.getD().getDate()) == eRecord.getD().getDate())&& ((eRecord2.getId()) == eid)) {
-                                                                        hour += eRecord2.getD().getHours() - eRecord.getD().getHours();
-	                                                                minutes += Math.abs(eRecord2.getD().getMinutes() - eRecord.getD().getMinutes());
+							if (arg2[0] != null) {
+								int empid = Integer.parseInt(arg2[0]);
+								String status2 = arg2[1];
+								long time2 = Date.parse(arg2[2]);
+								Date date2 = new Date(time2);
+								if (((status2.equalsIgnoreCase("out"))) && ((date2.getDate()) == date1.getDate()) && (id1== eid)) {
+									hour += date2.getHours() - date1.getHours();
+									minutes += Math.abs(date2.getMinutes() - date1.getMinutes());
 									break;
 								}
 							}
@@ -160,8 +157,19 @@ public class EmployeeRecordFilter {
 			System.out.println("Working hours : " + hour + " hours " + minutes + " Minutes");
 		}
 	}
+	public boolean compareTo(Date requireDate,Date currentDate) {
+		boolean status = false;
+		if ((requireDate.getDate()) == (currentDate.getDate()) && ((requireDate.getMonth()) == (currentDate.getMonth()))  && ((requireDate.getYear()) == (currentDate.getYear() + 1900))) {
+			status = true;
+			return status;
+		}
+		else if (((requireDate.getHours())==(currentDate.getHours()))&&((requireDate.getMinutes())==(currentDate.getMinutes()))) {
+			status=true;
+			return status;
+		}
+		return status;
+	}
 
 }
 
-  /*/home/praveen/Desktop/training/EmployeeRecordsFilter/src/com/vlabs/employee/bean/Myinputfile*/
- 
+
