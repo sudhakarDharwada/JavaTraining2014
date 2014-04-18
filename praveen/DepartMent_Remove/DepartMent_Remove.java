@@ -10,13 +10,13 @@ import java.util.Scanner;
 import com.employee.beans.Employee;
 
 public class DepartMent_Remove {
-
+	/*Main Method*/
 	public static void main(String[] args) throws IOException {
 
 		List<Employee> list = new ArrayList<Employee>();
 		myLogic(list);
 	}
-
+	/*Menu display*/
 	public static void myLogic(List<Employee> list) throws IOException {
 		DepartMent_Remove ale = new DepartMent_Remove();
 		Scanner s = new Scanner(System.in);
@@ -41,7 +41,7 @@ public class DepartMent_Remove {
 			}
 		}
 	}
-
+	/*logic's to perform respective operation*/
 	public String myCondition(List<Employee> list, int option,
 			Iterator<Employee> itr) {
 		String condition = "y";
