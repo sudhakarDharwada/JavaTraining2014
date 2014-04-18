@@ -2,8 +2,9 @@ package com.prime;
 
 import java.util.Scanner;
 
-/*this method checks whether the number is prime or not*/
+/*this method checks whether the number is prime or not and their difference is equals to 2*/
 public class Primefinder {
+	/*This method checks the condition that two numbers are prime and their difference is equals to 2*/
 	public boolean mainLogic(int first,int second)
 	{
 		if(((first-second)==2)||((first-second==-2))){
@@ -20,6 +21,7 @@ public class Primefinder {
 			return false;
 		}
 	}
+	/*This method checks the is prime or not*/
 	public boolean isPrime(int number)
 	{
 		boolean returnStatus=false;
