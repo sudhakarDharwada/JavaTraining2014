@@ -1,0 +1,4 @@
+1201,deposit,10000
+1202,deposit,20000
+1201,withdraw,5000
+1202,withdraw,10000

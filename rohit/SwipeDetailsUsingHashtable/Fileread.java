@@ -13,23 +13,23 @@ import java.util.Scanner;
 
 public class Fileread 
 {
-	public Hashtable<Integer,ArrayList<Studentiddtls>> idtableread(String file) throws FileNotFoundException
+	public Hashtable<Integer,ArrayList<Student>> idtableread(String file) throws FileNotFoundException
 	{
 		FileReader re = new FileReader(file);
 	   	Scanner sc =new Scanner(new BufferedReader(re));
-	   	Hashtable<Integer,ArrayList<Studentiddtls>> idtable=new Hashtable<Integer,ArrayList<Studentiddtls>>();
+	   	Hashtable<Integer,ArrayList<Student>> idtable=new Hashtable<Integer,ArrayList<Student>>();
 	   	while(sc.hasNext())
 	   	{
 	   		int i=Integer.parseInt(sc.useDelimiter(" ").next().trim());
 	   		String s3=sc.useDelimiter(" ").next();
 	   		String s1=sc.useDelimiter(" ").next();
 	   		String s2=sc.useDelimiter("\n").next().trim();
-	   		Studentiddtls st=new Studentiddtls(s3,s1,s2);
+	   		Student st=new Student(s3,s1,s2);
 	   		if(!(idtable.containsKey(i)))
 	   		{
-	   			List<Studentiddtls> al1=new ArrayList<Studentiddtls>();
+	   			List<Student> al1=new ArrayList<Student>();
 	   			al1.add(st);
-	   			idtable.put(i,(ArrayList<Studentiddtls>) al1);
+	   			idtable.put(i,(ArrayList<Student>) al1);
 	   		}
 	   		else
 	   		{
@@ -39,11 +39,11 @@ public class Fileread
 	   	}
 	   	return idtable;
 	}
-	public Hashtable<Date,ArrayList<Studentdatedtls>> datetableread(String file) throws FileNotFoundException
+	public Hashtable<Date,ArrayList<Student>> datetableread(String file) throws FileNotFoundException
 	{
 		FileReader re = new FileReader(file);
 	   	Scanner sc =new Scanner(new BufferedReader(re));
-	   	Hashtable<Date,ArrayList<Studentdatedtls>> datetable=new Hashtable<Date,ArrayList<Studentdatedtls>>();
+	   	Hashtable<Date,ArrayList<Student>> datetable=new Hashtable<Date,ArrayList<Student>>();
 	   	while(sc.hasNext())
 	   	{
 	   		int i=Integer.parseInt(sc.useDelimiter(" ").next().trim());
@@ -51,12 +51,12 @@ public class Fileread
 	   		String s1=sc.useDelimiter(" ").next();
 	   		String s2=sc.useDelimiter("\n").next().trim();
 	   		Date d=Date.valueOf(s3);
-	   		Studentdatedtls st1=new Studentdatedtls(i,s1,s2);
+	   		Student st1=new Student(i, s1, s2);
 	   		if(!(datetable.containsKey(d)))
 	   		{
-	   			List<Studentdatedtls> al1=new ArrayList<Studentdatedtls>();
+	   			List<Student> al1=new ArrayList<Student>();
 	   			al1.add(st1);
-	   			datetable.put(d,(ArrayList<Studentdatedtls>) al1);
+	   			datetable.put(d,(ArrayList<Student>) al1);
 	   		}
 	   		else
 	   		{

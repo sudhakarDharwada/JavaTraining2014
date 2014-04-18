@@ -46,7 +46,6 @@ public class ArrayListExample {
 			Iterator<Employee> itr) {
 		String condition = "y";
 		Scanner s = new Scanner(System.in);
-		// itr = list.iterator();
 		String desig = null;
 		if (option == 1) {
 			Employee e = Employee.setEmployee();

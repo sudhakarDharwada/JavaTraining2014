@@ -40,7 +40,7 @@ class EmployeeSearch{
            Scanner inFile = new Scanner(new File("Details.txt"));
 	   while (inFile.hasNext()){
 	       String line = inFile.nextLine();
-               StringTokenizer st = new StringTokenizer(line, " ");
+               StringTokenizer st = new StringTokenizer(line, ";");
                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                String arr[] = new String[st.countTokens()];          
 	       int i=0;
@@ -121,3 +121,21 @@ Date d = new Date();
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

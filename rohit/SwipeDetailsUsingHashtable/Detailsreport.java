@@ -19,8 +19,6 @@ public class Detailsreport
 			Fileread f=new Fileread();
 			Detailsreport dr=new Detailsreport();
 			String file=args[0];
-			Hashtable<Integer,ArrayList<Studentiddtls>> idtable=f.idtableread(file);
-			Hashtable<Date,ArrayList<Studentdatedtls>> datetable=f.datetableread(file);
 			Scanner sc1=new Scanner(System.in);
 			Date d;
 			String cont="y";
@@ -32,22 +30,22 @@ public class Detailsreport
 				{
 					System.out.println("enter id:");
 					int id=sc1.nextInt();
-					dr.workingtime(idtable,id);
+					dr.workingtime(f.idtableread(file),id);
 				}
 				else if(choice==2)
 				{
 					System.out.println("enter date in 'yyyy-MM-dd' format:");
 					d=Date.valueOf(sc1.next().trim());
-					dr.studentpresent(datetable, d);
+					dr.studentpresent(f.datetableread(file), d);
 				}
 				else if(choice==3)
 				{
-					TreeMap<Time,Integer> tm=dr.workinghours(idtable);
+					TreeMap<Time,Integer> tm=dr.workinghours(f.idtableread(file));
 					System.out.println(tm.lastEntry().getValue()+" worked maximum time : "+tm.lastEntry().getKey());
 				}
 				else if(choice==4)
 				{
-					TreeMap<Time,Integer> tm=dr.workinghours(idtable);
+					TreeMap<Time,Integer> tm=dr.workinghours(f.idtableread(file));
 					System.out.println(tm.firstEntry().getValue()+" worked minimum time : "+tm.firstEntry().getKey());
 				}
 				else
@@ -61,7 +59,7 @@ public class Detailsreport
 		}	
 	}
 	
-	public void workingtime(Hashtable<Integer,ArrayList<Studentiddtls>> idtable,int id)
+	public void workingtime(Hashtable<Integer,ArrayList<Student>> idtable,int id)
 	{
 		int i=0;int in=0;
 		int out=0;
@@ -88,7 +86,7 @@ public class Detailsreport
 			System.out.println("student not present on that date");
 	}
 	
-	public void studentpresent(Hashtable<Date,ArrayList<Studentdatedtls>> datetable,Date d)
+	public void studentpresent(Hashtable<Date,ArrayList<Student>> datetable,Date d)
 	{
 		int i=0;
 		Set<Integer> studentprsntids=new HashSet<Integer>();
@@ -105,7 +103,7 @@ public class Detailsreport
 			System.out.println("students not present on that date");
 	}
 
-	public TreeMap<Time,Integer> workinghours(Hashtable<Integer,ArrayList<Studentiddtls>> idtable)
+	public TreeMap<Time,Integer> workinghours(Hashtable<Integer,ArrayList<Student>> idtable)
 	{
 		int work_time=0;
 		Time t=Time.valueOf("11:00:00");
@@ -114,9 +112,7 @@ public class Detailsreport
 		Iterator<Integer> ir=is.iterator();
 		while(ir.hasNext())
 		{
-			int i=0;
-			int in=0;
-			int out=0;
+			int i=0;int in=0;int out=0;
 			int j=ir.next();
 			while(i<idtable.get(j).size())
 			{
