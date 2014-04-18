@@ -10,8 +10,5 @@ public class EqMat {
 		}
 		return matrix;
 	}
-	private static void outArray(int[] mat) {
-		for(int i=0;i<8;i++)
-			System.out.println("The position "+(i)+" "+mat[i]);
-	}
+
 }
