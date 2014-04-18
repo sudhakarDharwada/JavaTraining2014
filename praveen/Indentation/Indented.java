@@ -8,12 +8,14 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Intended {
-
+	/*main method*/
 	public static void main(String[] args) {
 		Intended intended = new Intended();
+		/*read the input file*/
 		System.out.print("\n\nEnter The Path of File To read from it:");
 		Scanner s = new Scanner(System.in);
 		String ReadFilePath = s.next();
+		/*read the output file path*/
 		System.out.print("\n\nEnter the path of File To Write On it");
 		String WriteFilePath = s.next();
 		String FileData = intended.readFile(ReadFilePath);
@@ -23,7 +25,7 @@ public class Intended {
 			System.out.print("\n\nTHE FILE PRINTING IS FAILED");
 		}
 	}
-
+	/*This method write the indented string into the file*/
 	protected boolean WriteFile(String FilePath, String Data) {
 		try {
 			BufferedWriter output = new BufferedWriter(new FileWriter(FilePath));
@@ -36,8 +38,9 @@ public class Intended {
 
 		}
 	}
-
+	/*It reads the input from file*/
 	protected String readFile(String path) {
+		/*In this we can add the word in an order so that, when we print it, it would be in indented*/
 		StringBuilder sb = new StringBuilder();
 		BufferedReader input = null;
 		try {
