@@ -44,20 +44,23 @@ class AccountSummary{
 				}
 				acc=Integer.parseInt(e[0]);
 				bal=Double.parseDouble(e[2]);
-				if(accountInfo.containsKey(acc))
+				Double checking_value=0.0;
+				if(accountInfo.get(acc)!=null)
+					checking_value=(double)accountInfo.get(acc);				
+				if(checking_value>0)
 				{
 					if(e[1].equalsIgnoreCase("deposit"))
 					{
-						accountInfo.put(acc,(double)accountInfo.get(acc)+bal);
-						
+						accountInfo.put(acc,checking_value+bal);	
 					}
 					else {
-						accountInfo.put(acc,(double)accountInfo.get(acc)-bal);
+						accountInfo.put(acc,checking_value-bal);
 					}
 				}
 				else{
 					accountInfo.put(acc,bal);					
 				}
+				checking_value=0.0;
 			}	
 		}
 		catch (Exception e1) {
@@ -68,7 +71,6 @@ class AccountSummary{
 	void printAccountSummary(Hashtable accountInfo){
 		Enumeration accounts=accountInfo.keys();
 		System.out.println("The Account details are");
-		//accounts=accountInfo.keys();
 		while(accounts.hasMoreElements()) {
 			int account = (int)accounts.nextElement();
 			System.out.println(account + ": " +accountInfo.get(account));

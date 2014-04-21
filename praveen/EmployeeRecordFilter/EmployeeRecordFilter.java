@@ -1,15 +1,12 @@
-package com.vlabs.employee.mainclass;
+
+package com.inputfiles.tests;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.InputMismatchException;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -17,169 +14,162 @@ import java.util.StringTokenizer;
 import com.vlabs.employee.bean.EmployeeRecord;
 
 public class EmployeeRecordFilter {
-        /*The Main Method*/
+
 	public static void main(String[] args) {
 		EmployeeRecordFilter eRecordFilter = new EmployeeRecordFilter();
 		Scanner s = new Scanner(System.in);
-		List<EmployeeRecord> list = null;
 		System.out.println("Enter The File Path To process:");
 		String path = null;
 		int condition = 1;
 		int option = 0;
-		try {
-			path = s.next();
-			list = eRecordFilter.fileInput(path);
-			while (condition != 5) {
-				System.out.println("\n\n  Menu\n 1)search by Date \n 2)search by Time\n 3)Working hours \n 4)display all \n 5)EXIT");
-				System.out.println("\n\nEnter your Option:");
-				option = s.nextInt();
-				if (option == 1) {
-					eRecordFilter.searchByDate(list);
+		path = s.next();
+		while (condition != 3) {
+			System.out.println("\n\n  Menu\n 1)search by Date \n 2)Working hours \n 3)EXIT");
+			System.out.println("\n\nEnter your Option:");
+			option = s.nextInt();
+			if (option == 1) {
+				eRecordFilter.searchByDate(path);
 
-				} else if (option == 2) {
-					eRecordFilter.searchByTime(list);
-				} else if (option == 3) {
-					eRecordFilter.workingHours(list);
-					
-				} else if (option == 4) {
-					eRecordFilter.displayAll(list);
-				} else if (option == 5) {
-					condition = option;
-				} else {
-					System.out.println("wrong option");
-				}
+			} else if (option == 2) {
+				System.out.print("\n\nEnter The Employee ID:");
+				int Eid = s.nextInt();
+				eRecordFilter.workingHours(path, Eid);
 
-			}
-		} catch (InputMismatchException e) {
-			System.out
-					.println("The path should not be number \n Try again ....!");
-		} catch (FileNotFoundException e) {
-			System.out.println("The file is not found \n try again ....!");
-		} catch (IOException e) {
-			System.out.println("File Read Error");
-		}
-	}
-        /*This method can read the file and store the recods ina collection*/
-	public List<EmployeeRecord> fileInput(String path)
-			throws FileNotFoundException, IOException {
-		BufferedReader input = new BufferedReader(new FileReader(path));
-		String str = null;
-		String arg[] = new String[3];
-		StringTokenizer sTokenizer = null;
-		EmployeeRecord eRecord = null;
-		List<EmployeeRecord> list = new ArrayList<EmployeeRecord>();
-		while ((str = input.readLine()) != null) {
-			sTokenizer = new StringTokenizer(str, ",");
-			for (int i = 0; sTokenizer.hasMoreTokens(); i++) {
-				arg[i] = sTokenizer.nextToken();
-			}
-			if (arg[0] != null) {
-				int id = Integer.parseInt(arg[0]);
-				String status = arg[1];
-				long time = Date.parse(arg[2]);
-				Date date = new Date(time);
-				// System.out.println(date);
-
-				eRecord = new EmployeeRecord(id, status, date);
-				list.add(eRecord);
+			} else if (option == 3) {
+				condition = option;
+			} else {
+				System.out.println("wrong option");
 			}
 		}
-		return list;
 	}
-        /*This method is used to search the Employee in a particular date*/
-	public void searchByDate(List<EmployeeRecord> list) {
+
+	public void searchByDate(String path) {
 		Scanner s = new Scanner(System.in);
+		BufferedReader input = null;
 		System.out.print("\nEnter the Date to serach\nYear:");
 		int yyyy = s.nextInt();
 		System.out.print("\nMonth:");
 		int mm = s.nextInt();
 		System.out.println("\ndate");
 		int dd = s.nextInt();
-		Date date = new Date(yyyy, mm, dd);
-		Iterator<EmployeeRecord> itr = list.iterator();
-		Set<Integer> set=new HashSet<Integer>();
-		while (itr.hasNext()) {
-			EmployeeRecord employeeRecord = (EmployeeRecord) itr.next();
-			if ((employeeRecord.compareTo(date))) {
-				set.add(employeeRecord.getId());
+		Date requieDate = new Date(yyyy, mm, dd);
+		Set<Integer> set = null;
+		try {
+			input = new BufferedReader(new FileReader(path));
+			String str = null;
+			String arg[] = new String[3];
+			StringTokenizer sTokenizer = null;
+			EmployeeRecord eRecord = null;
+			set = new HashSet<Integer>();
+			while ((str = input.readLine()) != null) {
+				sTokenizer = new StringTokenizer(str, ",");
+				for (int i = 0; sTokenizer.hasMoreTokens(); i++) {
+					arg[i] = sTokenizer.nextToken();
+				}
+				if (arg[0] != null) {
+					int id = Integer.parseInt(arg[0]);
+					String status = arg[1];
+					long time = Date.parse(arg[2]);
+					Date currentdate = new Date(time);
+					if (compareTo(requieDate,currentdate)) {
+						set.add(id);
+					}
+				}
 			}
-
-		}
-		System.out.println("\n Employees present in this Date\n"+set);
-	}
-        /*This method is used to Search The Employee in a particular time*/
-	public void searchByTime(List<EmployeeRecord> list) {
-		Scanner s = new Scanner(System.in);
-		System.out.print("\nEnter the Date to serach");
-		System.out.println("\nHours:");
-		int hours=s.nextInt();
-		System.out.println("\nMintues:");
-		int minutes=s.nextInt();
-		Date date = new Date();
-		date.setHours(hours);
-		date.setMinutes(minutes);
-		Iterator<EmployeeRecord> itr = list.iterator();
-		Set<Integer> set=new HashSet<Integer>();
-		while (itr.hasNext()) {
-			EmployeeRecord employeeRecord = (EmployeeRecord) itr.next();
-			if ((employeeRecord.compareTo(date))) {
-				set.add(employeeRecord.getId());
+		} catch (NumberFormatException e) {
+			System.out.println("File Formate In correct");
+		} catch (IOException e) {
+			System.out.println("file not found error");
+		} finally {
+			try {
+				input.close();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-
 		}
-		System.out.println("\n Employees present in this Time\n"+set);
-	}
-        /*This method is usefull to display all records in the file*/
-	public void displayAll(List<EmployeeRecord> list) {
-		java.util.Iterator<EmployeeRecord> itr = list.iterator();
-		if (list.isEmpty()) {
-			System.out.println("The List is empty");
+		if (set.isEmpty()) {
+			System.out.println("No people present on the date mentioned");
 		} else {
-			System.out.println("EmploeeID   EmployeeStatus   EmployeeTime");
-			while (itr.hasNext()) {
-				EmployeeRecord employeeRecord = (EmployeeRecord) itr.next();
-				System.out.println(employeeRecord.getId() + "\t\t"
-						+ employeeRecord.getStatus() + "\t\t"
-						+ employeeRecord.getD());
-
-			}
+			System.out.println("The People present on the date \n" + set);
 		}
-
 	}
-        /*This method is used to find the employees working hours*/
-	public void workingHours(List<EmployeeRecord> list) {
-		Scanner s=new Scanner(System.in);
-		System.out.println("Enter The Employee ID");
-		int eid=s.nextInt();
-		int hour=0,minutes=0;
-		Iterator<EmployeeRecord> itr1 = list.iterator();
-		Iterator<EmployeeRecord> itr2 = list.iterator();
-		while (itr1.hasNext()) {
-			EmployeeRecord employeeRecord1 = (EmployeeRecord) itr1.next();
-				if(((employeeRecord1.getId())==eid)&&((employeeRecord1.getStatus()).equalsIgnoreCase("in")))
-				{
-					itr2=list.iterator();
-					while(itr2.hasNext())
-					{
-						EmployeeRecord employeeRecord2 = (EmployeeRecord) itr2.next();
-						if(((employeeRecord2.getStatus().equalsIgnoreCase("out")))&&((employeeRecord2.getD().getDate())==employeeRecord1.getD().getDate())&&((employeeRecord2.getId())==eid))
-						{
-							hour+=employeeRecord2.getD().getHours()-employeeRecord1.getD().getHours();
-							minutes+=Math.abs(employeeRecord2.getD().getMinutes()-employeeRecord1.getD().getMinutes());
-							break;
+
+	public void workingHours(String path, int eid) {
+		BufferedReader input = null;
+		int hour = 0, minutes = 0;
+		try {
+			input = new BufferedReader(new FileReader(path));
+			String str1 = null;
+			String arg1[] = new String[3];
+			StringTokenizer sTokenizer = null;
+			while ((str1 = input.readLine()) != null) {
+				sTokenizer = new StringTokenizer(str1, ",");
+				for (int i = 0; sTokenizer.hasMoreTokens(); i++) {
+					arg1[i] = sTokenizer.nextToken();
+				}
+				if (arg1[0] != null) {
+					int id1 = Integer.parseInt(arg1[0]);
+					String status1 = arg1[1];
+					long time1 = Date.parse(arg1[2]);
+					Date date1 = new Date(time1);
+					if (((id1) == eid) && (status1.equalsIgnoreCase("in"))) {
+						String str2 = null;
+						String arg2[] = new String[3];
+						StringTokenizer sTokenizer2 = null;
+						while ((str2 = input.readLine()) != null) {
+							sTokenizer2 = new StringTokenizer(str2, ",");
+							for (int i = 0; sTokenizer2.hasMoreTokens(); i++) {
+								arg2[i] = sTokenizer2.nextToken();
+							}
+							if (arg2[0] != null) {
+								int empid = Integer.parseInt(arg2[0]);
+								String status2 = arg2[1];
+								long time2 = Date.parse(arg2[2]);
+								Date date2 = new Date(time2);
+								if (((status2.equalsIgnoreCase("out"))) && ((date2.getDate()) == date1.getDate()) && (id1== eid)) {
+									hour += date2.getHours() - date1.getHours();
+									minutes += Math.abs(date2.getMinutes() - date1.getMinutes());
+									break;
+								}
+							}
 						}
 					}
 				}
 			}
-		if(minutes>60)
-		{
-			hour+=minutes/60;
-			minutes=minutes%60;
-			System.out.println("Working hours : "+hour+" hours "+minutes+" Minutes");
+		} catch (NumberFormatException e) {
+			System.out.println("File Formate In correct");
+		} catch (FileNotFoundException e) {
+			System.out.println("File not found");
+		} catch (IOException e) {
+			System.out.println("File read error");
+		} finally {
+			try {
+				input.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		else {
-			System.out.println("Working hours : "+hour+" hours "+minutes+" Minutes");
+		if (minutes > 60) {
+			hour += minutes / 60;
+			minutes = minutes % 60;
+			System.out.println("Working hours : " + hour + " hours " + minutes + " Minutes");
+		} else {
+			System.out.println("Working hours : " + hour + " hours " + minutes + " Minutes");
 		}
 	}
+	public boolean compareTo(Date requireDate,Date currentDate) {
+		boolean status = false;
+		if ((requireDate.getDate()) == (currentDate.getDate()) && ((requireDate.getMonth()) == (currentDate.getMonth()))  && ((requireDate.getYear()) == (currentDate.getYear() + 1900))) {
+			status = true;
+			return status;
+		}
+		else if (((requireDate.getHours())==(currentDate.getHours()))&&((requireDate.getMinutes())==(currentDate.getMinutes()))) {
+			status=true;
+			return status;
+		}
+		return status;
+	}
+
 }
+
 

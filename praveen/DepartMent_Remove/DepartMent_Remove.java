@@ -9,16 +9,16 @@ import java.util.Scanner;
 
 import com.employee.beans.Employee;
 
-public class ArrayListExample {
-
+public class DepartMent_Remove {
+	/*Main Method*/
 	public static void main(String[] args) throws IOException {
 
 		List<Employee> list = new ArrayList<Employee>();
 		myLogic(list);
 	}
-
+	/*Menu display*/
 	public static void myLogic(List<Employee> list) throws IOException {
-		ArrayListExample ale = new ArrayListExample();
+		DepartMent_Remove ale = new DepartMent_Remove();
 		Scanner s = new Scanner(System.in);
 		Iterator<Employee> itr = null;
 		String condition = "y";
@@ -41,12 +41,11 @@ public class ArrayListExample {
 			}
 		}
 	}
-
+	/*logic's to perform respective operation*/
 	public String myCondition(List<Employee> list, int option,
 			Iterator<Employee> itr) {
 		String condition = "y";
 		Scanner s = new Scanner(System.in);
-		// itr = list.iterator();
 		String desig = null;
 		if (option == 1) {
 			Employee e = Employee.setEmployee();
