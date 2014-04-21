@@ -1,7 +1,7 @@
 package com.eightqueen.test.programs;
 
 public class Equeen {
-	static int Matrix[] = intialize(8);
+	static int Matrix[] = new int[8];
 
 	public static boolean yCondition(boolean ycon) {
 		return ycon;
@@ -97,13 +97,6 @@ public class Equeen {
 		}
 	}
 
-	public static int[] intialize(int n) {
-		int matrix[] = new int[n];
-		for (int i = 0; i < n; i++) {
-			matrix[i] = 0;
-		}
-		return matrix;
-	}
 
 }
 
