@@ -35,9 +35,7 @@ public class Equeen {
 	public boolean isSafeToPalce(int req_position) {
 		boolean safe = true;
 		for (int curr_row = 0; curr_row < req_position; curr_row++) {
-			if (Matrix[curr_row] == Matrix[req_position]
-					|| ((Math.abs(Matrix[curr_row] - Matrix[req_position])) == (Math.abs(curr_row
-							- req_position)))) {
+			if (Matrix[curr_row] == Matrix[req_position] || ((Math.abs(Matrix[curr_row] - Matrix[req_position])) == (Math.abs(curr_row - req_position)))) {
 				safe = false;
 				return safe;
 			}
