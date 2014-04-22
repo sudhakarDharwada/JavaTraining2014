@@ -1,6 +1,7 @@
 package com.eightqueen.test.programs;
 
 public class Equeen {
+        private static long startTime;
 	static int Matrix[] = new int[8];
 	static int sno = 0;
         /*This method find the Solution N Queens(8 Queens)*/
@@ -14,7 +15,9 @@ public class Equeen {
 				Matrix[row] = 0;
 				row--;
 				if (row < 0) {
-					System.out.println("\n\nThank Q");
+				        System.out.println("\n\nTotal "+sno+" solutions\n");
+				        long endTime = System.currentTimeMillis();
+				        System.out.println("It took " + (endTime - startTime) + " milliseconds");
 				} else {
 					Matrix[row] = Matrix[row] + 1;
 				}
@@ -52,6 +55,7 @@ public class Equeen {
 	}
         /*main method*/
 	public static void main(String[] args) {
+                startTime = System.currentTimeMillis();
 		Equeen eq = new Equeen();
 		eq.EqueenFinder();
 	}

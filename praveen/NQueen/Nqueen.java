@@ -3,6 +3,7 @@ package com.eightqueen.test.programs;
 import java.util.Scanner;
 
 public class Nqueen {
+        private static long startTime;
 	static int Matrix[];
 	static int sno = 0;
          /*This method find the Solution N Queens*/
@@ -16,7 +17,9 @@ public class Nqueen {
 				Matrix[row] = 0;
 				row--;
 				if (row < 0) {
-					System.out.println("\n\nThank Q");
+					System.out.println("\n\nTotal "+sno+" solutions\n");
+					long endTime = System.currentTimeMillis();
+					System.out.println("It took " + (endTime - startTime) + " milliseconds");
 				} else {
 					Matrix[row] = Matrix[row] + 1;
 				}
@@ -31,8 +34,6 @@ public class Nqueen {
 				}
 			}
 		}
-		System.out.println("Total "+sno+" solutions");
-
 	}
         /*This Method checks whether at required position the element is insert or not*/
 	public boolean isSafeToPalce(int req_position) {
@@ -59,6 +60,7 @@ public class Nqueen {
 		Scanner s=new Scanner(System.in);
 		System.out.print("\nEnter the Number of Queens:");
 		int No_of_Queens=s.nextInt();
+                startTime = System.currentTimeMillis();
 		Matrix=new int[No_of_Queens];
 		eq.EqueenFinder(No_of_Queens);
 	}
