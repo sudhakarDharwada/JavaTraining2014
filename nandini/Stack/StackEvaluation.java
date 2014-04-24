@@ -1,16 +1,21 @@
 import java.util.*;
-public class StackEvaluation{
+public class Stack1{
 	public static void main(String args[])throws NullPointerException
 	{	
 		Scanner sc= new Scanner(System.in);
 		System.out.println("Enter the Expression to be evaluate");
 		String input=sc.next();
 		System.out.print(input);
+		Stack1 se=new Stack1();
 		Stack<Integer> operands = new Stack<Integer>();
 		Stack<Character> operators=new Stack<Character>();
-		int result=0; 
-		StackEvaluation se=new StackEvaluation();
-		boolean previousChar=false;		
+		int result=se.method(input, operands, operators);
+		System.out.println("The result is"+result);
+		
+	}
+	public int method(String input,Stack<Integer> operands,Stack<Character> operators)
+	{	
+		boolean previousChar=false;
 		for(int i=0;i<input.length();i++)
 		{
 			char ch=input.charAt(i);
@@ -30,21 +35,34 @@ public class StackEvaluation{
 					previousChar=false;
 					break;
 					
-					case '+':if(previousChar==true){
-						char x=operators.pop();
-						operands=se.methodCal(x,operands);
-					}
-					else
-						operators.push(ch);
-					break;
+					case '+':
+					try
+					{
+						while(operators.peek().equals('*') || operators.peek().equals('/'))	
+						{
+							char x=operators.pop();
+							operands=methodCal(x,operands);
 					
-					case '-':if(previousChar==true){
-						char y=operators.pop();
-						operands=se.methodCal(y,operands);
+						}
 					}
-					else
-						operators.push(ch);					
-					break;
+					catch(Exception e)
+						{ }
+						operators.push(ch);
+						break;
+					
+					case '-': try
+					{
+						while(operators.peek().equals('*') || operators.peek().equals('/'))	
+						{
+							char y=operators.pop();
+							operands=methodCal(y,operands);
+					
+						}
+					}
+					catch(Exception e)
+						{}
+						operators.push(ch);
+						break;
 					
 					case '(': operators.push(ch);
 					break;
@@ -53,7 +71,8 @@ public class StackEvaluation{
 					while(!operators.isEmpty() && !operators.peek().equals(")")){
 						char res=operators.pop();
 						if(res!= '(')
-							operands=se.methodCal(res,operands);
+							operands=methodCal(res,operands);
+						
 					}
 					break;
 					
@@ -62,26 +81,32 @@ public class StackEvaluation{
 				}
 			}
 		}
+	
 		while(!operators.isEmpty()){
 			char c=operators.pop();
-			operands=se.methodCal(c,operands);
+			operands=methodCal(c,operands);
 		}
-		System.out.println("Result of Evaluated Expression is"+operands.pop());
+		return operands.pop();
 	}
+
 	Stack<Integer> methodCal(char c,Stack<Integer> operands)
 	{
 		int a=operands.pop();
 		int b=operands.pop();
+		int d=0;
 			switch(c)
 			{
-				case '*':System.out.print(operands.push(a*b));
+				case '*':d=a*b;
+						operands.push(d);
 				break;
 				case '/':operands.push(b/a);
 				break;
-				case '+':operands.push(a+b);
+				case '+':
+						operands.push(a+b);
 				break;
-				case '-':operands.push(b-a);
-				break;
+				case '-':
+					operands.push(b-a);
+					break;
 			}
 		return operands;
 	}
