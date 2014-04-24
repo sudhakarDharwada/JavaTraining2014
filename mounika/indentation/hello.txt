@@ -1,0 +1,18 @@
+class adding {
+public static void main(String args[]){
+public void sum(){
+           int a=10;
+      int b=20;
+           int result=a+b;System.out.println(result);
+        if(result>10)
+  {
+System.out.println("sum is greater than 10");
+}
+else
+{
+System.out.println("sum is less than 10 ");
+}
+
+}
+}
+}
