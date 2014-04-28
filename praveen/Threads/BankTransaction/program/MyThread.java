@@ -54,8 +54,9 @@ class MyThread extends Thread
 			}
 		}
 	}
-	public static synchronized void addToTable(String userId, String trans, double amount) {
-			double initBal=0.0;
+	public void addToTable(String userId, String trans, double amount) {
+		double initBal=0.0;
+		synchronized(userId){
 			if(userAccount.get(userId)==null)
 			{
 				userAccount.put(userId,initBal);
@@ -76,5 +77,6 @@ class MyThread extends Thread
 					userAccount.put(userId,(userAccount.get(userId)-amount));
 				}
 			}
+		}
 	}
 }
