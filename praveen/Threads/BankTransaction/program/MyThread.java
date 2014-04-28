@@ -36,7 +36,6 @@ class MyThread extends Thread
 					String trans=arg[1];
 					double amount=Double.parseDouble(arg[2]);
 
-					System.out.println("Thread"+Thread.currentThread().getName());
 					addToTable(UserId,trans,amount);
 				}
 			}
