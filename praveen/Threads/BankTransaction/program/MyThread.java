@@ -54,29 +54,30 @@ class MyThread extends Thread
 			}
 		}
 	}
-	public void addToTable(String userId, String trans, double amount) {
-		double initBal=0.0;
-		synchronized(userId){
-			if(userAccount.get(userId)==null)
-			{
-				userAccount.put(userId,initBal);
-				if(trans.equalsIgnoreCase("deposite"))
+	public  void addToTable(String userId, String trans, double amount) {
+			double initBal=0.0;
+			synchronized (userId) {
+				if(userAccount.get(userId)==null)
 				{
-					userAccount.put(userId,(userAccount.get(userId)+amount));
+					userAccount.put(userId,initBal);
+					if(trans.equalsIgnoreCase("deposite"))
+					{
+						userAccount.put(userId,(userAccount.get(userId)+amount));
+					}
+					else {
+						userAccount.put(userId,(userAccount.get(userId)-amount));
+					}
 				}
 				else {
-					userAccount.put(userId,(userAccount.get(userId)-amount));
+					if(trans.equalsIgnoreCase("deposite"))
+					{
+						userAccount.put(userId,(userAccount.get(userId)+amount));
+					}
+					else {
+						userAccount.put(userId,(userAccount.get(userId)-amount));
+					}
 				}
 			}
-			else {
-				if(trans.equalsIgnoreCase("deposite"))
-				{
-					userAccount.put(userId,(userAccount.get(userId)+amount));
-				}
-				else {
-					userAccount.put(userId,(userAccount.get(userId)-amount));
-				}
-			}
-		}
+
 	}
 }

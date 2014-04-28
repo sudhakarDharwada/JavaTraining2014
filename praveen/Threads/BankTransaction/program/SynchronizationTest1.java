@@ -11,7 +11,13 @@ public class SynchronizationTest1 {
 	public static void main(String[] args) {
 		SynchronizationTest1 st1=new SynchronizationTest1();
 		Hashtable<String, Double> userAccount = new Hashtable<String, Double>();
-		File folder = new File("/home/praveen/Desktop/works/Banking using threads/");
+		if (args.length != 1) {
+			System.err
+					.println("Invalid command line, exactly one argument required");
+			System.exit(1);
+		}
+		String FilePath = args[0];
+		File folder = new File(FilePath);
 		File[] listOfFiles = folder.listFiles();
 		List<Thread> list = new ArrayList<Thread>();
 
@@ -19,7 +25,6 @@ public class SynchronizationTest1 {
 			if (file.isFile()) {
 				MyThread t = new MyThread(file.getAbsolutePath(), userAccount);
 				t.start();
-				System.out.println("in if");
 				list.add(t);
 			}
 		}
