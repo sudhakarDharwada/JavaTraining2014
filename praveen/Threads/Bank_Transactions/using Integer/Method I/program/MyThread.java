@@ -1,4 +1,5 @@
-package bankTransactionSampleProject.testcases;
+package com.snapfish.threads.Threads;
+
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -7,11 +8,11 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
 
-class MyThread extends Thread
+public class MyThread extends Thread
 {
-	static Hashtable<String, Double> userAccount;
+	static Hashtable<Integer, Double> userAccount;
 	String filepath;
-	public MyThread(String filepath,Hashtable<String, Double> users)
+	public MyThread(String filepath,Hashtable<Integer, Double> users)
 	{
 		this.filepath=filepath;
 		userAccount=users;
@@ -32,7 +33,7 @@ class MyThread extends Thread
 					arg[i] = sTokenizer.nextToken();
 				}
 				if (arg[0] != null) {
-					String UserId=arg[0];
+					int UserId=Integer.parseInt(arg[0]);
 					String trans=arg[1];
 					double amount=Double.parseDouble(arg[2]);
 
@@ -53,30 +54,32 @@ class MyThread extends Thread
 			}
 		}
 	}
-	public  void addToTable(String userId, String trans, double amount) {
+	public void addToTable(Integer userId, String trans, double amount) {
 			double initBal=0.0;
 			synchronized (userId) {
-				if(userAccount.get(userId)==null)
-				{
-					userAccount.put(userId,initBal);
-					if(trans.equalsIgnoreCase("deposite"))
-					{
-						userAccount.put(userId,(userAccount.get(userId)+amount));
-					}
-					else {
-						userAccount.put(userId,(userAccount.get(userId)-amount));
-					}
-				}
-				else {
-					if(trans.equalsIgnoreCase("deposite"))
-					{
-						userAccount.put(userId,(userAccount.get(userId)+amount));
-					}
-					else {
-						userAccount.put(userId,(userAccount.get(userId)-amount));
-					}
+			Double init=userAccount.get(userId);
+			if(init==null)
+			{
+				userAccount.put(userId,initBal);
+				init=initBal;
+				synchronized (userId) {
+					traansaction(userId, trans, amount,init);
 				}
 			}
-
+			else {
+				synchronized (userId) {
+					traansaction(userId, trans, amount,init);
+				}
+			}
+		}
+	}
+	public void traansaction(Integer userId,String trans,double amount,double init) {
+		if(trans.equalsIgnoreCase("deposite"))
+		{
+			userAccount.put(userId,(userAccount.get(userId)+amount));
+		}
+		else {
+			userAccount.put(userId,(userAccount.get(userId)-amount));
+		}
 	}
 }
