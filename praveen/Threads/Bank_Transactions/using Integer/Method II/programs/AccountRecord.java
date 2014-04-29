@@ -22,7 +22,7 @@ public class AccountRecord {
 	}
         /*this method creates an object to every unique userId and sets to hashtable*/
 	public static AccountRecord setAccountRecord(Integer UserId,Hashtable<Integer, AccountRecord> set) {
-		synchronized (UserId) {
+		synchronized (AccountRecord.class) {
 			map = set;
 			AccountRecord obj = null;
 			if (map.containsKey(UserId)) {
