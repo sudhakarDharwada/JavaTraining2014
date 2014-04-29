@@ -7,10 +7,11 @@ import java.io.FileReader;
 import java.util.StringTokenizer;
 import java.util.*;
 import java.io.*;
-public class AccountSummary implements Runnable{
-	File file=null;
-	static Hashtable<Integer, Account> accountInfo=new Hashtable<Integer, Account>();
-	protected static Set<Lock> lock_set = new HashSet<Lock>();
+public class AccountSummary implements Runnable
+{
+	private File file=null;
+	private static Hashtable<Integer, Account> accountInfo=new Hashtable<Integer, Account>();
+	private static Hashtable<Integer, Lock> lock_hash = new Hashtable<Integer, Lock>();
 	public AccountSummary(File file)
 	{
 		this.file=file;
@@ -55,7 +56,7 @@ public class AccountSummary implements Runnable{
 				trans_type=e[1];
 				bal=Double.parseDouble(e[2]);
 				Lock lock = new Lock(acc);
-				lock_set.add(lock);
+				lock_hash.put(acc,lock);
 				this.calculateBalance(acc,trans_type,bal);
 			}	
 		}
@@ -73,12 +74,12 @@ public class AccountSummary implements Runnable{
 	public void calculateBalance(int acc,String trans_type,double bal)
 	{		
     	Lock lock = this.getLockObject(acc);
-    	if(lock!=null){
-    	    synchronized(lock){      // To lock the object if the process base on same ID
+    	if(lock!=null){   
+			 synchronized(lock){     // To lock the object if the process base on same ID
     	    	Account  b=accountInfo.get(acc);
-    	    	if(b!=null){
+    	    	if(b!=null)
+    	    	{
     	    	    b.setBalance(bal,trans_type);
-    	    	    accountInfo.put(acc,b);
     	    	}
     	    	else{
     	    	    b = new Account();
@@ -104,19 +105,12 @@ public class AccountSummary implements Runnable{
 	/*to avoid concurrent modification*/
 	public Lock getLockObject(int id)
 	{
-    	synchronized(lock_set)                    
+    	while(lock_hash.get(id)!=null)
     	{
-    	    Iterator i = lock_set.iterator();
-    	    while(i.hasNext()){
-    	    	Lock l = (Lock)i.next();
-    	    	if(l.id == id){
-    	    	    return l;
-    	    	}
-    	    }
-    	    return null;
-    	}
-    }
-    
+			return lock_hash.get(id);
+		}
+		return null;
+    }    
 }
 
 class Lock 
@@ -125,20 +119,6 @@ class Lock
     Lock(int id)
     {
         this.id = id;
-    }
-    /* To avoid concurrent modification over riding hashCode() and equals() methods*/
-    public int hashCode(){
-    	return id;
-    }
-
-    public boolean equals(Object obj){
-        if(obj !=null && obj instanceof Lock){
-            Lock l = (Lock)obj;
-            if(id == l.id){
-                return true;
-            }
-        }
-        return false;
     }
 }
 
