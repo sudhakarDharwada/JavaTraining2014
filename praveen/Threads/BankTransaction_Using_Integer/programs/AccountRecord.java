@@ -36,12 +36,12 @@ public class AccountRecord {
 		return obj;
 	}
         /*this method added the amount*/
-	public AccountRecord addValue(double amount) {
+	public AccountRecord deposite(double amount) {
 		this.amount=this.amount+amount;
 		return this;
 	}
         /*this method substracts  the amount*/
-	public AccountRecord diffValue(double amount) {
+	public AccountRecord withdraw(double amount) {
 		this.amount=this.amount-amount;
 		return this;
 	}
