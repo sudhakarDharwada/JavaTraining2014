@@ -11,7 +11,6 @@ public class AccountSummary implements Runnable
 {
 	private File file=null;
 	private static Hashtable<Integer, Account> accountInfo=new Hashtable<Integer, Account>();
-	private static Hashtable<Integer, Lock> lock_hash = new Hashtable<Integer, Lock>();
 	public AccountSummary(File file)
 	{
 		this.file=file;
@@ -55,8 +54,6 @@ public class AccountSummary implements Runnable
 				acc=Integer.parseInt(e[0]);
 				trans_type=e[1];
 				bal=Double.parseDouble(e[2]);
-				Lock lock = new Lock(acc);
-				lock_hash.put(acc,lock);
 				this.calculateBalance(acc,trans_type,bal);
 			}	
 		}
@@ -67,27 +64,36 @@ public class AccountSummary implements Runnable
 		catch (IOException e1) {
 			e1.printStackTrace();
 		}		
-	}
-	
+	}	
 	
 	/*Caluculating the balance */
 	public void calculateBalance(int acc,String trans_type,double bal)
 	{		
-    	Lock lock = this.getLockObject(acc);
-    	if(lock!=null){   
-			 synchronized(lock){     // To lock the object if the process base on same ID
-    	    	Account  b=accountInfo.get(acc);
-    	    	if(b!=null)
-    	    	{
-    	    	    b.setBalance(bal,trans_type);
-    	    	}
-    	    	else{
-    	    	    b = new Account();
-    	    	    b.setBalance(bal,trans_type);
-    	    	    accountInfo.put(acc,b);
-    	    	}
-    	    }
-        }
+        Account  b=accountInfo.get(acc);
+        if(b==null)
+        {
+			synchronized(accountInfo)
+			{
+				Account a=accountInfo.get(acc);
+				if(a==null)
+				{
+					Account c = new Account();
+    	    	    c.setBalance(bal,trans_type);
+					accountInfo.put(acc,c);
+				}
+				else
+				{
+					a.setBalance(bal,trans_type);
+				}
+			}
+		}
+		else
+		{
+			synchronized(b)
+			{
+				b.setBalance(bal,trans_type);
+			}
+		}
     }	
 	
 	/*For printing the summary of account information*/
@@ -101,24 +107,5 @@ public class AccountSummary implements Runnable
 			System.out.println(account + ": " +accountInfo.get(account));
 		}	
 	}
-	
-	/*to avoid concurrent modification*/
-	public Lock getLockObject(int id)
-	{
-    	while(lock_hash.get(id)!=null)
-    	{
-			return lock_hash.get(id);
-		}
-		return null;
-    }    
-}
-
-class Lock 
-{
-    protected int id;
-    Lock(int id)
-    {
-        this.id = id;
-    }
 }
 
