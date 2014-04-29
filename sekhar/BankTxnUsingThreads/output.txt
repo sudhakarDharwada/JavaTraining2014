@@ -1,0 +1,12 @@
+101 withdraw 1000:Thread-1
+102 withdraw 1000:Thread-2
+101 deposite 1000:Thread-0
+101 deposite 1000:Thread-1
+102 deposite 1000:Thread-2
+102 deposite 1000:Thread-0
+101 deposite 1000:Thread-0
+102 deposite 1000:Thread-0
+
+Summary:
+The Account no:102 Amount:2000
+The Account no:101 Amount:2000
