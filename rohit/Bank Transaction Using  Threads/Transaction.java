@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 
@@ -18,7 +20,6 @@ public class Transaction
 		File file = new File("/home/valuelabs/input/");
 		File[] files = file.listFiles();
 		Thread[] t=new Thread[files.length];
-		long st=System.currentTimeMillis();
 		for(int j=0;j<3;j++)
 		{
 			t[j]=new Thread(new ReportThread(files[j].getAbsolutePath()));
@@ -32,8 +33,6 @@ public class Transaction
 			}
 		for(Entry<Accno,Balance> e:ReportThread.accdetails.entrySet())
 			System.out.println(e.getKey()+"   "+e.getValue().amount);
-		long et=System.currentTimeMillis();
-		System.out.println(et-st);
 		System.out.println("enter the account no. to get current balance:");
 		Scanner sc=new Scanner(System.in);
 		Accno a1=new Accno(sc.nextInt());
@@ -46,12 +45,12 @@ public class Transaction
 class Generate
 {
 	static Accno ns=null;
-	
+	static Map<Integer,Accno> m=new HashMap<Integer,Accno>();
 	public static Hashtable<Accno,Balance> generatereport(int i,String s1,int amount)
 	{	
-		
-		ns=new Accno(i);
-		synchronized (ns) 
+		if(!(m.containsKey(i)))
+			m.put(i,new Accno(i));
+		synchronized (m.get(i)) 
 		{
 			if(ReportThread.accdetails.get(new Accno(i))==null)
 			{
