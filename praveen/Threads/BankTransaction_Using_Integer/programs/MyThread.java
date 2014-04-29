@@ -65,10 +65,10 @@ public class MyThread extends Thread
 	public void transaction(Integer userId,String trans,double amount) {
 		if(trans.equalsIgnoreCase("deposite"))
 		{
-			userAccount.put(userId,(userAccount.get(userId).addValue(amount)));
+			userAccount.put(userId,(userAccount.get(userId).deposite(amount)));
 		}
 		else {
-			userAccount.put(userId,(userAccount.get(userId).diffValue(amount)));
+			userAccount.put(userId,(userAccount.get(userId).withdraw(amount)));
 		}
 	}
 	
