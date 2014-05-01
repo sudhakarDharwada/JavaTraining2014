@@ -26,14 +26,12 @@ public class BankTrans1 {
 			if (file.isFile()) {
 				MyThread t = new MyThread(file.getAbsolutePath(), userAccount);
 				t.start();
-				list.add(t);
-			}
-		}
-		for (Thread t : list) {
-			try {
-				t.join();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				try {
+					t.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		st1.summary(userAccount);
