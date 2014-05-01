@@ -1,0 +1,3 @@
+112 withdrawl 200
+116 deposit 500
+115 withdrawl 200
