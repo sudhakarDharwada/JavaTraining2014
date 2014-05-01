@@ -1,0 +1,6 @@
+101,deposite,1000
+102,deposite,1000
+101,deposite,1000
+102,deposite,1000
+101,withdraw,500
+103,withdraw,500
