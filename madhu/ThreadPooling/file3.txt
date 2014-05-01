@@ -1,0 +1,3 @@
+14567834 withdraw 100
+12347645 deposit 600
+54368900 deposit 400
