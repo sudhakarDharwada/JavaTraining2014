@@ -1,4 +1,0 @@
-11115 deposit 1000
-11116 deposit 2000
-11113 withdrawl 1000
-11111 withdrawl 2000

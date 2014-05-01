@@ -1,6 +1,6 @@
 AccountId	Transaction	Amount
 
-1003		withdraw	100
+1001		withdraw	100
 1002		withdraw	200
 1001		deposit		300
 1002		deposit		500

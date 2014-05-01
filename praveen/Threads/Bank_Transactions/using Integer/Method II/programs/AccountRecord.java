@@ -21,19 +21,20 @@ public class AccountRecord {
 		this.amount = amount;
 	}
         /*this method creates an object to every unique userId and sets to hashtable*/
-	public static synchronized AccountRecord setAccountRecord(Integer UserId,Hashtable<Integer, AccountRecord> set)
-	{
-		map=set;
-		AccountRecord obj=null;
-		if(map.containsKey(UserId))
-		{
-			obj=map.get(UserId);
+	public static AccountRecord setAccountRecord(Integer UserId,Hashtable<Integer, AccountRecord> set) {
+		synchronized (AccountRecord.class) {
+			map = set;
+			AccountRecord obj = null;
+			if (map.containsKey(UserId)) {
+				obj = map.get(UserId);
+				System.out.println("Userid:" + UserId + " contains in Thread:"+ Thread.currentThread().getName() + " with amount:"+ obj.getAmount());
+			} else {
+				obj = new AccountRecord(UserId);
+				System.out.println("Userid:" + UserId + " not contain in Thread:" + Thread.currentThread().getName() + " with amount:" + obj.getAmount());
+				map.put(UserId, obj);
+			}
+			return obj;
 		}
-		else {
-			obj=new AccountRecord(UserId);
-			map.put(UserId,obj);
-		}
-		return obj;
 	}
         /*this method added the amount*/
 	public AccountRecord deposite(double amount) {

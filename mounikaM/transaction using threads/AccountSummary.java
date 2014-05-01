@@ -7,10 +7,10 @@ import java.io.FileReader;
 import java.util.StringTokenizer;
 import java.util.*;
 import java.io.*;
-public class AccountSummary implements Runnable{
-	File file=null;
-	static Hashtable<Integer, Account> accountInfo=new Hashtable<Integer, Account>();
-	protected static Set<Lock> lock_set = new HashSet<Lock>();
+public class AccountSummary implements Runnable
+{
+	private File file=null;
+	private static Hashtable<Integer, Account> accountInfo=new Hashtable<Integer, Account>();
 	public AccountSummary(File file)
 	{
 		this.file=file;
@@ -54,8 +54,6 @@ public class AccountSummary implements Runnable{
 				acc=Integer.parseInt(e[0]);
 				trans_type=e[1];
 				bal=Double.parseDouble(e[2]);
-				Lock lock = new Lock(acc);
-				lock_set.add(lock);
 				this.calculateBalance(acc,trans_type,bal);
 			}	
 		}
@@ -66,27 +64,36 @@ public class AccountSummary implements Runnable{
 		catch (IOException e1) {
 			e1.printStackTrace();
 		}		
-	}
-	
+	}	
 	
 	/*Caluculating the balance */
 	public void calculateBalance(int acc,String trans_type,double bal)
 	{		
-    	Lock lock = this.getLockObject(acc);
-    	if(lock!=null){
-    	    synchronized(lock){      // To lock the object if the process base on same ID
-    	    	Account  b=accountInfo.get(acc);
-    	    	if(b!=null){
-    	    	    b.setBalance(bal,trans_type);
-    	    	    accountInfo.put(acc,b);
-    	    	}
-    	    	else{
-    	    	    b = new Account();
-    	    	    b.setBalance(bal,trans_type);
-    	    	    accountInfo.put(acc,b);
-    	    	}
-    	    }
-        }
+        Account  b=accountInfo.get(acc);
+        if(b==null)
+        {
+			synchronized(accountInfo)
+			{
+				Account a=accountInfo.get(acc);
+				if(a==null)
+				{
+					Account c = new Account();
+    	    	    c.setBalance(bal,trans_type);
+					accountInfo.put(acc,c);
+				}
+				else
+				{
+					a.setBalance(bal,trans_type);
+				}
+			}
+		}
+		else
+		{
+			synchronized(b)
+			{
+				b.setBalance(bal,trans_type);
+			}
+		}
     }	
 	
 	/*For printing the summary of account information*/
@@ -100,45 +107,5 @@ public class AccountSummary implements Runnable{
 			System.out.println(account + ": " +accountInfo.get(account));
 		}	
 	}
-	
-	/*to avoid concurrent modification*/
-	public Lock getLockObject(int id)
-	{
-    	synchronized(lock_set)                    
-    	{
-    	    Iterator i = lock_set.iterator();
-    	    while(i.hasNext()){
-    	    	Lock l = (Lock)i.next();
-    	    	if(l.id == id){
-    	    	    return l;
-    	    	}
-    	    }
-    	    return null;
-    	}
-    }
-    
-}
-
-class Lock 
-{
-    protected int id;
-    Lock(int id)
-    {
-        this.id = id;
-    }
-    /* To avoid concurrent modification over riding hashCode() and equals() methods*/
-    public int hashCode(){
-    	return id;
-    }
-
-    public boolean equals(Object obj){
-        if(obj !=null && obj instanceof Lock){
-            Lock l = (Lock)obj;
-            if(id == l.id){
-                return true;
-            }
-        }
-        return false;
-    }
 }
 

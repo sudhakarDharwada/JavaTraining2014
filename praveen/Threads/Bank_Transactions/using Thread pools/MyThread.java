@@ -8,11 +8,13 @@ import java.io.IOException;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
 
+import com.snapfish.threads.beans.AccountRecord;
+
 public class MyThread extends Thread
 {
-	static Hashtable<Integer, Double> userAccount;
+	static Hashtable<Integer, AccountRecord> userAccount;
 	String filepath;
-	public MyThread(String filepath,Hashtable<Integer, Double> users)
+	public MyThread(String filepath,Hashtable<Integer, AccountRecord> users)
 	{
 		this.filepath=filepath;
 		userAccount=users;
@@ -33,11 +35,14 @@ public class MyThread extends Thread
 					arg[i] = sTokenizer.nextToken();
 				}
 				if (arg[0] != null) {
-					int UserId=Integer.parseInt(arg[0]);
+					Integer UserId=Integer.parseInt(arg[0]);
 					String trans=arg[1];
 					double amount=Double.parseDouble(arg[2]);
 
-					addToTable(UserId,trans,amount);
+					AccountRecord obj=AccountRecord.setAccountRecord(UserId, userAccount);
+					synchronized (obj) {
+						transaction(UserId, trans, amount);
+					}
 				}
 			}
 		} catch (FileNotFoundException e) {
@@ -54,32 +59,15 @@ public class MyThread extends Thread
 			}
 		}
 	}
-	public void addToTable(Integer userId, String trans, double amount) {
-			double initBal=0.0;
-			synchronized (userId) {
-			Double init=userAccount.get(userId);
-			if(init==null)
-			{
-				userAccount.put(userId,initBal);
-				init=initBal;
-				synchronized (userId) {
-					traansaction(userId, trans, amount,init);
-				}
-			}
-			else {
-				synchronized (userId) {
-					traansaction(userId, trans, amount,init);
-				}
-			}
-		}
-	}
-	public void traansaction(Integer userId,String trans,double amount,double init) {
+			
+	public void transaction(Integer userId,String trans,double amount) {
 		if(trans.equalsIgnoreCase("deposite"))
 		{
-			userAccount.put(userId,(userAccount.get(userId)+amount));
+			userAccount.put(userId,(userAccount.get(userId).addValue(amount)));
 		}
 		else {
-			userAccount.put(userId,(userAccount.get(userId)-amount));
+			userAccount.put(userId,(userAccount.get(userId).diffValue(amount)));
 		}
 	}
+	
 }
