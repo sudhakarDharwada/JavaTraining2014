@@ -1,6 +1,6 @@
 package com.val.Threading;
 
-public class Account 
+public class Account
 {
 	int amount;
 	public Account(int amount)

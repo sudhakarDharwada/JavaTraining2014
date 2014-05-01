@@ -13,7 +13,7 @@ class FileThread implements Runnable
 	public void run()
 	{
 			try {
-					Transaction.processTransactions(file);	
+				Transaction.processTransactions(file);	
 				
 			} catch (NumberFormatException e) {
 			
