@@ -1,9 +1,7 @@
 package com.snapfish.threads.mainclasses;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Map.Entry;
 
 import com.snapfish.threads.Threads.*;
@@ -20,7 +18,6 @@ public class BankTrans1 {
                 String FilePath = args[0];
 		File folder = new File(FilePath);
 		File[] listOfFiles = folder.listFiles();
-		List<Thread> list = new ArrayList<Thread>();
 
 		for (File file : listOfFiles) {
 			if (file.isFile()) {
