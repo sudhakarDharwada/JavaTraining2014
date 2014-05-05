@@ -1,3 +1,0 @@
-1113 deposit 5000
-1113 withdraw 5000
-1114 withdraw 4000
