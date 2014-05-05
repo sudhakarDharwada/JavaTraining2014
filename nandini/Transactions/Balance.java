@@ -14,6 +14,7 @@ public class Balance {
     public void setBalance(double amount,String type){
     	if(type.equalsIgnoreCase("deposit")){
     	    deposit(amount);
+    	    System.out.println("deposit is done");
     	}
     	else {
     	    withdraw(amount);

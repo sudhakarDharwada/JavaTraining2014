@@ -6,8 +6,6 @@ import java.io.*;
 public class FileOperation extends Thread{
     
     static Map<String,Balance> accountMap = new HashMap<String,Balance>(); //To store Account Ids and Balance
-    protected static Set<Lock> lockSet = new HashSet<Lock>(); // To identify unique object for synchronization
-    
     File fileName = null;
     public FileOperation(File fileName){
     	this.fileName = fileName;
@@ -28,10 +26,9 @@ public class FileOperation extends Thread{
     	while ((line = br.readLine()) != null){
     	    StringTokenizer st=new StringTokenizer(line);
     	    String acId=st.nextToken();
-    	    Lock lock = new Lock(Integer.parseInt(acId));
-    	    lockSet.add(lock);
+    	    int accid=Integer.parseInt(acId);
     	    String type=st.nextToken();
-    	    double amount=Double.parseDouble(st.nextToken());
+    	    double amount=Double.parseDouble(st.nextToken()); 
     	    this.calculateBalance(acId,type,amount);
     	}
     	if(br!=null)
@@ -42,38 +39,33 @@ public class FileOperation extends Thread{
 	}
     	
     }
-    
-    //To get the object uniquely based on AccountID
-    public Lock getLockObject(int id){
-    	synchronized(lockSet){//TO avoid ConcurrentModificationException
-    	    Iterator i = lockSet.iterator();
-    	    while(i.hasNext()){
-    	    	Lock l = (Lock)i.next();
-    	    	if(l.id == id){
-    	    	    return l;
-    	    	}
-    	    }
-    	    return null;
-    	}
-    }
-    
     //Calculate the balance with diff type transactions
     public void calculateBalance(String acId,String type,double amount){
-		Lock lock = this.getLockObject(Integer.parseInt(acId));
-    	if(lock!=null){
-    	    synchronized(lock){ // To lock the object if the process base on same ID
-    	    	Balance bal = accountMap.get(acId);
-    	    	if(bal!=null){
-    	    	    bal.setBalance(amount,type);
-    	    	    accountMap.put(acId,bal);
-    	    	}
-    	    	else{
-    	    	    bal = new Balance();
-    	    	    System.out.println(acId+" "+type+" "+amount);
-    	    	    bal.setBalance(amount,type);
-    	    	    accountMap.put(acId,bal);
-    	    	}
-    	    }
+		Balance bal = accountMap.get(acId);
+		System.out.println(bal);
+    	if(bal==null)
+    	{
+    	    synchronized(accountMap)
+    	    {
+    	    	Balance bal1 = accountMap.get(acId);
+    	    	if(bal1==null)
+    	    	{
+						Balance bal2= new Balance();
+						bal2.setBalance(amount,type);
+						accountMap.put(acId,bal2);
+				}
+    	    	else
+    	    	{
+					System.out.println(acId+" "+type+" "+amount);
+    	    	    bal1.setBalance(amount,type);
+					
+				}
+			}
+		}
+    	else {
+			synchronized(bal){
+			bal.setBalance(amount,type);
+			}
         }
     }
     
