@@ -1,9 +1,9 @@
-package com.vl.bank;
+package com.vl.ThreadPool;
 
 import java.util.*;
 import java.io.*;
 
-public class FileOperation extends Thread{
+public class FileOperation implements Runnable{
     
     static Map<String,Balance> accountMap = new HashMap<String,Balance>(); //To store Account Ids and Balance
     File fileName = null;
