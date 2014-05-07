@@ -91,6 +91,7 @@ class FilePermission {
 				}
 				else{
 					readOperationCount++;
+					condition=false;
 				}
 			}
 			
