@@ -2,67 +2,65 @@ package com.vl.ReadWriteLocks;
 
 public class ReadWriteLock{
 	
-	private Lock l;
-	private int no_of_write_issued;
-	private int no_of_read_issued;
-	private boolean is_write_lock_issued;
-	private int write_waiting;
+	static int no_of_write_issued;
+	static int no_of_read_issued;
+	static boolean is_write_lock_issued;
+	static int write_waiting;
 	
 	public ReadWriteLock() 
 	{
-		l = new Lock();
 		is_write_lock_issued = false;
 	}
 	
-	void getReadLock()
+	public static synchronized void getReadLock()
 	{
-		synchronized(l)
+		while(is_write_lock_issued==true || write_waiting != 0)
 		{
-			if(is_write_lock_issued==true || write_waiting != 0)
+			try
 			{
-				try
-				{
-					l.wait();
-				}
-				catch(InterruptedException e)
-				{
-					e.printStackTrace();
-				}
-				no_of_read_issued++;
+				ReadWriteLock.class.wait();
 			}
-		}
+			catch(InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+			no_of_read_issued++;
+		}	
 	}
 	
-	void getWriteLock()
+	public static synchronized void getWriteLock()
 	{
-		synchronized(l)
+		write_waiting++;
+		while(is_write_lock_issued && no_of_read_issued!= 0)
 		{
-			write_waiting++;
-			while(is_write_lock_issued && no_of_read_issued== 0)
+			try
 			{
-				try
-				{
-					l.wait();
-				}
-				catch(InterruptedException e)
-				{
-					e.printStackTrace();
-				}
+				System.out.println("write waiting");
+				ReadWriteLock.class.wait();
 			}
-			is_write_lock_issued=true;
-			write_waiting--;
+			catch(InterruptedException e)
+			{
+				e.printStackTrace();
+			}
 		}
+		is_write_lock_issued=true;
+		write_waiting--;
 	}
 	
-	void doRelease()
+	public static synchronized void doRelease()
 	{
-		synchronized(l)
+		if(no_of_read_issued==0 && !is_write_lock_issued)
+			return;
+		if(is_write_lock_issued)
 		{
-			if(is_write_lock_issued)
-				is_write_lock_issued=false;
-			else
-				no_of_read_issued--;
-			l.notify();
+			is_write_lock_issued=false;
+			ReadWriteLock.class.notify();
+		}
+		else
+		{
+			no_of_read_issued--;
+			if(no_of_read_issued==0)
+				ReadWriteLock.class.notify();
 		}
 	}
 }

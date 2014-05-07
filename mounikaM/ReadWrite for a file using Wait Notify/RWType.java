@@ -29,7 +29,7 @@ class RWType
 		}
 		br.close();
 		rwl.doRelease();
-		System.out.println("done reading"+Thread.currentThread().getName());
+		System.out.println("done reading "+Thread.currentThread().getName());
 	}
 	
 	void writeFile() throws FileNotFoundException,IOException
@@ -40,6 +40,6 @@ class RWType
 		fw.write(content);
 		fw.close();
 		rwl.doRelease();
-		System.out.println("done writing"+Thread.currentThread().getName());
+		System.out.println("done writing "+Thread.currentThread().getName());
 	}
 }
