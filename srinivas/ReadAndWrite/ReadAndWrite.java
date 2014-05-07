@@ -2,6 +2,7 @@ package readAndWritefinal;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -9,14 +10,23 @@ import java.io.IOException;
 
 public class ReadAndWrite extends Thread{
 
-	
+
 	int ch;
-	
+
 	FileReader fr;
 	FileWriter fw;
-		
+	File file;
+	String operation;
+
 	public BufferedReader br;
 	public BufferedWriter bw;
+
+	public ReadAndWrite(File file,String operation) {
+
+		this.file = file;
+		this.operation = operation;
+
+	}
 
 	@Override
 	public void run(){
@@ -24,9 +34,14 @@ public class ReadAndWrite extends Thread{
 		System.out.println(Thread.currentThread().getName() +"***** started");
 
 		try {
-			reading();
-			writing();
 
+			
+			if(operation.equals("read"))
+				reading();
+			else
+				writing();
+			
+			
 		} catch (InterruptedException e) {
 
 			e.printStackTrace();
@@ -42,9 +57,11 @@ public class ReadAndWrite extends Thread{
 
 	public   void reading() throws InterruptedException, IOException{
 
-		fr = new FileReader(MainClass.file);
-		br = new BufferedReader(fr);
+		
 		synchronized (this) {
+			
+			fr = new FileReader(MainClass.file);
+			br = new BufferedReader(fr);
 
 
 			if(MainClass.writers == 0){
@@ -74,11 +91,11 @@ public class ReadAndWrite extends Thread{
 
 		MainClass.readers--;
 		if(MainClass.readers == 0){
-		
+
 			System.out.println("notifyAll by readRelease" +Thread.currentThread().getName());
 			notifyAll();
 		}
-		
+
 	}
 
 	public  void writing() throws InterruptedException, IOException{
