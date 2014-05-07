@@ -1,4 +1,4 @@
-package com.vl.bank;
+package com.vl.ThreadPool;
 
 public class Balance {
     double amount;
@@ -14,7 +14,6 @@ public class Balance {
     public void setBalance(double amount,String type){
     	if(type.equalsIgnoreCase("deposit")){
     	    deposit(amount);
-    	    System.out.println("deposit is done");
     	}
     	else {
     	    withdraw(amount);

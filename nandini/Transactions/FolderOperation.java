@@ -9,7 +9,6 @@ public class FolderOperation {
         if(folder.isDirectory()){
             File[] listOfFiles = folder.listFiles();
             String[] fileNames=new String[listOfFiles.length];
-            
             //Threads to be create based on no.of files
             FileOperation threads[] = new FileOperation[listOfFiles.length];
             for(int i=0;i<listOfFiles.length;i++){
@@ -27,7 +26,6 @@ public class FolderOperation {
             //TO display Account summary info.
             FileOperation.getDetails();
         }
-        
         
     }
 }

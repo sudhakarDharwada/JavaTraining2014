@@ -1,2 +1,0 @@
-1111 deposit 30000
-1111 withdraw 20000
