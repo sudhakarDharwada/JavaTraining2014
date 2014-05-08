@@ -8,7 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-
+/*main classs*/
 public class ThreadLocalExample1{
 
 	public static void main(String[] args) {
@@ -24,6 +24,7 @@ public class ThreadLocalExample1{
 	}
 
 }
+/*This is the componet which stores the operation type(Read/Write) and FilePath */
 class RequiredInfo
 {
 	private String operationType;
@@ -45,6 +46,7 @@ class RequiredInfo
 		this.filePath = filePath;
 	}
 }
+/*This is ThreadLocal component */
 class MyThreadLocal
 {
 	public static final ThreadLocal<RequiredInfo> MY_THREAD_LOCAL=new ThreadLocal<RequiredInfo>();
@@ -61,6 +63,7 @@ class MyThreadLocal
 		MY_THREAD_LOCAL.remove();
 	}
 }
+/*This is user Thread class */
 class MyThread extends Thread{
 
 	RequiredInfo info;
@@ -82,6 +85,8 @@ class MyThread extends Thread{
 	}
 
 }
+
+/*This is Fileoperation class contains the read and write operations as methods*/
 class FileOperation
 {
 	BufferedReader input;
@@ -144,7 +149,7 @@ class FileOperation
 	}
 }
 
-
+/*This is ReadWiteLock class to provide permission to acces the file*/
 class ReadWriteLock
 {
 	static ReadWriteLock lock=new ReadWriteLock();
