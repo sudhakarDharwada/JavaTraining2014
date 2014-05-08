@@ -1,0 +1,13 @@
+102 deposit 10000
+101 deposit 700
+103 deposit 600
+104 deposit 300
+101 withdrawal 200
+103 withdrawal 100
+102 withdrawal 8000
+101 deposit 400
+105 deposit 900
+106 deposit 200
+105 withdrawal 500
+107 deposit 0000
+
