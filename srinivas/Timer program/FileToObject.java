@@ -36,7 +36,7 @@ public class FileToObject  {
 				//Name
 				String name =st.nextToken();
 				emp.setName(name);
-				System.out.print(name);
+				//System.out.print(name);
 
 				//Date
 				String dateInString =st.nextToken();
@@ -46,7 +46,7 @@ public class FileToObject  {
 
 				Timestamp ts = Timestamp.valueOf(dateInString+" "+timeInString);
 				emp.setTimestamp(ts);
-				System.out.println(ts);
+				//System.out.println(ts);
 
 				list.add(emp);
 
@@ -60,28 +60,37 @@ public class FileToObject  {
 	public void remainder(){
 
 		Iterator<EmpRemainder> i = list.listIterator();
+		Iterator<EmpRemainder> ii = list.listIterator();
 
-		while(i.hasNext()){
+		while(ii.hasNext()){
 
-			EmpRemainder er =i.next();
-			long time=er.timestamp.getTime()-System.currentTimeMillis();
+			EmpRemainder err =ii.next();
+			System.out.println(err.name+"----->"+err.timestamp);
+		}
 
-			if(time<0){
-			}
+		while(true){
 			
-			else{
-				synchronized (tc) {
+			while(i.hasNext()){
 
-					try {
-						tc.wait(time);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+				EmpRemainder er =i.next();
+				long time=er.timestamp.getTime()-System.currentTimeMillis();
+
+				if(time<0){
+				}
+
+				else{
+					synchronized (tc) {
+
+						try {
+							tc.wait(time);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						System.out.println("hai to... "+er.name);
 					}
-					System.out.println("hai to... "+er.name);
 				}
 			}
 		}
-
 
 	}
 }
