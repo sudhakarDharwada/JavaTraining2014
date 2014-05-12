@@ -17,14 +17,14 @@ public class FileReader1 {
 		Scanner sc=new Scanner(new BufferedReader(fr));
 		while(sc.hasNext()){
 			String name=sc.useDelimiter(" ").next();
-            String dates=sc.useDelimiter("\n").next();
-            //SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            //Date d=formatter.parse(date);
-            @SuppressWarnings("deprecation")
+            		String dates=sc.useDelimiter("\n").next();
+                        //SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        	        //Date d=formatter.parse(date);
+            		@SuppressWarnings("deprecation")
 			long date=Date.parse(dates);
-            Date d=new Date(date);
-            b=new BirthDetails(name, d);
-            bd.add(b);
+        		Date d=new Date(date);
+            		b=new BirthDetails(name, d);
+            		bd.add(b);
 		}
 		return bd;
 	}
