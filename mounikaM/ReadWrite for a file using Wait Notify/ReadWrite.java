@@ -12,15 +12,30 @@ public class ReadWrite
 		if (0 < args.length) 
 		{
 			inFile = new File(args[0]);
-			Thread t[]=new Thread[5];
+			Thread t[]=new Thread[20];
 			t[0]=new Thread(new ReadWriteThread(inFile,"read"));
-			t[1]=new Thread(new ReadWriteThread(inFile,"write"));
-			t[2]=new Thread(new ReadWriteThread(inFile,"write"));
+			t[1]=new Thread(new ReadWriteThread(inFile,"read"));
+			t[2]=new Thread(new ReadWriteThread(inFile,"read"));
 			t[3]=new Thread(new ReadWriteThread(inFile,"read"));
 			t[4]=new Thread(new ReadWriteThread(inFile,"read"));
+			t[5]=new Thread(new ReadWriteThread(inFile,"write"));
+			t[6]=new Thread(new ReadWriteThread(inFile,"read"));
+			t[7]=new Thread(new ReadWriteThread(inFile,"write"));
+			t[8]=new Thread(new ReadWriteThread(inFile,"read"));
+			t[9]=new Thread(new ReadWriteThread(inFile,"write"));
+			t[10]=new Thread(new ReadWriteThread(inFile,"write"));
+			t[11]=new Thread(new ReadWriteThread(inFile,"write"));
+			t[12]=new Thread(new ReadWriteThread(inFile,"write"));
+			t[13]=new Thread(new ReadWriteThread(inFile,"write"));
+			t[14]=new Thread(new ReadWriteThread(inFile,"write"));
+			t[15]=new Thread(new ReadWriteThread(inFile,"read"));
+			t[16]=new Thread(new ReadWriteThread(inFile,"read"));
+			t[17]=new Thread(new ReadWriteThread(inFile,"read"));
+			t[18]=new Thread(new ReadWriteThread(inFile,"write"));
+			t[19]=new Thread(new ReadWriteThread(inFile,"write"));			
 			try
 			{
-				for(int i=0;i<5;i++)
+				for(int i=0;i<20;i++)
 				{
 					t[i].start();
 				}
@@ -55,8 +70,7 @@ class ReadWriteThread implements Runnable
 		try
 		{
 			System.out.println("Starting..."+Thread.currentThread().getName());
-			String m="read";
-			if(operation_type.equalsIgnoreCase(m))
+			if(operation_type.equalsIgnoreCase("read"))
 			{
 				rw.readFile();
 			}

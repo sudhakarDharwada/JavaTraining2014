@@ -14,12 +14,12 @@ public class MainClass {
 		
 		ReadAndWrite[] rw = new ReadAndWrite[100];
 		
+		new ReadAndWrite(file,"read").start();
+		new ReadAndWrite(file,"read").start();
+		new ReadAndWrite(file,"write").start();
+		new ReadAndWrite(file,"read").start();
+		new ReadAndWrite(file,"read").start();
 		
-		for(int i=1;i<4;i++){
-			rw[i] = new ReadAndWrite();
-			
-			rw[i].start();
-		}
 		
 	}
 
