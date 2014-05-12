@@ -13,7 +13,7 @@ public class RWLock {
     
 
    public static void main(String[] args) {
-      ReadWrite[] rw = new ReadWrite[100];
+      ReadWrite[] rw = new ReadWrite[];
       new ReadWrite(file,"read").start();
       new ReadWrite(file,"read").start();
       new ReadWrite(file,"write").start();
@@ -85,7 +85,7 @@ class ReadWrite extends Thread{
 	    if(no_of_reads == 0 && no_of_writes == false){
               no_of_writes=true;
 	      System.out.println("writing");
-	      bw.write(" .");
+	      bw.write("hi");
 	      bw.flush();
               writeRelease();
 	    }
