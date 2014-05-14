@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:element name="purchaseOrder" type="purchaseOrderType"></xs:element>
+
+
+<xs:complexType name="purchaseOrderType">
+<xs:sequence>
+<xs:element name="orderItems" type="orderItemsType"></xs:element>
+<xs:element name="shippingAddress" type="shippingAddressType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="orderItemsType">
+	<xs:sequence>
+	<xs:element name="Item" type="ItemType" maxOccurs="unbounded"></xs:element>
+	</xs:sequence>
+</xs:complexType>
+
+
+<xs:complexType name="ItemType">
+	<xs:sequence>	
+	<xs:element name="ItemName" type="xs:string"></xs:element>
+	<xs:element name="Code" type="xs:string"></xs:element>
+	</xs:sequence>
+</xs:complexType>
+
+
+<xs:complexType name="shippingAddressType">
+<xs:sequence>
+	<xs:element name="Name" type="xs:string"></xs:element>
+	<xs:element name="FatherName" type="xs:string"></xs:element>
+	<xs:element name="doorNo" type="xs:string"></xs:element>
+	<xs:element name="street" type="xs:string"></xs:element>
+	<xs:element name="city" type="xs:string"></xs:element>
+	<xs:element name="distict" type="xs:string"></xs:element>
+	<xs:element name="state" type="xs:string"></xs:element>
+	<xs:element name="country" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
