@@ -26,3 +26,5 @@
 <!ELEMENT HeadName (#PCDATA)>
 <!ELEMENT Staff (StaffName)>
 <!ELEMENT StaffName (#PCDATA)>
+<!ATTLIST CollChairManName phone CDATA #IMPLIED>
+<!ATTLIST CollPrinceName phone CDATA #REQUIRED>
