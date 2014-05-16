@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+
+
+<xs:element name="College" type="CollegeType"></xs:element>
+<xs:complexType name="CollegeType">
+<xs:sequence>
+<xs:element name="CollegeDetails" type="CollegeDetailsType"></xs:element>
+<xs:element name="Departments" type="DepartmentsType"></xs:element>
+<xs:element name="CollegeExaminationCell" type="CollegeExaminationCellType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CollegeDetailsType">
+<xs:sequence>
+<xs:element name="CollName" type="xs:string"></xs:element>
+<xs:element name="CollChairManName" type="xs:string"></xs:element>
+<xs:element name="CollPrinceName" type="xs:string"></xs:element>
+<xs:element name="Estd" type="xs:int"></xs:element>
+<xs:element name="CollAddress" type="xs:string"></xs:element>
+<xs:element name="CollCity" type="xs:string"></xs:element>
+<xs:element name="CollState" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DepartmentsType">
+<xs:sequence>
+<xs:element name="Department" type="DepartmentType" minOccurs="1" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DepartmentType">
+<xs:sequence>
+<xs:element name="DeptDetails" type="DeptDetailsType"></xs:element>
+<xs:element name="DeptStaff" type="DeptStaffType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DeptDetailsType">
+<xs:sequence>
+<xs:element name="DeptName" type="xs:string"></xs:element>
+<xs:element name="DeptHOD" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DeptStaffType">
+<xs:sequence>
+<xs:element name="Teaching" type="TeachingType"></xs:element>
+<xs:element name="Non-Teaching" type="Non-TeachingType"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="TeachingType">
+<xs:sequence>
+<xs:element name="Professor" type="ProfessorType" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ProfessorType">
+<xs:sequence>
+<xs:element name="ProName" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Non-TeachingType">
+<xs:sequence>
+<xs:element name="technican" type="technicanType" maxOccurs="unbounded"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="technicanType">
+<xs:sequence>
+<xs:element name="technicanName" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CollegeExaminationCellType">
+	<xs:sequence>
+		<xs:element name="Head" type="HeadType"></xs:element>
+		<xs:element name="Staff" type="StaffType" maxOccurs="unbounded"></xs:element>
+	</xs:sequence>
+</xs:complexType>
+<xs:complexType name="HeadType">
+<xs:sequence>
+<xs:element name="HeadName" type="xs:string"></xs:element>
+</xs:sequence>
+</xs:complexType>
+	<xs:complexType name="StaffType">
+		<xs:sequence>
+			<xs:element name="StaffName" type="xs:string"></xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

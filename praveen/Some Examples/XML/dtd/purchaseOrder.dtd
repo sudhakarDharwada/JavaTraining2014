@@ -1,0 +1,14 @@
+<!ELEMENT purchaseOrder (orderItems,shippingAddress)>
+<!ELEMENT orderItems (Item+)>
+<!ELEMENT Item (ItemName,Code)>
+<!ELEMENT ItemName (#PCDATA)>
+<!ELEMENT Code (#PCDATA)>
+<!ELEMENT shippingAddress (Name,FatherName,doorNo,street,city,distict,state,country)>
+<!ELEMENT Name (#PCDATA)>
+<!ELEMENT FatherName (#PCDATA)>
+<!ELEMENT doorNo (#PCDATA)>
+<!ELEMENT street (#PCDATA)>
+<!ELEMENT city (#PCDATA)>
+<!ELEMENT distict (#PCDATA)>
+<!ELEMENT state (#PCDATA)>
+<!ELEMENT country (#PCDATA)>

@@ -1,56 +1,68 @@
 package com.val.Thread;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
 
 
 class RWThread implements Runnable
 {
-	RWLock rlock=new RWLock();
+	RWLock lock=new RWLock();
+	public String operation;
+	public static String file;
+	public RWThread(String op) 
+	{
+		this.operation=op;
+	}
+	public RWThread() 
+	{
+	}
+	
 	public void run() 
 	{
-		try {
-			
-			while(true)
+		try
+		{
+			if(operation.equalsIgnoreCase("read"))
 			{
-			  if(!RWLock.writer)
-			  {
-			    rlock.getReadAccess();
-			    break;
-			  }
-			  else
-			  {
-			      synchronized (this) 
-				  {
-			    	  System.out.println(Thread.currentThread().getName()+"at wait");
-					  wait();
-					  System.out.println(Thread.currentThread().getName()+"at active");
-				  }
-			  }
+				lock.getReadAccess();
+				Reader rd=new FileReader(file);
+				BufferedReader br=new BufferedReader(rd);
+				String read=null;
+				while((read=br.readLine())!=null)
+				{
+					System.out.println(Thread.currentThread().getName()+" "+read);
+				}
+				rd.close();br.close();
 			}
-			while(true)
+			else if(operation.equalsIgnoreCase("write"))
 			{
-			  if(!(RWLock.writer)&&(RWLock.reader==0))
-			  {
-			    rlock.getWriteAccess();
-			    break;
-			  }
-			  else
-			  {
-				  synchronized (this)
-				  {
-					  System.out.println(Thread.currentThread().getName()+"at wait");
-					  wait();	 
-					  System.out.println(Thread.currentThread().getName()+"at active");
-				  }
-			  }
-			 
+				lock.getWriteAccess();
+				Writer wr=new FileWriter(file,true);
+				BufferedWriter bw=new BufferedWriter(wr);
+				String text="Hello!";
+				bw.append(text);
+				bw.close();wr.close();
 			}
-		} catch (IOException e) {
-			
+		} 
+		catch (InterruptedException e)
+		{
 			e.printStackTrace();
-		} catch (InterruptedException e) {
-			
+		} 
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
+		finally
+		{
+			lock.releaseLock();
+		}
+	}
+	public static void getFile(String file) 
+	{
+		RWThread.file=file;
 	}
 }

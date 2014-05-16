@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE College SYSTEM "C:\users\praveen\Desktop\xml\College.dtd">
+<College>
+	<CollegeDetails>
+		<CollName>VRS AND YRN COLLEGE OF ENGINEERING AND TECHNOLOGY</CollName>
+		<CollChairManName>Sri V. Venkata Rama Chandra Vasu</CollChairManName>
+		<CollPrinceName phone=" 99085 36668">Dr S. Satyanarayana</CollPrinceName>
+		<Estd>1951</Estd>
+		<CollAddress>Vaderevu road</CollAddress>
+		<CollCity>chiala</CollCity>
+		<CollState>Andhra Pradesh</CollState>
+	</CollegeDetails>
+	<Departments>
+		<Department>
+			<DeptDetails>
+				<DeptName>Computer Science</DeptName>
+				<DeptHOD>Srinivas Rao garu</DeptHOD>
+			</DeptDetails>
+			<DeptStaff>
+				<Teaching>
+					<Professor>
+						<ProName>Rama Krishna garu</ProName>
+					</Professor>
+					<Professor>
+						<ProName>Uma Maheswarao garu</ProName>
+					</Professor>
+					<Professor>
+						<ProName>Sri Devi garu</ProName>
+					</Professor>
+					<Professor>
+						<ProName>Sree Latha garu</ProName>
+					</Professor>
+					<Professor>
+						<ProName>Padmavathi garu</ProName>
+					</Professor>
+				</Teaching>
+				<Non-Teaching>
+					<lab>
+						<technican>
+							<technicanName>Mallikarjun</technicanName>
+						</technican>
+						<technican>
+							<technicanName>Kiran</technicanName>
+						</technican>
+					</lab>
+				</Non-Teaching>
+			</DeptStaff>
+		</Department>
+	</Departments>
+	<CollegeExaminationCell>
+		<Head>
+			<HeadName>Subba rao garu</HeadName>
+		</Head>
+		<Staff>
+			<StaffName>Phani garu</StaffName>
+		</Staff>
+		<Staff>
+			<StaffName>Srinivas garu</StaffName>
+		</Staff>
+		<Staff>
+			<StaffName>Raghavendra garu</StaffName>
+		</Staff>
+	</CollegeExaminationCell>
+</College>
