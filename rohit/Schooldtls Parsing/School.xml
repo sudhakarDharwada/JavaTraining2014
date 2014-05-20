@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE School SYSTEM "/home/valuelabs/workspace/parserprograms/src/com/vl/parserexamples/School.dtd">
+<School>
+	<School_Name>Hyderabad Public School</School_Name>
+	<Class>
+		<Class_Name>first_class</Class_Name>
+		<Student>
+			<Name>Rohit</Name>
+			<DOB>1992-10-20</DOB>
+			<Adress>Hyderabad</Adress>
+		</Student>
+		<Student>
+			<Name>Srinu</Name>
+			<DOB>1993-08-21</DOB>
+			<Adress>Hyderabad</Adress>
+		</Student>
+		<Student>
+			<Name>Mounika</Name>
+			<DOB>1992-02-11</DOB>
+			<Adress>Hyderabad</Adress>
+		</Student>
+		<Teacher>
+			<Teacher_Name>Harisha</Teacher_Name>
+		</Teacher>
+		<Subjects>English</Subjects>
+		<Subjects>Telugu</Subjects>
+		<Subjects>Drawing</Subjects>
+		<Subjects>Hindi</Subjects>
+	</Class>
+	<Class>
+		<Class_Name>Second_Class</Class_Name>
+		<Student>
+			<Name>Nandini</Name>
+			<DOB>1991-05-15</DOB>
+			<Adress>Hyderabad</Adress>
+		</Student>
+		<Student>
+			<Name>Praveen</Name>
+			<DOB>1991-02-29</DOB>
+			<Adress>Hyderabad</Adress>
+		</Student>
+		<Student>
+			<Name>Himani</Name>
+			<DOB>1992-12-29</DOB>
+			<Adress>Hyderabad</Adress>
+		</Student>
+		<Teacher>
+			<Teacher_Name>Harsha</Teacher_Name>
+		</Teacher>
+		<Subjects>English</Subjects>
+		<Subjects>Telugu</Subjects>
+		<Subjects>Social Studies</Subjects>
+		<Subjects>Hindi</Subjects>
+		<Subjects>Maths</Subjects>
+	</Class>
+</School>
