@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<purchaseOrder xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\users\praveen\Desktop\xml\xsd\purchaseOrder.xsd">
+	<orderItems>
+		<Item>
+			<ItemName>lenovo ideaPad z580</ItemName>
+			<Code>10101</Code>
+		</Item>
+		<Item>
+			<ItemName>creative SBS A335 speakers</ItemName>
+			<Code>10102</Code>
+		</Item>
+		<Item>
+			<ItemName>Lenovo N100 Wireless Mouse</ItemName>
+			<Code>10103</Code>
+		</Item>
+		<Item>
+			<ItemName>Ubuntu Edge</ItemName>
+			<Code>10104</Code>
+		</Item>
+	</orderItems>
+	<shippingAddress>
+		<Name>Srinivas Ravipati</Name>
+		<FatherName>Raghuram Ravipati</FatherName>
+		<doorNo>12-97</doorNo>
+		<street>Main Road</street>
+		<city>chirala</city>
+		<distict>prakasam</distict>
+		<state>andhra pradesh</state>
+		<country>india</country>
+	</shippingAddress>
+</purchaseOrder>

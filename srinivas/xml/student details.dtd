@@ -1,0 +1,16 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ 
+ <!DOCTYPE details [
+
+<!ELEMENT details (name,group,percentage,city)>
+<!ELEMENT name (firstname,lastname)>
+<!ELEMENT firstname(#PCDATA)>
+<!ELEMENT lastname(#PCDATA)>
+<!ELEMENT group(#PCDATA)>
+<!ELEMENT percentage(#PCDATA)>
+<!ELEMENT city(#PCDATA)>
+
+
+<!ATTLIST group stream CDATA #REQUIRED>
+]> 
+

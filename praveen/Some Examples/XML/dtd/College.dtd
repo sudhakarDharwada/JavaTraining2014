@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT College (CollegeDetails,Departments,CollegeExaminationCell)>
+<!ELEMENT CollegeDetails (CollName,CollChairManName,CollPrinceName,Estd,CollAddress,CollCity,CollState)>
+<!ELEMENT CollName (#PCDATA)>
+<!ELEMENT CollChairManName (#PCDATA)>
+<!ELEMENT CollPrinceName (#PCDATA)>
+<!ELEMENT Estd (#PCDATA)>
+<!ELEMENT CollAddress (#PCDATA)>
+<!ELEMENT CollCity (#PCDATA)>
+<!ELEMENT CollState (#PCDATA)>
+<!ELEMENT Departments (Department+)>
+<!ELEMENT Department (DeptDetails,DeptStaff)>
+<!ELEMENT DeptDetails (DeptName,DeptHOD)>
+<!ELEMENT DeptName (#PCDATA)>
+<!ELEMENT DeptHOD (#PCDATA)>
+<!ELEMENT DeptStaff (Teaching,Non-Teaching)>
+<!ELEMENT Teaching (Professor+)>
+<!ELEMENT Professor (ProName)>
+<!ELEMENT ProName (#PCDATA)>
+<!ELEMENT Non-Teaching (lab)>
+<!ELEMENT lab (technican+)>
+<!ELEMENT technican (technicanName)>
+<!ELEMENT technicanName (#PCDATA)>
+<!ELEMENT CollegeExaminationCell (Head,Staff+)>
+<!ELEMENT Head (HeadName)>
+<!ELEMENT HeadName (#PCDATA)>
+<!ELEMENT Staff (StaffName)>
+<!ELEMENT StaffName (#PCDATA)>
+<!ATTLIST CollChairManName phone CDATA #IMPLIED>
+<!ATTLIST CollPrinceName phone CDATA #REQUIRED>
