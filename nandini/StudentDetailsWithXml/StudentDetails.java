@@ -1,6 +1,5 @@
 import javax.xml.parsers.DocumentBuilder; 
 import javax.xml.parsers.DocumentBuilderFactory; 
-import javax.xml.parsers.FactoryConfigurationError; 
 import javax.xml.parsers.ParserConfigurationException; 
 import org.xml.sax.SAXException; 
 import org.xml.sax.SAXParseException; 
@@ -12,7 +11,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Attr;
-import org.w3c.dom.Element;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
@@ -29,7 +27,7 @@ public class StudentDetails
 	{
 		if(args.length!=1)
 		{
-			System.err.println("Usage:java StudentDetails filename");
+			System.err.println("File Not Found");
 			System.exit(1);
 		}
 		factory=DocumentBuilderFactory.newInstance();
@@ -123,7 +121,6 @@ public class StudentDetails
 		String class_name=sc.next();
 		long time=0;
 		NodeList nList=document.getElementsByTagName("class1");
-		try{
 		for(int i=0;i<nList.getLength();i++){
 			Node node=nList.item(i);
 			if(node.hasAttributes())
@@ -136,26 +133,24 @@ public class StudentDetails
 						Node node2=nList2.item(m);
 						if((node2.getNodeName()).equals("DOB"))
 						{				
-							long dtime=StudentDetails.convertToDate(node2.getTextContent());
-							if(dtime>time)
-								time=dtime;	
+							long time2=StudentDetails.convertToDate(node2.getTextContent());
+							if(time2>time)
+								time=time2;	
 						}
 					}
 				}
 			}
 		}
-	}
-	catch(Exception pe){}
 		System.out.println("oldest age of" +TimeUnit.MILLISECONDS.toDays(time)/365+" years "+(TimeUnit.MILLISECONDS.toDays(time)%365)/30+" months "+((TimeUnit.MILLISECONDS.toDays(time)%365)%30)+" days");
 	}
-	public static long convertToDate(String t)
+	public static long convertToDate(String str)
 	{
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
 		Date date=null;
 		try {
-			t=t.replaceAll("\\s","");
-			date = sdf.parse(t);
+			str=str.replaceAll("\\s","");
+			date = sdf.parse(str);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
