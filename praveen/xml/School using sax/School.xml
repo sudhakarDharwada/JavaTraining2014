@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE School [
+<!ELEMENT School (Details,Staff,Classes)>
+<!ELEMENT Details (SchoolName,Address)>
+<!ELEMENT SchoolName (#PCDATA)>
+<!ELEMENT Address (#PCDATA)>
+<!ELEMENT Staff (Teacher+)>
+<!ELEMENT Teacher (Name,ClassResponesable)>
+<!ELEMENT Name (#PCDATA)>
+<!ELEMENT ClassResponesable (#PCDATA)>
+<!ELEMENT Classes (Class+)>
+<!ELEMENT Class (ClassName,Students)>
+<!ELEMENT ClassName (#PCDATA)>
+<!ELEMENT Students (Student+)>
+<!ELEMENT Student (SName,SDOB,SAddress)>
+<!ELEMENT SName (#PCDATA)>
+<!ELEMENT SDOB (year,month,date)>
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT month (#PCDATA)>
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT SAddress (#PCDATA)>
+]>
+<School>
+    <Details>
+        <SchoolName>Gayatri English Medium School</SchoolName>
+        <Address>Chirala</Address>
+    </Details>
+    <Staff>
+        <Teacher>
+            <Name>KP</Name>
+            <ClassResponesable>Tenth</ClassResponesable>
+        </Teacher>
+        <Teacher>
+            <Name>Radha Krishna</Name>
+            <ClassResponesable>Ninth</ClassResponesable>
+        </Teacher>
+    </Staff>
+    <Classes>
+        <Class>
+            <ClassName>Tenth</ClassName>
+            <Students>
+                <Student>
+                    <SName>Praveen Ravipati</SName>
+                    <SDOB>
+                    <year>1990</year>
+                    <month>11</month>
+                    <date>25</date>
+                    </SDOB>
+                    <SAddress>chirala</SAddress>
+                </Student>
+                <Student>
+                    <SName>Bharath Kumar Gelli</SName>
+                    <SDOB>
+                    <year>1991</year>
+                    <month>08</month>
+                    <date>21</date>
+                    </SDOB>
+                    <SAddress>chirala</SAddress>
+                </Student>
+                <Student>
+                    <SName>Sarath Babu Ponnuri</SName>
+                    <SDOB>
+                    <year>1991</year>
+                    <month>04</month>
+                    <date>14</date>
+                    </SDOB>
+                    <SAddress>chirala</SAddress>
+                </Student>
+                <Student>
+                    <SName>Priyatam Chappidi</SName>
+                    <SDOB>
+                    <year>1992</year>
+                    <month>05</month>
+                    <date>13</date>
+                    </SDOB>
+                    <SAddress>chirala</SAddress>
+                </Student>
+                <Student>
+                    <SName>Siva Naga Raju Kodaviti</SName>
+                    <SDOB>
+                    <year>1991</year>
+                    <month>11</month>
+                    <date>12</date>
+                    </SDOB>
+                    <SAddress>chirala</SAddress>
+                </Student>
+                <Student>
+                    <SName>Anil Kumar Yammineni</SName>
+                    <SDOB>
+                    <year>1990</year>
+                    <month>12</month>
+                    <date>01</date>
+                    </SDOB>
+                    <SAddress>chirala</SAddress>
+                </Student>
+            </Students>
+        </Class>
+        <Class>
+            <ClassName>Ninth</ClassName>
+            <Students>
+                <Student>
+                    <SName>Malli karjun rao</SName>
+                    <SDOB><year>1990</year>
+                    <month>10</month>
+                    <date>29</date>
+                    </SDOB>
+                    <SAddress>chirala</SAddress>
+                </Student>
+                <Student>
+                    <SName>Randy</SName>
+                    <SDOB><year>1992</year>
+                    <month>09</month>
+                    <date>16</date>
+                    </SDOB>
+                    <SAddress>chirala</SAddress>
+                </Student>
+            </Students>
+        </Class>
+    </Classes>
+</School>
