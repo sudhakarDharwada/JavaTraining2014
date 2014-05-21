@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<school>
+
+	<class number="1">
+	
+		<student>
+			<firstname> Srinivas </firstname>
+			<lastname>Bavirisetty</lastname>
+			<DOB>07-03-1990</DOB>
+			<Address>samalkot</Address>
+		</student>
+		
+		<student>
+			<firstname> Rohit </firstname>
+			<lastname>Gudese</lastname>
+			<DOB>04-06-1991</DOB>
+			<Address>srikakulam</Address>
+		</student>
+		
+		<student>
+			<firstname> Madhu </firstname>
+			<lastname>Alisala</lastname>
+			<DOB>12-09-1990</DOB>
+			<Address>warangal</Address>
+		</student>
+		
+		<student>
+			<firstname>Sasi</firstname>
+			<lastname>Skom</lastname>
+			<DOB>17-11-1990</DOB>
+			<Address>hyd</Address>
+		</student>
+		
+		<classteacher>classtchr</classteacher>
+		<subjects>5</subjects>
+	</class>
+	
+	<class number="2">
+	
+		<student>
+			<firstname> Srinivas2 </firstname>
+			<lastname>Bavirisetty2</lastname>
+			<DOB>07-03-1990</DOB>
+			<Address>samalkot2</Address>
+		</student>
+		
+		<student>
+			<firstname> Rohit2 </firstname>
+			<lastname>Gudese2</lastname>
+			<DOB>04-06-1991</DOB>
+			<Address>srikakulam2</Address>
+		</student>
+		
+		<student>
+			<firstname> Madhu2 </firstname>
+			<lastname>Alisala2</lastname>
+			<DOB>12-09-1990</DOB>
+			<Address>warangal2</Address>
+		</student>
+		
+		<student>
+			<firstname>Sasi2</firstname>
+			<lastname>Skom2</lastname>
+			<DOB>17-11-1990</DOB>
+			<Address>hyd2</Address>
+		</student>
+		
+		<classteacher>classtchr2</classteacher>
+		<subjects>5</subjects>
+	</class>
+
+</school>
