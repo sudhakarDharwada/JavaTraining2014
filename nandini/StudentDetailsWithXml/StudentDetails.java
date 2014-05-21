@@ -128,24 +128,17 @@ public class StudentDetails
 			Node node=nList.item(i);
 			if(node.hasAttributes())
 			{
-				NamedNodeMap attrs = node.getAttributes(); 
-				for(int k = 0 ; k<attrs.getLength() ; k++) 
-				{
-					Attr attribute = (Attr)attrs.item(k);
-					NodeList nList1=node.getChildNodes();
-					for(int j=0;j<nList1.getLength();j++){
-						Node node1=nList1.item(j);
-						
-						NodeList nList2=node1.getChildNodes();
-						for(int m=0;m<nList2.getLength();m++){
-							Node node2=nList2.item(m);
-							if((node2.getNodeName()).equals("DOB")){
-								
-								long dtime=StudentDetails.convertToDate(node2.getTextContent());
-								if(dtime>time)
-									time=dtime;
-								
-							}
+				NodeList nList1=node.getChildNodes();
+				for(int j=0;j<nList1.getLength();j++){
+				Node node1=nList1.item(j);	
+				NodeList nList2=node1.getChildNodes();
+					for(int m=0;m<nList2.getLength();m++){
+						Node node2=nList2.item(m);
+						if((node2.getNodeName()).equals("DOB"))
+						{				
+							long dtime=StudentDetails.convertToDate(node2.getTextContent());
+							if(dtime>time)
+								time=dtime;	
 						}
 					}
 				}
