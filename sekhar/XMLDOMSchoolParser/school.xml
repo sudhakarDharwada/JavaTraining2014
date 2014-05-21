@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<school>
+	<class name="first">
+		<student>
+			<firstname>kondamuri</firstname>
+			<lastname>chandrasekhar</lastname>
+			<dateofbirth>12-09-1992</dateofbirth>
+			<address>hyd</address>
+		</student>
+		<student>
+			<firstname>talari</firstname>
+			<lastname>sagar</lastname>
+			<dateofbirth>13-05-1992</dateofbirth>
+			<address>rjy</address>
+		</student>
+		<student>
+			<firstname>behara</firstname>
+			<lastname>madhukar</lastname>
+			<dateofbirth>18-06-1992</dateofbirth>
+			<address>guntur</address>
+		</student>
+		<teacher>sheak</teacher>
+		<subjects>
+			<sub1>english</sub1>
+			<sub2>telugu</sub2>
+			<sub3>maths</sub3>
+			<sub4>sports</sub4>
+		</subjects>
+	</class>
+	<class name="second">
+		<student>
+			<firstname>bachina</firstname>
+			<lastname>madhav</lastname>
+			<dateofbirth>25-06-1991</dateofbirth>
+			<address>ong</address>
+		</student>
+		<student>
+			<firstname>palnadu</firstname>
+			<lastname>murali</lastname>
+			<dateofbirth>19-09-1991</dateofbirth>
+			<address>angara</address>
+		</student>
+		<teacher>abdul</teacher>
+		<subjects>
+			<sub1>english</sub1>
+			<sub2>telugu</sub2>
+			<sub3>maths</sub3>
+			<sub4>hindi</sub4>
+		</subjects>
+
+	</class>
+</school>
