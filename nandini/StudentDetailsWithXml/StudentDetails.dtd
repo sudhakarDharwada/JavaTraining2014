@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT school (class1+)>
+<!ELEMENT class1 (student+)>
+<!ELEMENT student (name,DOB,address)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT DOB (#PCDATA)>
+<!ELEMENT address (#PCDATA)>
+<!ELEMENT teacher (#PCDATA)>
+<!ELEMENT subject (#PCDATA)>
+<!ATTLIST class standard CDATA #REQUIRED>
+		
+		
+
