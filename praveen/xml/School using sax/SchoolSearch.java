@@ -36,10 +36,10 @@ public class SchoolSearch
 
 		Scanner s=new Scanner(System.in);
 		int option;
+		MyThreadLocal.set(isValidate);
 		boolean condition=true;
 		while (condition) {
-
-			System.out.println("Menu");
+			System.out.println("\n\nMenu");
 			System.out.println("1)Enter New file");
 			System.out.println("2)search teacher");
 			System.out.println("3)search oldest student");
@@ -57,24 +57,26 @@ public class SchoolSearch
 					factory.setValidating(true);
 					factory.setNamespaceAware(true);
 					SAXParser parser=factory.newSAXParser();
-					SaxHandler handler=new SaxHandler();
+					
 					XMLReader reader=parser.getXMLReader();
 					reader.setErrorHandler(new MyErrorHandler());
+					reader.parse(new InputSource(filePath));
+					SaxHandler handler=new SaxHandler();
 					reader.setContentHandler(handler);
 					reader.parse(new InputSource(filePath));
-					//					handler.display();
 					school=handler.getSchool();
-					System.out.println(school);
+					//System.out.println(school);
+					//handler.display();
 				} catch (ParserConfigurationException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SAXException e) {
 					// TODO Auto-generated catch block
-					e.printStackTrace();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				
 			}
 			else if (option==2) {
 				searchTeacher();
@@ -94,7 +96,7 @@ public class SchoolSearch
 	public void searchTeacher(){
 		Scanner s=new Scanner(System.in);
 		isValidate=MyThreadLocal.get();
-		if(isValidate){
+		if(isValidate||school!=null){
 			String trep=null;
 			System.out.println("Enter the teacher name:");
 			String teacher=s.next();
@@ -121,7 +123,7 @@ public class SchoolSearch
 		Scanner s=new Scanner(System.in);
 		isValidate=MyThreadLocal.get();
 		List<Student> students=null;
-		if(isValidate){
+		if(isValidate||school!=null){
 			System.out.println("Enter the class Name");
 			String cls=s.next();
 			List<Class> classes=school.getClasses().getClasses();
@@ -140,9 +142,3 @@ public class SchoolSearch
 	}
 }
 
-
-
-/*
-
-/home/praveen/Downloads/wokspaces/training/SchoolUsingXml/xml/School.xml
- */
