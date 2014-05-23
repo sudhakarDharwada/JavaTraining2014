@@ -38,8 +38,8 @@ public class SchoolSearch
 			if(option==1){
 				System.out.println("Enter the file path:");
 				String filePath=s.next();
-//				Parsers p= new SchoolSaxParser();
-				Parsers p= new SchoolDomParser();
+				Parsers p= new SchoolSaxParser();
+//				Parsers p= new SchoolDomParser();
 				school=p.parser(filePath);
 				
 			}
