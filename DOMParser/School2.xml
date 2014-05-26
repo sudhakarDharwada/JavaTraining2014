@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE SchoolInfo SYSTEM "SChool2.dtd">
+<SchoolInfo>
+	<School_Name>Brilliant School</School_Name>
+	<Class>
+		<Class_Name>First_Class</Class_Name>
+		<Student>
+			<Student_Name>MOUNIKA</Student_Name>
+				<Address>SECUNDERABAD</Address>
+		</Student>
+		<Student>
+			<Student_Name>MADHAVI</Student_Name>
+			
+			<Address>HYD</Address>
+		</Student>
+		<Teacher>
+			<Teacher_Name>Mounika</Teacher_Name>
+		</Teacher>
+		<Subject>English</Subject>
+		<Subject>Telugu</Subject>
+			</Class>
+	<Class>
+		<Class_Name>Second_Class</Class_Name>
+		<Student>
+			<Student_Name>MOUNIKA</Student_Name>
+					<Address>SECUNDERABAD</Address>
+
+		</Student>
+		<Student>
+			<Student_Name>MADHAVI</Student_Name>
+			
+			<Address>HYD</Address>
+		</Student>
+				<Teacher>
+			<Teacher_Name>Kanimou</Teacher_Name>
+		</Teacher>
+		<Subject>English</Subject>
+		<Subject>Telugu</Subject>
+		<Subject>Maths</Subject>
+	</Class>
+</SchoolInfo>
+

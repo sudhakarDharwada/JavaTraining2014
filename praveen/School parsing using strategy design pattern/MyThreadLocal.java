@@ -1,4 +1,4 @@
-package com.vl.handlers;
+package com.vl.school.handlers;
 
 public class MyThreadLocal
 {

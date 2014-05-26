@@ -1,27 +1,16 @@
 package com.vl.school.testclasses;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-
-import com.vl.handlers.Compare;
-import com.vl.handlers.MyErrorHandler;
-import com.vl.handlers.MyThreadLocal;
-import com.vl.handlers.SaxHandler;
-import com.vl.school.bean.Class;
-import com.vl.school.bean.School;
-import com.vl.school.bean.Student;
-import com.vl.school.bean.Teacher;
-
+import com.vl.school.adstractclasses.Parsers;
+import com.vl.school.adstractclasses.SchoolSaxParser;
+import com.vl.school.beans.School;
+import com.vl.school.beans.Student;
+import com.vl.school.beans.Teacher;
+import com.vl.school.handlers.Compare;
+import com.vl.school.handlers.MyThreadLocal;
 public class SchoolSearch 
 {
 	static School school=null;
@@ -36,10 +25,10 @@ public class SchoolSearch
 
 		Scanner s=new Scanner(System.in);
 		int option;
+		MyThreadLocal.set(isValidate);
 		boolean condition=true;
 		while (condition) {
-
-			System.out.println("Menu");
+			System.out.println("\n\nMenu");
 			System.out.println("1)Enter New file");
 			System.out.println("2)search teacher");
 			System.out.println("3)search oldest student");
@@ -49,32 +38,10 @@ public class SchoolSearch
 			if(option==1){
 				System.out.println("Enter the file path:");
 				String filePath=s.next();
-				isValidate=true;
-				MyThreadLocal.set(isValidate);
-				school=null;
-				SAXParserFactory factory=SAXParserFactory.newInstance();
-				try {
-					factory.setValidating(true);
-					factory.setNamespaceAware(true);
-					SAXParser parser=factory.newSAXParser();
-					SaxHandler handler=new SaxHandler();
-					XMLReader reader=parser.getXMLReader();
-					reader.setErrorHandler(new MyErrorHandler());
-					reader.setContentHandler(handler);
-					reader.parse(new InputSource(filePath));
-					//					handler.display();
-					school=handler.getSchool();
-					System.out.println(school);
-				} catch (ParserConfigurationException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SAXException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Parsers p= new SchoolSaxParser();
+//				Parsers p= new SchoolDomParser();
+				school=p.parser(filePath);
+				
 			}
 			else if (option==2) {
 				searchTeacher();
@@ -94,7 +61,7 @@ public class SchoolSearch
 	public void searchTeacher(){
 		Scanner s=new Scanner(System.in);
 		isValidate=MyThreadLocal.get();
-		if(isValidate){
+		if(isValidate||school!=null){
 			String trep=null;
 			System.out.println("Enter the teacher name:");
 			String teacher=s.next();
@@ -106,8 +73,8 @@ public class SchoolSearch
 				}
 			}
 
-			List<Class> classes=school.getClasses().getClasses();
-			for(Class c:classes){
+			List<com.vl.school.beans.Class> classes=school.getClasses().getClasses();
+			for(com.vl.school.beans.Class c:classes){
 				if(c.getClassName().equalsIgnoreCase(trep)){
 					System.out.println("The no of students in the "+c.getClassName()+" class are:"+c.getStudents().size());
 				}
@@ -121,11 +88,11 @@ public class SchoolSearch
 		Scanner s=new Scanner(System.in);
 		isValidate=MyThreadLocal.get();
 		List<Student> students=null;
-		if(isValidate){
+		if(isValidate||school!=null){
 			System.out.println("Enter the class Name");
 			String cls=s.next();
-			List<Class> classes=school.getClasses().getClasses();
-			for(Class c:classes){
+			List<com.vl.school.beans.Class> classes=school.getClasses().getClasses();
+			for(com.vl.school.beans.Class c:classes){
 				if(c.getClassName().equalsIgnoreCase(cls))
 				{
 					students=c.getStudents();
@@ -139,10 +106,3 @@ public class SchoolSearch
 		}
 	}
 }
-
-
-
-/*
-
-/home/praveen/Downloads/wokspaces/training/SchoolUsingXml/xml/School.xml
- */

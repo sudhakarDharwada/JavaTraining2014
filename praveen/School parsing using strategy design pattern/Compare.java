@@ -1,8 +1,9 @@
-package com.vl.handlers;
+package com.vl.school.handlers;
 
 import java.util.Comparator;
 
-import com.vl.school.bean.Student;
+import com.vl.school.beans.Student;
+
 
 public class Compare implements Comparator<Student>{
 

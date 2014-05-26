@@ -1,4 +1,4 @@
-package com.vl.school.bean;
+package com.vl.school.beans;
 
 public class School {
 	private Details details;

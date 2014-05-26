@@ -1,4 +1,4 @@
-package com.vl.handlers;
+package com.vl.school.handlers;
 
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;

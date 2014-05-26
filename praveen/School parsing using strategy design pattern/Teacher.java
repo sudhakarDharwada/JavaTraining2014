@@ -1,4 +1,4 @@
-package com.vl.school.bean;
+package com.vl.school.beans;
 
 public class Teacher {
 	private String Name;

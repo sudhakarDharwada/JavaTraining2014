@@ -1,4 +1,4 @@
-package com.vl.school.bean;
+package com.vl.school.beans;
 
 import java.util.ArrayList;
 import java.util.List;
