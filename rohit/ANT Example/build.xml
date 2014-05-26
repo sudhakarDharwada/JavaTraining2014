@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<project name="Ant-Test" default="main" basedir=".">
+  <property name="src.dir" location="." />
+  <property name="build.dir" location="bin" />
+  <property name="dist.dir" location="dist" />
+
+  <!-- Deletes the existing build, docs and dist directory-->
+  <target name="clean">
+    <delete dir="${build.dir}" />
+    <delete dir="${dist.dir}" />
+  </target>
+
+  <!-- Creates the  build, docs and dist directory-->
+  <target name="makedir">
+    <mkdir dir="${build.dir}" />
+    <mkdir dir="${dist.dir}" />
+  </target>
+
+  <!-- Compiles the java code (including the usage of library for JUnit -->
+  <target name="compile" depends="clean, makedir">
+    <javac srcdir="${src.dir}" destdir="${build.dir}" source="1.5">
+    </javac>
+  </target>
+
+  <!--Creates the deployable jar file  -->
+  <target name="jar" depends="compile">
+    <jar destfile="${dist.dir}\rohit.jar" basedir="${build.dir}">
+      <manifest>
+        <attribute name="Main-Class" value="Hello" />
+      </manifest>
+    </jar>
+  	<echo>in jar</echo>
+  </target>
+	<target name="notify" depends="jar">
+	   <java jar="${dist.dir}\rohit.jar" fork="true" /> 
+	   <!-- <java classname="Hello" classpath="${build.dir}" /> -->
+	  </target>
+  <target name="main" depends="notify">
+    <description>Main target</description>
+  	</target>
+</project> 
