@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT school(class+)>
+<!ELEMENT class(student*,teacher,subjects*)>
+	<!ATTLIST class name CDATA #REQUIRED>
+<!ELEMENT student(firstname,lastname,dateofbirth,address)>
+<!ELEMENT firstname(#PCDATA)>
+<!ELEMENT lastname(#PCDATA)>
+<!ELEMENT dateofbirth(#PCDATA)>
+<!ELEMENT address(#PCDATA)>	
+<!ELEMENT teacher(name)>
+<!ELEMENT name(#PCDATA)> 
+<!ELEMENT subjects(sub1,sub2,sub3,sub4)
+<!ELEMENT sub1(#PCDATA)>
+<!ELEMENT sub2(#PCDATA)>
+<!ELEMENT sub3(#PCDATA)>
+<!ELEMENT sub4(#PCDATA)>

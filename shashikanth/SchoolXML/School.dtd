@@ -1,0 +1,6 @@
+<!ELEMENT School (Class+)>
+<!ELEMENT Class (ClassName,Student+,Teacher,Subjects+)>
+<!ELEMENT Student (Name,DOB,Address*)>
+<!ELEMENT Teacher (Name)>
+<!ELEMENT Subjects (Name+)>
+
