@@ -51,6 +51,7 @@ public class UsingSax extends DefaultHandler
 		sp.parse(f1, h);
 		System.out.println("Enter 1 to get no.of students from a class\n 2 for to get class name for a given teacher and\n 3 for a given class to get the oldest age.");
 		int i=sn.nextInt();
+		System.out.println("Input is "+ i);
 		switch(i)
 		{
 			case 1: h.noOfStudents();
