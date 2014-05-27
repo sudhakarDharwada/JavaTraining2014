@@ -39,10 +39,15 @@ public class UsingSax extends DefaultHandler
 	{
 		try
 		{
+		if(args.length != 1)
+		{
+			System.out.println("please enter a xml file name while running");
+			System.exit(1);
+		}
 		SAXParserFactory spfac = SAXParserFactory.newInstance();
 		SAXParser sp = spfac.newSAXParser();
 		UsingSax h = new UsingSax();
-		File f1=new File("/home/mmounika/Desktop/java/ant/src/schools.xml");
+		File f1=new File(args[0]);
 		sp.parse(f1, h);
 		System.out.println("Enter 1 to get no.of students from a class\n 2 for to get class name for a given teacher and\n 3 for a given class to get the oldest age.");
 		int i=sn.nextInt();
