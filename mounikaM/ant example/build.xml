@@ -16,7 +16,8 @@
 	</target>
 	
 	<target name="run" depends="jar">
-		<java jar="${project-name}.jar" fork="true">
+		<java jar="${project-name}.jar" fork="true" >
+			<arg value="${input-file}"/>
 		</java>
 	</target>
 </project>
