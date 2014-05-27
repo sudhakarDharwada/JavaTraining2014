@@ -22,9 +22,10 @@
     </target>
       
     <target name="run" depends="create_run_jar">
-       <java jar="${project_name}.jar" fork="true">
+       <java jar="${project_name}.jar" fork="true" input="input.txt">
+		    <arg value="${fileinput}"/>
 		</java>
-       <!-- <java classname="StudentDetails" classpath="${classes.dir}"/>-->
+
     </target>
     
     <target name="main" depends="run">
@@ -32,3 +33,4 @@
     </target>
     
 </project>
+
