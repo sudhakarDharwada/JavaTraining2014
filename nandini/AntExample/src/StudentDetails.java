@@ -25,13 +25,17 @@ public class StudentDetails
 	
 	public static void main(String args[])
 	{
+		if(args.length!=1)
+		{
+			System.err.println("File Not Found");
+			System.exit(1);
+		}
 		factory=DocumentBuilderFactory.newInstance();
 		try
 		{
 			int count=0;
 			builder=factory.newDocumentBuilder();
-			File file=new File("/home/vnandini/Desktop/AntExample/src/StudentDetails.xml");
-			document=builder.parse(file);
+			document=builder.parse(new File(args[0]));
 		}
 		catch (SAXParseException spe) {
 			spe.printStackTrace();
