@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="ohms" default="war">
+	<property file="build.properties"/>
+
+	<target name="make">
+		<mkdir dir="${dest}/ohms"/>
+		<mkdir dir="${dest}/ohms/WEB-INF"/>
+		<mkdir dir="${dest}/ohms/WEB-INF/src"/>
+		<mkdir dir="${dest}/ohms/WEB-INF/classes"/>
+		<mkdir dir="${dest}/ohms/WEB-INF/lib"/>
+		<mkdir dir="${dest}/dist"/>
+	</target>
+	<target name="copy" depends="make">
+		<copy todir="${dest}/ohms/WEB-INF/src" flatten="true">
+			<fileset dir="${src}">
+				<include name="**/*.java"/>
+			</fileset>
+		</copy>
+		<copy todir="${dest}/ohms/calendar" flatten="true">
+			<fileset dir="${src}/calendar">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${dest}/ohms/images" flatten="true">
+			<fileset dir="${src}/images">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${dest}/ohms/js" flatten="true">
+			<fileset dir="${src}/js">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${dest}/ohms/pagelet" flatten="true">
+			<fileset dir="${src}/pagelet">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+		<copy todir="${dest}/ohms" flatten="true">
+			<fileset dir="${src}">
+				<include name="**/*.jsp"/>
+				<include name="**/*.html"/>
+				<include name="**/*.css"/>
+			</fileset>
+		</copy>
+		<copy todir="${dest}/ohms/WEB-INF" flatten="true">
+			<fileset dir="${src}">
+				<include name="**/web.xml"/>
+			</fileset>
+		</copy>
+		<copy todir="${dest}/ohms/WEB-INF/lib">
+			<fileset dir="${srctlib}">
+				<include name="**/servlet-api.jar"/>
+			</fileset>
+		</copy>		
+
+	</target>
+	<path id="compile.classpath">
+			<fileset dir="${dest}/ohms/WEB-INF/lib">
+				<include name="**/*.jar"/>
+			</fileset>
+	</path>
+	<target name="compile" depends="copy">
+		<javac srcdir="${dest}/ohms/WEB-INF/src" destdir="${dest}/ohms/WEB-INF/classes"  debug="true" includejavaruntime="true" includeantruntime="true">
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+	
+	<target name="war" depends="compile">
+	    <war destfile="${dest}/dist/ohmspro.war" webxml="${dest}/ohms/WEB-INF/web.xml">
+	        <fileset dir="${dest}/ohms/">
+	        	<include name="**/*.jsp"/>
+	        	<include name="**/*.html"/>
+	        	<include name="**/*.css"/>
+	        	<include name="**/calendar"/>
+	        	<include name="**/calendar/*.*"/>
+	        	<include name="**/images"/>
+	        	<include name="**/images/*.*"/>
+	        	<include name="**/js"/>
+	        	<include name="**/js/*.*"/>
+	        	<include name="**/pagelet"/>
+				<include name="**/pagelet/*.*"/>
+	        </fileset>
+	        <lib dir="${dest}/ohms/WEB-INF/lib"/>
+	        <classes dir="${dest}/ohms/WEB-INF/classes"/>
+	    </war>
+	</target>
+
+</project>
