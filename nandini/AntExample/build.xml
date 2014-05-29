@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="StudentDetails" basedir="." default="main">
+<property file="School.properties"/>
+
+    <target name="clean" description="Delete all generated files">
+        <delete dir="${classes.dir}" failonerror="false"/>
+        <delete file="${project_name}.jar"/>
+    </target>
+    
+     <target name="compile" description="Compiles the Task">
+       <mkdir dir="${classes.dir}"/>
+       <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false"/>
+    </target>
+    
+    <target name="create_run_jar" description="creating jar file" depends="compile">
+		<jar destfile="${project_name}.jar" basedir="${classes.dir}">
+			<manifest>
+				<attribute name="${main-Class}" value="StudentDetails"/>
+			</manifest>
+			</jar>
+			
+    </target>
+      
+    <target name="run" depends="create_run_jar">
+       <java jar="${project_name}.jar" fork="true" input="input.txt">
+		    <arg value="${fileinput}"/>
+		</java>
+
+    </target>
+    
+    <target name="main" depends="run">
+    
+    </target>
+    
+</project>
+

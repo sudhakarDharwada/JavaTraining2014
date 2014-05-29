@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<school>
+<class1 standard="eleventh"> 
+	<student id="593">
+		<name>
+			<fname>Nandini</fname>
+			<lname>Vojjala</lname>
+		</name>
+		<DOB>
+			<date>2013-04-21</date>
+		</DOB>
+		<address>
+			<place>Dilsuknagar</place>
+			<city>Hyderabad</city>
+		</address>
+	</student>
+	<student id="512">
+		<name>
+			<fname>Naresh</fname>
+			<lname>Vojjala</lname>
+		</name>
+		<DOB>
+			<date>2013-04-02</date>
+		</DOB>
+		<address>
+			<place>Dilsuknagar</place>
+			<city>Hyderabad</city>
+		</address>
+	</student>
+	<student id="502">
+		<name>
+			<fname>Sowmya</fname>
+			<lname>Kandem</lname>
+		</name>
+		<DOB>
+			<date>2012-12-21</date>
+		</DOB>
+		<address>
+			<place>Dilsuknagar Area</place>
+			<city>Hyderabad</city>
+		</address>
+	</student>
+	<teacher>
+		<name>nikil</name>
+	</teacher>
+	<subject>English</subject>
+	<subject>Java</subject>
+	<subject>XML</subject>
+</class1>
+<class1 standard="tenth"> 
+	<student id="593">
+		<name>
+			<fname>Srinivas</fname>
+			<lname>Peddi</lname>
+		</name>
+		<DOB>
+			<date>2011-06-12</date>
+		</DOB>
+		<address>
+			<place>Dilsuknagar</place>
+			<city>Hyderabad</city>
+		</address>
+	</student>
+	<student id="502">
+		<name>
+			<fname>Santosh</fname>
+			<lname>Kandem</lname>
+		</name>
+		<DOB>
+			<date>2010-07-31</date>
+		</DOB>
+		<address>
+			<place>Dilsuknagar Area</place>
+			<city>Hyderabad</city>
+		</address>
+	</student>
+	<teacher>
+		<name>neelima</name>
+	</teacher>
+	<subject>English</subject>
+	<subject>Java</subject>
+	<subject>XML</subject>
+</class1>
+</school>

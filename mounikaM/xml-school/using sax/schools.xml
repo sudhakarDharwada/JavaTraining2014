@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE schools SYSTEM "schools.dtd">
+
+<schools name1="trinity">
+	<classes standard="tenth">
+		<student id="100">
+			<name>
+				<fname>Mounika</fname>
+				<lname>Manchala</lname>
+			</name>
+			<dob>1989/04/14</dob>
+			<address>Main Road,Kachigud,Hyderabad</address>			
+		</student>	
+		<student id="101">
+			<name>
+				<fname>Sruthi</fname>
+				<lname>Manchala</lname>
+			</name>
+			<dob>1987/04/20</dob>
+			<address>chowrastha,Dilsuknagar,Hyderabad</address>		
+		</student>
+		<teacher>
+			<name_t>Jhon</name_t>
+		</teacher>
+		<subject>science</subject>
+	</classes>
+	<classes standard="ninth">
+		<student id="102">
+			<name>
+				<fname>kavya</fname>
+				<lname>P</lname>
+			</name>
+			<dob>2001/10/13</dob>
+			<address>Ganesh Road,HimayathNagar,Hyderabad</address>	
+		</student>
+		<student id="103">
+			<name>
+				<fname>spoorthi</fname>
+				<lname>M</lname>
+			</name>
+			<dob>2000/10/13</dob>
+			<address>cross Road,Kothapet,Hyderabad</address>	
+		</student>
+		<teacher>
+			<name_t>sri</name_t>
+		</teacher>
+		<subject>science</subject>
+	</classes>
+</schools>
