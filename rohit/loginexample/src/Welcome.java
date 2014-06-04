@@ -19,39 +19,21 @@ public class Welcome extends HttpServlet
 	String filePath;
 	FileInputStream input;
 	public void init( ){
-		System.out.println("++++++++++++++++");
 		filePath = getServletContext().getInitParameter("properties-file");
-		System.out.println("*******************");
-		System.out.println(filePath);
 	}
-	/*@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		super.doGet(req, resp);
-	}*/
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException 
 	{
 		RequestDispatcher rd = req.getRequestDispatcher("/login.html");
-		RequestDispatcher rd1 = req.getRequestDispatcher("/usr.jsp");
 		String islogin="false";
 		PrintWriter out = resp.getWriter();
 		resp.setContentType("text/html");
-		System.out.println("enter");
 		Properties prop=new Properties();
 		input=new FileInputStream(filePath);
 		prop.load(input);
 		String usrname=req.getParameter("usrname");
-		System.out.println(usrname);
 		String password=req.getParameter("pwd");
-		if(usrname==null)
-		{
-			rd1.forward(req, resp);
-		}
-		else
-		{
 		HttpSession session = req.getSession();
 		session.setAttribute("name", usrname);
 		for(Entry<Object, Object> e:prop.entrySet())
@@ -60,13 +42,12 @@ public class Welcome extends HttpServlet
 			{
 				islogin="true";
 				session.setAttribute("islogin",islogin );
-				rd1.forward(req, resp);
+				resp.sendRedirect("usr.jsp");
 				break;
 			}
 		}
 		rd.include(req, resp);
 		out.println("<center><font size="+"2"+" color="+"red"+"> username(or)password you entered is incorrect</font></center>");
-		}
 	}
 
 }
