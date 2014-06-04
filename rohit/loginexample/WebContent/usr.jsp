@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>welcome page</title>
 </head>
 <body>
 	<%
@@ -15,28 +15,29 @@
 			out.println("<p>" + "<a href=" + "login.html"+ ">click here </a> to login</p>");
 		} 
 		else
-		{
-			out.println("<form action=" + "logout.jsp" + " >");
-			out.println("<table align=" + "right" + ">");
-			out.println("<tr>");
-			out.println("<td>");
-			String name1 = (String) session.getAttribute("name");
-			out.println("logged in user " + name1);
-			out.println("</td>");
-			out.println("<td><input type=" + "submit" + " value="+ "logout" + " /></td>");
-			out.println("</tr>");
-			out.println("</table>");
-			out.println("</form>");
-			out.println("<h1 align=" + "center" + ">Welcome Page</h1>");
-			out.println("<br><br><br><br>");
-			out.println("<form action=" + "dtls.jsp" + " method=" + "post"+ " >");
-			out.println("<center>");
-			out.println("DateOfBirth:");
-			out.println("<input type=" + "text" + " name=" + "dob"+ " size=" + "10" + " >");
-			out.println("<br><br>");
-			out.println("<input type=" + "submit" + " value=" + "submit"+ ">");
-			out.println("</center>");
-			out.println("</form>");
+		{%>
+		<form action="logout.jsp">
+		<table align="right">
+			<tr>
+				<td>
+					<%
+						String name1 = (String) session.getAttribute("name");
+						out.println("logged in user " + name1);
+					%>
+				</td>
+				<td><input type="submit" value="logout" /></td>
+			</tr>
+		</table>
+	</form>
+	<h1 align="center">Welcome Page</h1>
+	<br><br><br><br>
+	<form action="dtls.jsp" method="post">
+		<center>
+			DateOfBirth: <input type="text" name="dob" size="10"> <br>
+			<br> <input type="submit" value="submit">
+		</center>
+	</form>
+	<%
 		}
 	%>
 </body>

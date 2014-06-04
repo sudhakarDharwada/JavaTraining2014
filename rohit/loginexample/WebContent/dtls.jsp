@@ -9,26 +9,28 @@
 <body>
 	<%
 		String flag = (String) session.getAttribute("islogin");
-		if (flag.equals("false")) 
-		{
+		if (flag.equals("false")) {
 			out.println("you are not logged in");
-			out.println("<p>" + "<a href=" + "login.html"+">click here </a> to login</p>");
+			out.println("<p>" + "<a href=" + "login.html"+ ">click here </a> to login</p>");
 		}
 		else 
-		{
-			out.println("<form action=" + "logout.jsp" + " >");
-			out.println("<table align=" + "right" + ">");
-			out.println("<tr>");
-			out.println("<td>");
-			String name1 = (String) session.getAttribute("name");
-			out.println("logged in user " + name1);
-			out.println("</td>");
-			out.println("<td><input type=" + "submit" + " value="+ "logout" + " /></td>");
-			out.println("</tr>");
-			out.println("</table>");
-			out.println("</form>");
-			String dob = request.getParameter("dob");
-			out.println("<b>Date Of Birth : </b>" + dob);
+		{ %>
+	<form action="logout.jsp">
+		<table align="right">
+			<tr>
+				<td>
+					<%
+						String name1 = (String) session.getAttribute("name");
+						out.println("logged in user " + name1);
+					%>
+				</td>
+				<td><input type="submit" value="logout" /></td>
+			</tr>
+		</table>
+	</form>
+	<%
+		String dob = request.getParameter("dob");
+		out.println("<b>Date Of Birth : </b>" + dob);
 		}
 	%>
 </body>
