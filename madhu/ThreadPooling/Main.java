@@ -50,12 +50,19 @@ public class Main extends Thread {
 						//System.out.println("first ..."+ as.amount);
 						ht.put(accId, as);
 					}
-					else if(status.equals("withdraw")){
-						ad.withdraw(money);
-						//System.out.println("withdraw called");
-					}
+                    else {
+                        // aad is not null
+                        if(status.equals("withdraw")){
+                            ad.withdraw(money);
+                            //System.out.println("withdraw called");
+                        } else {
+                            // status is deposit
+                        }
+                    }
+                    /*
 					AccountStatus as=new AccountStatus(money);
 					ht.put(accId, as);
+                    */
 				}
 			}
 			else{

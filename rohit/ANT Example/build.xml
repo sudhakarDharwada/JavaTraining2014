@@ -17,7 +17,7 @@
   </target>
 
   <!-- Compiles the java code (including the usage of library for JUnit -->
-  <target name="compile" depends="clean, makedir">
+  <target name="compile" depends="makedir">
     <javac srcdir="${src.dir}" destdir="${build.dir}" source="1.5">
     </javac>
   </target>

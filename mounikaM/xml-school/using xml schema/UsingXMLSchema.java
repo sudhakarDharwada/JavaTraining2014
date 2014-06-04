@@ -14,27 +14,34 @@ import org.w3c.dom.Element;
 import java.text.ParseException;
 import java.util.Scanner;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
-class SchoolDetails
+class UsingXMLSchema
 {
+	static final String JAXP_SCHEMA_LANGUAGE ="http://java.sun.com/xml/jaxp/properties/schemaLanguage";
+	static final String W3C_XML_SCHEMA ="http://www.w3.org/2001/XMLSchema";
+	static final String JAXP_SCHEMA_SOURCE ="http://java.sun.com/xml/jaxp/properties/schemaSource";
 	static Document document;
 	static DocumentBuilder builder;
 	static DocumentBuilderFactory factory;
-	static NodeList nodelist=document.getElementsByTagName("classes");
+	static NodeList nodelist;
 	static Scanner s=new Scanner(System.in);
 	
 	public static void main(String args[])
 	{
-		if(args.length != 1)
-		{
-			System.out.println("please enter a xml file name while running");
-			System.exit(1);
-		}
-		factory=DocumentBuilderFactory.newInstance();
-		factory.setValidating(true);
+		String filename = null;
+		boolean dtdValidate = false;
+		boolean xsdValidate = false;
+		String schemaSource = args[1];
+		factory=DocumentBuilderFactory.newInstance();	
 		try
 		{
+			factory.setAttribute(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
+			factory.setAttribute(JAXP_SCHEMA_SOURCE,new File(schemaSource));
+			factory.setFeature("http://apache.org/xml/features/validation/schema", true);
+			factory.setValidating(true);
 			builder = factory.newDocumentBuilder();
+			factory.setNamespaceAware(true);
 			document = builder.parse( new File(args[0]) );			
 			System.out.println("Enter 1 to get no.of students from a class\n 2 for to get class name for a given teacher and\n 3 for a given class to get the oldest age.");
 			int i=s.nextInt();
@@ -51,23 +58,25 @@ class SchoolDetails
 		} 
 		catch(SAXParseException spe)
 		{
-			System.out.println("spe");
+			spe.printStackTrace();
 		}
 		catch (SAXException sxe)
 		{
-			System.out.println("sxe");
+			sxe.printStackTrace();
 		} 
 		catch(ParserConfigurationException pce) 
 		{  
-			System.out.println("pce");
+			pce.printStackTrace();
 		} 
 		catch(IOException ioe)
 		{
-			System.out.println("ioe");
+			ioe.printStackTrace();
 		}		
+	
 	}
 	public static void noOfStudents()
 	{
+		nodelist=document.getElementsByTagName("classes");
 		System.out.println("enter a class name");
 		String class_name=s.next();
 		int count=0;
@@ -95,6 +104,7 @@ class SchoolDetails
 	}
 	public static void getClassName()
 	{
+		nodelist=document.getElementsByTagName("classes");
 		System.out.println("enter a first name of the teacher");
 		String t_name=s.next();
 		for(int k=0;k<nodelist.getLength();k++)
@@ -120,10 +130,11 @@ class SchoolDetails
 	}
 	public static void getOldestAge()
 	{
+		nodelist=document.getElementsByTagName("classes");
 		System.out.println("enter the class name to get the oldest age");
 		String cls=s.next();		
 		Date current=new Date();
-		int highest_age=0,age=0;
+		long highest_age=0,age=0;
 		for(int k=0;k<nodelist.getLength();k++)
 		{
 			String d=null;
@@ -154,6 +165,7 @@ class SchoolDetails
 							}
 							catch(ParseException e)
 							{
+								e.printStackTrace();
 							}
 							if(age>highest_age)
 								highest_age=age;
@@ -162,6 +174,8 @@ class SchoolDetails
 				}
 			}		
 		}
-		System.out.println("oldest age is "+highest_age/12 +" in "+cls);
+		System.out.println("oldest age is "+TimeUnit.MILLISECONDS.toDays(highest_age)/365 +" in "+cls);
 	}
 }
+
+
