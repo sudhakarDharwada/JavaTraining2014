@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Form" default="startTomcat" basedir=".">
+	<property name="project" value="/home/valuelabs/Desktop/login"/>
+	<property name="source" value="${project}/src"/>
+	<property name="webcontent" value="${project}/WebContent"/>
+	<property name="WEB-INF" value="${webcontent}/WEB-INF"/>
+	<property name="tomcat" value="/home/valuelabs/Desktop/apserver/apache-tomcat-7.0.54"/>
+	<property name="tomcat.deploy" value="${tomcat}/webapps"/>
+	<property name="tomcat.bin" value="${tomcat}/bin"/>
+	
+
+	<target name="compile" >
+		<javac srcdir="${source}" destdir="/home/valuelabs/Desktop/login/WebContent/WEB-INF/classes" classpath="/home/valuelabs/Desktop/login/WebContent/WEB-INF/lib/servlet-api.jar"/>
+	</target>
+	<target name="war" depends="compile">
+	<war warfile="${project}/login.war" webxml="${WEB-INF}/web.xml">
+		
+		<fileset dir="${webcontent}" />
+		
+		<fileset dir="${project}">
+			<include name="user.properties" />
+		</fileset>
+	</war>
+	</target>
+	<target name="deploy" depends="war">
+		<copy file="${project}/login.war" todir="${tomcat.deploy}"/>
+	</target>
+	<target name="startTomcat" depends="deploy">
+	<exec executable="${tomcat.bin}/startup.sh"></exec>
+	</target>
+	<target name="stopTomcat">
+	<exec executable="${tomcat.bin}/shutdown.sh"></exec>
+	</target>
+</project>
