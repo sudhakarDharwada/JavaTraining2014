@@ -1,0 +1,62 @@
+input {
+	width: 200px;
+	height: 20px;
+	background-color: inactivecaption;
+	
+}
+.submit{
+	width: 100px;
+	height: 30px;
+	background-color: aqua;
+	border-style: hidden;
+}
+#file{
+	height: 30px;
+	border-bottom-style:none;
+}
+#templatemo_menu {
+	float: left;
+	width: 950px;
+	height: 48px;
+	background: url(./images/templatemo_menu_bg.jpg);
+	padding: 5px 0 0 0;
+}
+
+#templatemo_menu ul {
+	float: right;
+	margin: 0px;
+	padding: 0 0 0 0;
+	width: 950px;
+	list-style: none;
+}
+
+#templatemo_menu ul li {
+	display: inline;
+}
+
+#templatemo_menu ul li a {
+	float: left;
+	padding: 11px 40px;	
+	text-align: center;
+	font-size: 12px;
+	text-align: center;
+	text-decoration: none;
+	background: url(images/templatemo_menu_divider.png) center right no-repeat;
+	color: #fff;	
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	outline: none;
+}
+
+#templatemo_menu li a:hover, #templatemo_menu li .current {
+	color: #ffeb00;
+}
+
+#templatemo_menu li .last {
+	background: none;
+}
+#caption{
+    font: oblique;
+    font-size: x-large;
+    color: blue;
+}
