@@ -16,24 +16,35 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 import java.util.concurrent.TimeUnit;
 
-public class StudentDetails
+public class XsdSchemaLoader
 {
+	static final String JAXP_SCHEMA_LANGUAGE ="http://java.sun.com/xml/jaxp/properties/schemaLanguage";
+	static final String W3C_XML_SCHEMA ="http://www.w3.org/2001/XMLSchema";
+	static final String JAXP_SCHEMA_SOURCE ="http://java.sun.com/xml/jaxp/properties/schemaSource";
 	static Document document;
 	static DocumentBuilder builder;
 	static DocumentBuilderFactory factory;
 	static Scanner sc=new Scanner(System.in);
+	static boolean xsdValidate=false;
 	
 	public static void main(String args[])
 	{
-		if(args.length!=1)
+		if(args.length!=2)
 		{
 			System.err.println("File Not Found");
 			System.exit(1);
 		}
+		for (int i = 0; i < args.length; i++) {
+			if (args[i].equals("SchoolDetails.xsd")) {
+            xsdValidate = true;
+        } 
+		}
 		factory=DocumentBuilderFactory.newInstance();
+		if(xsdValidate){
 		try
-		{
-			int count=0;
+		{  
+			factory.setAttribute(JAXP_SCHEMA_LANGUAGE, W3C_XML_SCHEMA);
+			factory.setAttribute(JAXP_SCHEMA_SOURCE, new File("StudentDetails.xsd"));
 			builder=factory.newDocumentBuilder();
 			document=builder.parse(new File(args[0]));
 		}
@@ -49,6 +60,7 @@ public class StudentDetails
 		catch (IOException ioe) {
 			ioe.printStackTrace();
 		}
+		}
 		System.out.println("1.Enter 1 to know no of students in a class \n 2.enter 2 to know the name of class teacher \n 3.Enter 3 to know the oldest age in the class ");
 			int option=sc.nextInt();
 			switch(option)
@@ -62,6 +74,7 @@ public class StudentDetails
 			default : System.out.println("No Option Choosed");
 		}
 	}
+	
 	public static void getNoOfstudentsInClass(){
 		int count=0;
 		System.out.println("Enter class name");
@@ -89,6 +102,7 @@ public class StudentDetails
 		}
 		System.out.println("Total number of students in the given class are "+count); 
 	}
+	
 	public static void getClassName(){
 		System.out.println("Enter Teacher name");
 		String name_of_teacher=sc.next();
@@ -116,9 +130,9 @@ public class StudentDetails
 			}
 		}
 	}
+	
 	public static void getOldestAge(){
 		System.out.println("Enter class name");
-		String class_name=sc.next();
 		long time=0;
 		NodeList nList=document.getElementsByTagName("class1");
 		for(int i=0;i<nList.getLength();i++){
@@ -133,7 +147,7 @@ public class StudentDetails
 						Node node2=nList2.item(m);
 						if((node2.getNodeName()).equals("DOB"))
 						{				
-							long time2=StudentDetails.convertToDate(node2.getTextContent());
+							long time2=XsdSchemaLoader.convertToDate(node2.getTextContent());
 							if(time2>time)
 								time=time2;	
 						}
@@ -143,6 +157,7 @@ public class StudentDetails
 		}
 		System.out.println("oldest age of" +TimeUnit.MILLISECONDS.toDays(time)/365+" years "+(TimeUnit.MILLISECONDS.toDays(time)%365)/30+" months "+((TimeUnit.MILLISECONDS.toDays(time)%365)%30)+" days");
 	}
+	
 	public static long convertToDate(String str)
 	{
 		

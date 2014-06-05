@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+function validate()
+{
+var x=document.forms["myform"]["name"].value;
+var emailID=document.forms["myform"]["email"].value;
+if (x==null || x=="")
+  {
+  alert("Name must be filled out");
+  return false;
+  }
+atpos = emailID.indexOf("@");
+dotpos = emailID.lastIndexOf(".");
+if (atpos < 1 || ( dotpos - atpos < 2 )) 
+{
+    alert("Please enter correct email ID");
+    return false;
+	}
+
+}
+</script>
+</head>
+<body>
+<form action="registration" method="post"name="myform"onsubmit="return validate()">
+<p>Enter Detailes </p>
+Name:<input type="text" name="name"/><br/>
+Email:<input type="text"name="email"/><br/>
+<p>Gender:</p><br>
+Male:<input type="radio"name="gender"value="male"/><br/>
+Female:<input type="radio" name="gender"value="female"/><br/>
+<p>Stationary list</p>
+Books:<input type="checkbox"name="stationary"value="book"/><br/>
+Pens:<input type="checkbox"name="stationary"value="pen"><br/>
+
+<input type="submit" value="register"/>
+</form>
+
+</body>
+</html>

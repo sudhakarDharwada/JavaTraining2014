@@ -59,7 +59,7 @@ public class StudentDetails
 			break;
 			case 3:getOldestAge();
 			break;
-			default : System.out.println("No Option Choosed");
+			default : System.out.println("No Option Choosed or the option you have choosed is wrong");
 		}
 	}
 	public static void getNoOfstudentsInClass(){

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT SchoolInfo (School_Name,Class+)>
+<!ELEMENT School_Name (#PCDATA)>
+<!ELEMENT Class (Class_Name,Student+,Teacher,Subject+)>
+<!ELEMENT Class_Name (#PCDATA)>
+<!ELEMENT Student (Student_Name,Address)>
+<!ELEMENT Student_Name (#PCDATA)>
+<!ELEMENT Address (#PCDATA)>
+<!ELEMENT Teacher (Teacher_Name)>
+<!ELEMENT Teacher_Name (#PCDATA)>
+<!ELEMENT Subject (#PCDATA)>
+
