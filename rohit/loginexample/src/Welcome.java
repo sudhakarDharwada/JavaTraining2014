@@ -23,30 +23,31 @@ public class Welcome extends HttpServlet
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
 	{
-		RequestDispatcher rd = req.getRequestDispatcher("/login.html");
-		String islogin="false";
-		PrintWriter out = resp.getWriter();
-		resp.setContentType("text/html");
+		RequestDispatcher rd = request.getRequestDispatcher("/login.html");
+		String islogin=null;
+		PrintWriter out = response.getWriter();
+		response.setContentType("text/html");
 		Properties prop=new Properties();
 		input=new FileInputStream(filePath);
 		prop.load(input);
-		String usrname=req.getParameter("usrname");
-		String password=req.getParameter("pwd");
-		HttpSession session = req.getSession();
-		session.setAttribute("name", usrname);
+		String usrname=request.getParameter("usrname");
+		String password=request.getParameter("pwd");
 		for(Entry<Object, Object> e:prop.entrySet())
 		{
 			if(usrname.equals(e.getKey())&&password.equals(e.getValue()))
 			{
+				HttpSession session = request.getSession();
+				session.setAttribute("name", usrname);
 				islogin="true";
+				session.setMaxInactiveInterval(60);
 				session.setAttribute("islogin",islogin );
-				resp.sendRedirect("usr.jsp");
+				response.sendRedirect("usr.jsp");
 				break;
 			}
 		}
-		rd.include(req, resp);
+		rd.include(request, response);
 		out.println("<center><font size="+"2"+" color="+"red"+"> username(or)password you entered is incorrect</font></center>");
 	}
 

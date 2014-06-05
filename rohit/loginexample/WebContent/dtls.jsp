@@ -8,9 +8,8 @@
 </head>
 <body>
 	<%
-		String flag = (String) session.getAttribute("islogin");
-		if (flag.equals("false")) {
-			out.println("you are not logged in");
+		if (session.getAttribute("islogin")==null) {
+			out.println("you are not logged in (or) session expired");
 			out.println("<p>" + "<a href=" + "login.html"+ ">click here </a> to login</p>");
 		}
 		else 

@@ -8,15 +8,14 @@
 </head>
 <body>
 	<%
-		String flag = (String) session.getAttribute("islogin");
-		if (flag.equals("false")) 
-		{
-			out.println("you are not logged in");
-			out.println("<p>" + "<a href=" + "login.html"+ ">click here </a> to login</p>");
+		if (session.getAttribute("islogin")==null) {
+			out.println("you are not logged in (or) session expired");
+			out.println("<p>" + "<a href=" + "login.html"
+					+ ">click here </a> to login</p>");
 		} 
-		else
-		{%>
-		<form action="logout.jsp">
+		else {
+	%>
+	<form action="logout.jsp">
 		<table align="right">
 			<tr>
 				<td>
@@ -30,7 +29,10 @@
 		</table>
 	</form>
 	<h1 align="center">Welcome Page</h1>
-	<br><br><br><br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<form action="dtls.jsp" method="post">
 		<center>
 			DateOfBirth: <input type="text" name="dob" size="10"> <br>
