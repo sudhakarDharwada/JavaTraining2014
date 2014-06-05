@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <servlet>
+    <servlet-name>login</servlet-name>
+    <servlet-class>com.servlets.LoginServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>details</servlet-name>
+    <servlet-class>com.servlets.Details</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>storingtosession</servlet-name>
+    <servlet-class>com.servlets.StoringToSessionServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>storingtosession</servlet-name>
+    <url-pattern>/storingtosession</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>details</servlet-name>
+    <url-pattern>/detailsservlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>logout</servlet-name>
+    <servlet-class>com.servlets.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>logout</servlet-name>
+    <url-pattern>/logoutservlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>login</servlet-name>
+    <url-pattern>/loginServlet</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+    <welcome-file>home.html</welcome-file>
+  </welcome-file-list>
+</web-app>
