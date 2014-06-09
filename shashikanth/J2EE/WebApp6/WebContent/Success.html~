@@ -13,7 +13,7 @@
 <h3 align="center">Login Successfull</h3>
 <div align="center">
 <form action="Date" method="post">
-<input type="submit" value="Show Date"/>
+<input type="submit" value="Show Date" />
 </form>
 </div>
 </body>
