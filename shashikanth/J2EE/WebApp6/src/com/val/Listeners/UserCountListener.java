@@ -1,6 +1,7 @@
 package com.val.Listeners;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
@@ -11,6 +12,8 @@ public class UserCountListener implements HttpSessionListener
 	public void sessionCreated(HttpSessionEvent e) 
 	{
 		System.out.println("Session Created");
+		HttpSession session=e.getSession();
+		session.setMaxInactiveInterval(50);
 		 total++;  
 		 current++;    
 		 ctx=e.getSession().getServletContext();  

@@ -4,6 +4,10 @@
    <welcome-file-list>
     <welcome-file>Login.html</welcome-file>
   </welcome-file-list>
+  <context-param>
+  <param-name>User-Credentials</param-name>
+  <param-value>com.val.Properties.Users</param-value>
+  </context-param>
   <servlet>
   <servlet-name>LoginServlet</servlet-name>
   <servlet-class>com.val.Servlets.LoginServlet</servlet-class>
@@ -31,10 +35,6 @@
  <filter>
   <filter-name>AuthenticationFilter</filter-name>
   <filter-class>com.val.Filters.AuthenticationFilter</filter-class>
-  <init-param>
-  <param-name>User-Credentials</param-name>
-  <param-value>com.val.Properties.Users</param-value>
-  </init-param>
   </filter>
   <filter-mapping>
   <filter-name>AuthenticationFilter</filter-name>
@@ -52,7 +52,14 @@
   <filter-name>AuthorizationFilter</filter-name>
   <url-pattern>/Display.html</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+  <filter-name>AuthorizationFilter</filter-name>
+  <url-pattern>/Date</url-pattern>
+  </filter-mapping>
   <listener>
   <listener-class>com.val.Listeners.UserCountListener</listener-class>
+  </listener>
+  <listener>
+  <listener-class>com.val.Listeners.FileLoadListener</listener-class>
   </listener>
 </web-app>

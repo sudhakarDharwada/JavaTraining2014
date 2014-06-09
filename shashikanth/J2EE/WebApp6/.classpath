@@ -13,5 +13,9 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+<<<<<<< HEAD:divya/Registration/.classpath
+	<classpathentry kind="lib" path="/home/divya/softwares/apache-tomcat-7.0.47/lib/servlet-api.jar"/>
+=======
+>>>>>>> 10b740a67d97a2467a8cc14e0a99e6b7eecdd642:shashikanth/J2EE/WebApp6/.classpath
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
