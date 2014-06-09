@@ -1,0 +1,11 @@
+#caption{
+	font: oblique;
+	font-size: x-large;
+	color: blue;
+}
+#notMatch{
+	font-family: serif;
+	font: small-caps;
+	color: red;
+}
+

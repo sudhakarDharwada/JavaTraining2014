@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Web-Application" basedir="." default="war">
+<property name="tomcat" value="/home/valuelabs/Tomcat-7.0/apache-tomcat-7.0.54"/>
+<property name="tomcat.bin" value="${tomcat}/bin"/>
+<property name="tomcat.deployment" value="${tomcat}/webapps"/>
+<property name="base" value="."/>
+<property name="source" value="${base}/src"/>
+<target name="war">
+<war warfile="WebApp6.war" webxml="${base}/WebContent/WEB-INF/web.xml">
+<fileset dir="${source}">
+<include name="**/*.java"/>
+<include name="**/*.properties"/>
+</fileset>
+<fileset dir="${base}/WebContent/">
+</fileset>
+</war>
+<antcall target="deployment"/>
+</target>
+<target name="deployment">
+<copy file="${base}/WebApp6.war" todir="${tomcat.deployment}"/>
+<antcall target="startTomcat"/>
+</target>
+<target name="startTomcat">
+<exec executable="${tomcat.bin}/startup.sh"></exec>
+</target>
+<target name="stopTomcat">
+<exec executable="${tomcat.bin}/shutdown.sh"></exec>
+</target>
+</project>
