@@ -24,13 +24,14 @@ public class AuthenticationFilter implements Filter
 	}
 	public void doFilter(ServletRequest req, ServletResponse resp,FilterChain chain) throws IOException, ServletException 
 	{
+		ServletContext context=req.getServletContext();
+		rb=(ResourceBundle) context.getAttribute("file");
 		HttpServletRequest request=(HttpServletRequest)req;
 		HttpServletResponse response=(HttpServletResponse)resp;
 		HttpSession session=request.getSession();
 		PrintWriter out=response.getWriter();
 		String username=req.getParameter("username");
 		String password=req.getParameter("pwd");
-		session.setAttribute("user",username);
 		Enumeration <String> keys = rb.getKeys();
 		while (keys.hasMoreElements())
 		{
@@ -48,7 +49,6 @@ public class AuthenticationFilter implements Filter
 	}
 	public void init(FilterConfig filterconfig) throws ServletException 
 	{
-		String path=filterconfig.getInitParameter("User-Credentials");
-		rb=ResourceBundle.getBundle(path);
+		
 	}
 }

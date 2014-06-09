@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="Web-Application" basedir="." default="stopTomcat">
+<project name="Web-Application" basedir="." default="war">
 <property name="tomcat" value="/home/valuelabs/Tomcat-7.0/apache-tomcat-7.0.54"/>
 <property name="tomcat.bin" value="${tomcat}/bin"/>
 <property name="tomcat.deployment" value="${tomcat}/webapps"/>
