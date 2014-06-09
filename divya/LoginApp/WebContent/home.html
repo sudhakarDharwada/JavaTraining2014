@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<script type="text/javascript">
+   
+  function textfield() {
+    var pwd = document.myform.pwd.value;
+    if(pwd == "" || pwd == NaN){
+      alert("please enter password!!");
+      return false;
+    }
+    if(pwd.length <=6){
+      alert("password should be greater than 6 characters");
+      return false;
+    }
+    return( true );
+  }
+
+</script>
+</head>
+<body>
+ <form action="login" method="post" name="myform" onsubmit="return(textfield());">
+   <center>
+     First name: <input type="text" name="name"><br>
+     Password: <input type="password" name="pwd"><br> 
+     <input type="submit" value="click!" onclick="textfield()" name="submit" >
+   </center>
+ </form>
+</body>
+</html>

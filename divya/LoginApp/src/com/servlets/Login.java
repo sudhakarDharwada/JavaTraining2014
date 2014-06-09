@@ -21,7 +21,7 @@ public class Login extends HttpServlet {
   RequestDispatcher rd;
 
   public void init() {
-    file = "/home/divya/Desktop/servlets/Registration/user.properties";
+    file = "/home/divya/Desktop/servlets/LoginApp/user.properties";
     prop = new Properties();
     FileInputStream input = null;
     try {
