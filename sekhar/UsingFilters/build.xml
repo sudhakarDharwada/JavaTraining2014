@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Gmail" default="startTomcat" basedir=".">
+<property file="./build.properties" />
+<target name="first">
+<mkdir dir="${WEB-INF}/classes" />
+</target>
+
+<target name="compile" depends="first">
+<javac srcdir="${source}" destdir="${WEB-INF}/classes"
+classpath="${tomcat}/lib/servlet-api.jar" />
+</target>
+<target name="war" depends="compile">
+<war warfile="Form.war" webxml="${WEB-INF}/web.xml">
+<fileset dir="${source}">
+<include name="data.properties" />
+</fileset>
+<fileset dir="${webcontent}" />
+</war>
+</target>
+<target name="deploy" depends="war">
+<copy file="${project}/Gmail.war" todir="${tomcat.deploy}" />
+</target>
+<target name="startTomcat" depends="deploy">
+<exec executable="${tomcat.bin}/startup.sh"></exec>
+</target>
+<target name="stopTomcat">
+<exec executable="${tomcat.bin}/shutdown.sh"></exec>
+</target>
+</project>
