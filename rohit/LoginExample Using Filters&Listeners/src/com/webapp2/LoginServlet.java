@@ -2,7 +2,6 @@ package com.webapp2;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 import java.util.ResourceBundle;
 
 import javax.servlet.RequestDispatcher;
@@ -26,18 +25,14 @@ public class LoginServlet extends HttpServlet
 		ResourceBundle rb = (ResourceBundle)ctx.getAttribute("input");
 		String user = request.getParameter("user");
 		String pwd = request.getParameter("pwd");
-		Enumeration<String> e = rb.getKeys();
-		while(e.hasMoreElements())
+		if(rb.containsKey(user))
 		{
-			String name = e.nextElement();
-			String paswd = rb.getString(name);
-			if(user.equals(name)&&pwd.equals(paswd))
+			if(pwd.equals(rb.getString(user)))
 			{
 				HttpSession session = request.getSession();
 				session.setAttribute("name", user);
 				session.setMaxInactiveInterval(4*60);
 				response.sendRedirect("loginsuccsess.html");
-				break;
 			}
 		}
 		RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.html");
