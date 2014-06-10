@@ -8,7 +8,7 @@
 		<javac srcdir="${source}" destdir="${WEB-INF}/classes" classpath="${classpath}"/>
 	</target>
 	<target name="war" description="building war" depends="compile">
-		<copy file="prop_p" todir="prop_d"/>
+		<copy file="${prop_p}" todir="${prop_d}"/>
 		<war warfile="${project_name}.war" webxml="${xmlpath}/web.xml" needxmlfile="true">
 			<fileset dir="${xmlpath}" />
 		</war>
