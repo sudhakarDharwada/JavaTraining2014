@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.vl.resources.PropertyLoader;
 
 
 public class MyFilter implements Filter {
@@ -23,7 +22,6 @@ public class MyFilter implements Filter {
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-		Properties prop=PropertyLoader.getInstance();
 		
 		HttpServletRequest request2=(HttpServletRequest) request;
 		HttpServletResponse response2=(HttpServletResponse) response;

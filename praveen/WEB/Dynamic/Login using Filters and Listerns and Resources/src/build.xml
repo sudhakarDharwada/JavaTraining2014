@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="login" default="war">
+	<property file="build.properties"/>
+
+	<target name="make">
+		<mkdir dir="${dest}/login"/>
+		<mkdir dir="${dest}/login/WEB-INF"/>
+		<mkdir dir="${dest}/login/WEB-INF/src"/>
+		<mkdir dir="${dest}/login/WEB-INF/classes"/>
+		<mkdir dir="${dest}/login/WEB-INF/lib"/>
+		<mkdir dir="${dest}/dist"/>
+	</target>
+	<target name="copy" depends="make">
+		<copy todir="${dest}/login/WEB-INF/src" flatten="true">
+			<fileset dir="${src}">
+				<include name="**/*.java"/>
+                                <include name="**/user.properties"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${dest}/login/images" flatten="true">
+			<fileset dir="${src}/images">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+		<copy todir="${dest}/login" flatten="true">
+			<fileset dir="${src}">
+				<include name="**/*.jsp"/>
+				<include name="**/*.html"/>
+				<include name="**/*.css"/>
+			</fileset>
+		</copy>
+		<copy todir="${dest}/login/WEB-INF" flatten="true">
+			<fileset dir="${src}">
+				<include name="**/web.xml"/>
+			</fileset>
+		</copy>
+		<copy todir="${dest}/login/WEB-INF/lib">
+			<fileset dir="${srctlib}">
+				<include name="**/servlet-api.jar"/>
+			</fileset>
+		</copy>		
+
+	</target>
+	<path id="compile.classpath">
+			<fileset dir="${dest}/login/WEB-INF/lib">
+				<include name="**/*.jar"/>
+			</fileset>
+	</path>
+	<target name="compile" depends="copy">
+		<javac srcdir="${dest}/login/WEB-INF/src" destdir="${dest}/login/WEB-INF/classes"  debug="true" includejavaruntime="true" includeantruntime="true">
+			<classpath refid="compile.classpath"/>
+		</javac>
+                <copy todir="${dest}/login/WEB-INF/classes">
+                        <fileset dir="${dest}/login/WEB-INF/src">
+                                <include name="**/user.properties"/>
+                        </fileset>                
+                </copy>
+	</target>
+	
+	<target name="war" depends="compile">
+	    <war destfile="${dest}/dist/login.war" webxml="${dest}/login/WEB-INF/web.xml">
+	        <fileset dir="${dest}/login/">
+	        	<include name="**/*.jsp"/>
+	        	<include name="**/*.html"/>
+	        	<include name="**/*.css"/>
+	        	<include name="**/images"/>
+	        	<include name="**/images/*.*"/>
+	        </fileset>
+	        <lib dir="${dest}/login/WEB-INF/lib"/>
+	        <classes dir="${dest}/login/WEB-INF/classes"/>
+                <fileset dir="${dest}/login/WEB-INF/classes">
+                        <include name="**/src/user.properties"/>
+                </fileset>   
+	    </war>
+	</target>
+
+</project>

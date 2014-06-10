@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.vl.resources.PropertyLoader;
 public class Login extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processRequest(request, response);
@@ -22,7 +21,6 @@ public class Login extends HttpServlet {
 		processRequest(request, response);
 	}
 	protected void processRequest(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException {
-//		Properties prop=PropertyLoader.getInstance();
 		String val=null;
 		PrintWriter out=response.getWriter();
 		ServletContext context=request.getServletContext();

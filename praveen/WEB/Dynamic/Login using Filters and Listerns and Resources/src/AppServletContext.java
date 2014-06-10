@@ -8,7 +8,7 @@ import javax.servlet.ServletContextListener;
 public class AppServletContext implements ServletContextListener {
     public void contextInitialized(ServletContextEvent contextEvent) {
        ServletContext context=contextEvent.getServletContext();
-       ResourceBundle rb = ResourceBundle.getBundle("com.vl.log.user");
+       ResourceBundle rb = ResourceBundle.getBundle("user");
        System.out.println("init listerner");
        context.setAttribute("prop", rb);
     }
