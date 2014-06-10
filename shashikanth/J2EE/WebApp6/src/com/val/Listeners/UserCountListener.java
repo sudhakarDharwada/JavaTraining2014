@@ -24,6 +24,6 @@ public class UserCountListener implements HttpSessionListener
 	{	
 		System.out.println("Session Destroyed");
 		current--;  
-	    ctx.setAttribute("currentusers",current);  
+	    ctx.setAttribute("currentusers",current);
 	}
 }
