@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="${project_name}" basedir="." default="deploy">
+	<property file="./build.properties" />
+	<target name="createClass">
+			<mkdir dir="${WEB-INF}/classes" />
+		</target>
+	<target name="compile" description="compiling the java files" depends="createClass">
+		<javac srcdir="${source}" destdir="${WEB-INF}/classes" classpath="${classpath}"/>
+	</target>
+	<target name="war" description="building war" depends="compile">
+		<copy file="${prop_p}" todir="${prop_d}"/>
+		<war warfile="${project_name}.war" webxml="${xmlpath}/web.xml" needxmlfile="true">
+			<fileset dir="${xmlpath}" />
+		</war>
+	</target>
+	<target name="deploy" depends="war">
+		<copy file="${project}/${project_name}.war" todir="/home/mmounika/Softwares/apache-tomcat-7.0.47/webapps" />
+	</target>
+	
+</project>
+
+

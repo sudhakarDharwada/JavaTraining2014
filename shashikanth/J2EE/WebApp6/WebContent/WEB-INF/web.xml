@@ -56,6 +56,10 @@
   <filter-name>AuthorizationFilter</filter-name>
   <url-pattern>/Date</url-pattern>
   </filter-mapping>
+   <filter-mapping>
+  <filter-name>AuthorizationFilter</filter-name>
+  <url-pattern>/logout</url-pattern>
+  </filter-mapping>
   <listener>
   <listener-class>com.val.Listeners.UserCountListener</listener-class>
   </listener>
