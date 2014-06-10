@@ -32,10 +32,13 @@ public class AuthenticationFilter implements Filter
 		PrintWriter out=response.getWriter();
 		String username=req.getParameter("username");
 		String password=req.getParameter("pwd");
-		if(rb.getString(username).equals(password))
-		{
-			session.setAttribute("login", "true");
-			chain.doFilter(req, resp);
+		if(username!=null && username!="" && rb.containsKey(username))
+		{	
+			if(rb.getString(username).equals(password))
+			{
+				session.setAttribute("login", "true");
+				chain.doFilter(req, resp);
+			}
 		}
 		request.getRequestDispatcher("Login.html").include(req, resp);
 		out.println("<center>Login Failed<center>");
