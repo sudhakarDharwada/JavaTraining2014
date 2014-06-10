@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>login.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>login page</servlet-name>
+    <servlet-class>com.servlets.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>login page</servlet-name>
+    <url-pattern>/serv1</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>success</servlet-name>
+    <servlet-class>com.servlets.Success</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>success</servlet-name>
+    <url-pattern>/serv2</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>log out</servlet-name>
+    <servlet-class>com.servlets.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>log out</servlet-name>
+    <url-pattern>/serv3</url-pattern>
+  </servlet-mapping>
+   <filter>
+    <filter-name>filters</filter-name>
+    <filter-class>com.servlets.ServletFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>filters</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <listener>
+    <listener-class>com.servlets.LoadPropertyFile</listener-class>
+</listener>
+<listener>
+		<listener-class>com.servlets.SessionListener</listener-class>
+	</listener>
+	<session-config>
+<session-timeout>10</session-timeout>
+</session-config>
+</web-app>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<script type="text/javascript">
+
+	function textfield() {
+
+		 var firstname = document.myform.firstname.value;
+		if (firstname == "" || firstname == NaN) {
+			alert("Please enter first name...");
+			document.myform.firstname.focus();
+			return false;
+		} 
+		
+		
+		
+		var pwd = document.myform.pwd.value;
+		if(pwd == "" || pwd == NaN){
+			alert("please enter password!!");
+			return false;
+		}
+		if(pwd.length <=5){
+			alert("password should be greater than 5 characters!!!");
+			return false;
+		}
+		   return( true );
+		
+	}
+</script>
+</head>
+<body>
+	<form action="loginServlet" method="post" name="myform"
+		onsubmit="return(textfield());">
+		<center>
+			First name: <input type="text" name="name"><br>
+
+			Password: <input type="password" name="pwd"><br> 
+			<input type="submit" value="click!" onclick="textfield()" name="submit" >
+		</center>
+	</form>
+</body>
+</html>

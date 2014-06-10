@@ -14,6 +14,7 @@ public class LoginServlet extends HttpServlet
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException 
 	{
+		System.out.println("In servlet");
 		resp.sendRedirect("Success.html");
 	}
 	

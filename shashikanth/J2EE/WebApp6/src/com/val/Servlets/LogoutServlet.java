@@ -15,6 +15,7 @@ public class LogoutServlet extends HttpServlet
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)throws ServletException, IOException 
 	{
 		HttpSession session=req.getSession(false);
+		session.removeAttribute("login");
 		session.invalidate();
 		req.getRequestDispatcher("Login.html").forward(req, resp);
 	}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="WebApplication" default="startTomcat" basedir=".">
+	<property file="build.properties"/>
+	<target name="clean">
+		<delete file="${classes}"/>
+	</target>
+	<target name="init" depends="clean">
+		<mkdir dir="${classes}"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${source}" destdir="${classes}" classpath="${WEB-INF}${file.separator}lib${file.separator}servlet-api.jar"/>
+	</target>
+	<target name="war" depends="compile">
+		<war warfile="WebApplication.war" webxml="${WEB-INF}${file.separator}web.xml">
+		
+				<fileset dir="${webcontent}">
+			<include name="**/*.class"/>
+			</fileset>
+		<fileset dir="${webcontent}"/>
+		</war>
+	</target>
+	<target name="deploy" depends="war">
+		<copy file="${basedir}${file.separator}WebApplication.war" todir="${tomcat.deploy}"/>
+	</target>
+	<target name="startTomcat" depends="deploy">
+		<exec executable="${tomcat.bin}${file.separator}startup.sh"></exec>
+	</target>
+	<target name="stopTomcat">
+		<exec executable="${tomcat.bin}${file.separator}shutdown.sh"></exec>
+	</target>
+</project>
