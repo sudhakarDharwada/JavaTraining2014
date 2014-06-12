@@ -5,7 +5,7 @@
   </welcome-file-list>
   <servlet>
     <servlet-name>Login</servlet-name>
-    <servlet-class>Login</servlet-class>
+    <servlet-class>com.servlets.Login</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Login</servlet-name>
@@ -13,7 +13,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>LoginSuccess</servlet-name>
-    <servlet-class>LoginSuccess</servlet-class>
+    <servlet-class>com.servlets.LoginSuccess</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>LoginSuccess</servlet-name>
@@ -21,7 +21,7 @@
   </servlet-mapping>  
   <servlet>
     <servlet-name>Logout</servlet-name>
-    <servlet-class>Logout</servlet-class>
+    <servlet-class>com.servlets.Logout</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>Logout</servlet-name>
@@ -29,15 +29,16 @@
   </servlet-mapping>  
   <filter>
   	<filter-name>AuthenticationFilter</filter-name>
-  	<filter-class>AuthenticationFilter</filter-class>
+  	<filter-class>com.servlets.AuthenticationFilter</filter-class>
   </filter>
   <filter-mapping>
   	<filter-name>AuthenticationFilter</filter-name>
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
   <listener>
-		<listener-class>ServletListener</listener-class>
+		<listener-class>com.servlets.ServletListener</listener-class>
 	</listener>
 	<session-config>
 	<session-timeout>30</session-timeout></session-config>
+  
 </web-app>

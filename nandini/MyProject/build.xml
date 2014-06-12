@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="${projectname}" basedir="." default="war">
+<property file="./build.properties"/>
+<target name="compile" description="Compiling the java files">
+<javac srcdir = "./src" destdir="${classes}" classpath="${classpath}" >
+</javac>
+</target>
+
+<target name="war" description="Creating the war file" depends="compile">
+<copy file="${prop_src}" todir="${prop_dest}"/>
+<war warfile="${projectname}.war" webxml="${xml_path}" needxmlfile="true">
+<fileset dir="./WebContent">
+<exclude name="${xml_path}" />
+</fileset>
+</war>
+</target>
+</project>
