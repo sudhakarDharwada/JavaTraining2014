@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+  <welcome-file-list>
+    <welcome-file>Login.html</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>com.servlets.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/Login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>LoginSuccess</servlet-name>
+    <servlet-class>com.servlets.LoginSuccess</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginSuccess</servlet-name>
+    <url-pattern>/LoginSuccess</url-pattern>
+  </servlet-mapping>  
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>com.servlets.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/Logout</url-pattern>
+  </servlet-mapping>  
+  <filter>
+  	<filter-name>AuthenticationFilter</filter-name>
+  	<filter-class>com.servlets.AuthenticationFilter</filter-class>
+  </filter>
+  <filter-mapping>
+  	<filter-name>AuthenticationFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <listener>
+		<listener-class>com.servlets.ServletListener</listener-class>
+	</listener>
+	<session-config>
+	<session-timeout>30</session-timeout></session-config>
+  
+</web-app>

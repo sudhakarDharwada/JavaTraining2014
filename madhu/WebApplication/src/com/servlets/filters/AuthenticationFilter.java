@@ -32,23 +32,12 @@ public class AuthenticationFilter implements Filter{
 		String username=req.getParameter("username");
 		String password=req.getParameter("pwd");
 		session.setAttribute("name", username);
-		//Enumeration <String> keys = rb.getKeys();
 		
-		if(rb.getString(username).equals(password)){
+		if(rb.containsKey(username)){
 			session.setAttribute("login", "true");
 			chain.doFilter(req, resp);
 		}
-		/*while (keys.hasMoreElements())
-		{
-			String key = keys.nextElement();
-			String value = rb.getString(key);
-			if(username.equals(key)&&password.equals(value))
-			{
-				session.setAttribute("login", "true");
-				chain.doFilter(req, resp);
-				break;
-			}
-		}*/
+		
 		request.getRequestDispatcher("login.html").include(req, resp);
 		out.println("<center>Login Failed<center>");
 	}
