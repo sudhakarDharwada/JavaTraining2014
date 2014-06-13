@@ -1,0 +1,52 @@
+[2014-06-13 17:11:07,703] [INFO] [com.log.logger.Login] entered into doGet
+[2014-06-13 17:18:08,166] [WARN] [com.log.logger.LoginFilter] Requested Resource::/Registration1.1/login
+[2014-06-13 17:18:08,166] [INFO] [com.log.logger.Login] checking
+[2014-06-13 17:18:08,166] [INFO] [com.log.logger.Login] entered into doGet
+[2014-06-13 17:18:08,167] [INFO] [com.log.logger.Login] checking user credentials
+[2014-06-13 17:19:23,395] [WARN] [com.log.logger.LoginFilter] Requested Resource::/Registration1.1/reg
+[2014-06-13 17:19:23,395] [INFO] [com.log.logger.Registration] getting registration deatiles
+[2014-06-13 17:19:23,395] [INFO] [com.log.logger.Registration] session created
+[2014-06-13 17:19:23,395] [INFO] [com.log.logger.Registration] registration to upload
+[2014-06-13 17:19:28,850] [WARN] [com.log.logger.LoginFilter] Requested Resource::/Registration1.1/upload
+[2014-06-13 17:19:30,754] [WARN] [com.log.logger.LoginFilter] Requested Resource::/Registration1.1/Logout
+[2014-06-13 17:19:30,754] [INFO] [com.log.logger.Logout] entered into file 
+[2014-06-13 17:19:30,754] [INFO] [com.log.logger.SessionListener] session Destroyed1DEE83E3FC04FB3AF8B8588F4333E18F
+[2014-06-13 17:19:30,754] [INFO] [com.log.logger.SessionListener] Sessions-1
+[2014-06-13 17:23:04,519] [WARN] [com.log.logger.LoginFilter] Requested Resource::/Registration1.1/login
+[2014-06-13 17:23:04,519] [DEBUG] [com.log.logger.LoginFilter] in filter
+[2014-06-13 17:23:04,519] [INFO] [com.log.logger.Login] checking
+[2014-06-13 17:23:04,519] [INFO] [com.log.logger.Login] entered into doGet
+[2014-06-13 17:23:04,522] [INFO] [com.log.logger.SessionListener] sessions created7F595FF0F308E62E36A07EB903015EF1
+[2014-06-13 17:23:04,522] [INFO] [com.log.logger.SessionListener] Sessions1
+[2014-06-13 17:23:04,524] [INFO] [com.log.logger.Login] checking user credentials
+[2014-06-13 17:23:23,562] [WARN] [com.log.logger.LoginFilter] Requested Resource::/Registration1.1/reg
+[2014-06-13 17:23:23,562] [DEBUG] [com.log.logger.LoginFilter] in filter
+[2014-06-13 17:23:23,562] [INFO] [com.log.logger.Registration] getting registration deatiles
+[2014-06-13 17:23:23,563] [INFO] [com.log.logger.Registration] session created
+[2014-06-13 17:23:23,563] [INFO] [com.log.logger.Registration] registration to upload
+[2014-06-13 17:23:28,072] [WARN] [com.log.logger.LoginFilter] Requested Resource::/Registration1.1/upload
+[2014-06-13 17:23:28,072] [DEBUG] [com.log.logger.LoginFilter] in filter
+[2014-06-13 17:23:29,995] [WARN] [com.log.logger.LoginFilter] Requested Resource::/Registration1.1/Logout
+[2014-06-13 17:23:29,995] [DEBUG] [com.log.logger.LoginFilter] in filter
+[2014-06-13 17:23:29,995] [INFO] [com.log.logger.Logout] entered into file 
+[2014-06-13 17:23:29,996] [INFO] [com.log.logger.SessionListener] session Destroyed7F595FF0F308E62E36A07EB903015EF1
+[2014-06-13 17:23:29,996] [INFO] [com.log.logger.SessionListener] Sessions0
+[2014-06-13 17:37:31,307] [WARN] [com.log.logger.LoginFilter] Requested Resource::/Registration1.1/login
+[2014-06-13 17:37:31,307] [DEBUG] [com.log.logger.LoginFilter] in filter
+[2014-06-13 17:37:31,307] [INFO] [com.log.logger.Login] checking
+[2014-06-13 17:37:31,307] [INFO] [com.log.logger.Login] entered into doGet
+[2014-06-13 17:37:31,307] [INFO] [com.log.logger.SessionListener] sessions createdE62FFA102C5DEF95A13EC64862EC7F12
+[2014-06-13 17:37:31,308] [INFO] [com.log.logger.SessionListener] Sessions1
+[2014-06-13 17:37:31,308] [INFO] [com.log.logger.Login] checking user credentials
+[2014-06-13 17:37:38,245] [WARN] [com.log.logger.LoginFilter] Requested Resource::/Registration1.1/reg
+[2014-06-13 17:37:38,245] [DEBUG] [com.log.logger.LoginFilter] in filter
+[2014-06-13 17:37:38,245] [INFO] [com.log.logger.Registration] getting registration deatiles
+[2014-06-13 17:37:38,245] [INFO] [com.log.logger.Registration] session created
+[2014-06-13 17:37:38,245] [INFO] [com.log.logger.Registration] registration to upload
+[2014-06-13 17:37:41,156] [WARN] [com.log.logger.LoginFilter] Requested Resource::/Registration1.1/upload
+[2014-06-13 17:37:41,156] [DEBUG] [com.log.logger.LoginFilter] in filter
+[2014-06-13 17:37:42,410] [WARN] [com.log.logger.LoginFilter] Requested Resource::/Registration1.1/Logout
+[2014-06-13 17:37:42,410] [DEBUG] [com.log.logger.LoginFilter] in filter
+[2014-06-13 17:37:42,410] [INFO] [com.log.logger.Logout] entered into file 
+[2014-06-13 17:37:42,410] [INFO] [com.log.logger.SessionListener] session DestroyedE62FFA102C5DEF95A13EC64862EC7F12
+[2014-06-13 17:37:42,410] [INFO] [com.log.logger.SessionListener] Sessions0
