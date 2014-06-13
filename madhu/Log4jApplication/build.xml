@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Log4jApplication" default="startTomcat" basedir=".">
+	<property file="build.properties"/>
+	<path id="jar-files">
+		<fileset dir="${jar}">
+			<include name="servlet-api.jar"/>
+			<include name="log4j-1.2.17.jar"/>
+		</fileset>
+	</path>
+	<target name="clean">
+		<delete file="${classes}"/>
+	</target>
+	<target name="init" depends="clean">
+		<mkdir dir="${classes}"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${source}" destdir="${classes}">
+			<classpath refid="jar-files"></classpath>
+		</javac>
+	</target>
+	<target name="war" depends="compile">
+		<war warfile="Log4jApplication.war" webxml="${WEB-INF}${file.separator}web.xml">
+		
+				<fileset dir="${webcontent}">
+			<include name="**/*.class"/>
+			</fileset>
+		<fileset dir="${webcontent}"/>
+		</war>
+	</target>
+	<target name="deploy" depends="war">
+		<copy file="${basedir}${file.separator}Log4jApplication.war" todir="${tomcat.deploy}"/>
+	</target>
+	<target name="startTomcat" depends="deploy">
+		<exec executable="${tomcat.bin}${file.separator}startup.sh"></exec>
+	</target>
+	<target name="stopTomcat">
+		<exec executable="${tomcat.bin}${file.separator}shutdown.sh"></exec>
+	</target>
+</project>
