@@ -38,15 +38,17 @@ public class AuthenticationFilter implements Filter{
 		
 		PrintWriter out=response.getWriter();
 		String username=req.getParameter("username");
-		//String password=req.getParameter("pwd");
+		String password=req.getParameter("pwd");
 		session.setAttribute("name", username);
 		
 		log.debug("checking whether entered into if condition or not");
-		if(rb.containsKey(username)){
+		if(username!=null&&username!=""&&rb.containsKey(username)){
+			if(rb.getString(username).equals(password)){
 			log.info("entered into if condition");
 			session.setAttribute("login", "true");
 			log.info("checking user credentials info: "+username);
 			chain.doFilter(req, resp);
+			}
 		}
 		request.getRequestDispatcher("login.html").include(req, resp);
 		out.println("<center>Login Failed<center>");
