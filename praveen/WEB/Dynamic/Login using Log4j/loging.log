@@ -1,0 +1,5 @@
+2014-06-12 17:29:11 FATAL com.vl.listner.AppServletContext:21 - init listerner
+2014-06-12 17:29:19 FATAL com.vl.filters.LoginFilter:20 - LoginFilters
+2014-06-12 17:29:19 FATAL com.vl.main.Login:50 - matches
+2014-06-12 17:29:19 FATAL com.vl.filters.MyFilter:29 - Myfilter
+2014-06-12 17:29:19 INFO  com.vl.filters.MyFilter:34 - session existing and username ispraveen

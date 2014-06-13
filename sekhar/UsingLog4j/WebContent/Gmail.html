@@ -1,0 +1,73 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+label {
+	display: inline-block;
+	width: 210px;
+	text-align: right;
+}
+
+#in {
+	width: 200px;
+	height: 20px;
+}
+
+.submit {
+	padding-left: em;
+}
+</style>
+
+
+</head>
+<body>
+	<form action="./Myservlet" method="post">
+		<table>
+			<td>
+				<center align="left">
+					<label>Username*:</label><input id="in" type="username".forward(request, response);
+						name="username" style="background: aqua; color: blue;" /><br>
+					<br> <label>Password *: </label> <input id="in"
+						type="password" name="pwd" style="background: aqua; color: blue;" /><br>
+					<br> <label>Surname *: </label><input id="in" type="surname"
+						name="sname" style="background: aqua; color: blue;" /><br> <br>
+					<label> Other Names *: </label> <input id="in" type="other names"
+						name="names" style="background: aqua; color: blue;" /><br> <br>
+					<label>Date of Birth *:</label> <input id="in" type="date of birth"
+						name="dob" style="background: aqua; color: blue;" /><br> <br>
+					<label>Email *:</label> <input id="in" type="email" name="email"
+						style="background: aqua; color: blue;" /><br> <br> <label>Telephone:
+					</label> <input id="in" type="telephone" name="tel"
+						style="background: aqua; color: blue;" /><br> <br> <label>Address
+						*: </label> <input id="in" type="address" name="addr"
+						style="background: aqua; color: blue;" /><br> <br> <label>Post
+						Code *: </label> <input id="in" type="postcode" name="pin"
+						style="background: aqua; color: blue;" /><br> <br> <label>FileUpload:</label>
+					<input id="in" type="file" name="upload"
+						style="background: red; color: blue;" /><br> <br> <label>Gender*:</label>
+					<input type="radio" name="sex" value="male" checked="checked">Male
+					<input type="radio" name="sex" value="female">Female
+					<table>
+						<tr>
+							<td>Select vehical*:</td>
+							<form>
+								<td><input type="checkbox" name="vehicle" value="Bike"
+									checked="checked">I have a bike</td> <br>
+								<td><input type="checkbox" name="vehicle" value="Car"
+									checked="checked">I have a car</td> <br>
+								<td><input type="checkbox" name="vehicle" value="plain">I
+									have a plain</td>
+						</tr>
+						<br>
+						</form>
+					</table>
+					<center>
+						<input type="submit" value="Submit" class="submit" />
+					</center>
+					<td>
+		</table>
+	</form>
+</body>
+</html>

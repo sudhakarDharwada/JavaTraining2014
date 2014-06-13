@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="loginUsingLog" default="war">
+	<property file="build.properties"/>
+
+	<target name="make">
+		<mkdir dir="${dest}/loginUsingLog"/>
+		<mkdir dir="${dest}/loginUsingLog/WEB-INF"/>
+		<mkdir dir="${dest}/loginUsingLog/WEB-INF/src"/>
+		<mkdir dir="${dest}/loginUsingLog/WEB-INF/classes"/>
+		<mkdir dir="${dest}/loginUsingLog/WEB-INF/lib"/>
+		<mkdir dir="${dest}/dist"/>
+	</target>
+	<target name="copy" depends="make">
+		<copy todir="${dest}/loginUsingLog/WEB-INF/src" flatten="true">
+			<fileset dir="${src}">
+				<include name="**/*.java"/>
+                                <include name="**/user.properties"/>
+			</fileset>
+		</copy>
+		<copy todir="${dest}/loginUsingLog/WEB-INF/lib">
+			<fileset dir="${src}">
+				<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="${dest}/loginUsingLog/images" flatten="true">
+			<fileset dir="${src}/images">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+		<copy todir="${dest}/loginUsingLog" flatten="true">
+			<fileset dir="${src}">
+				<include name="**/*.jsp"/>
+				<include name="**/*.html"/>
+				<include name="**/*.css"/>
+			</fileset>
+		</copy>
+		<copy todir="${dest}/loginUsingLog/WEB-INF" flatten="true">
+			<fileset dir="${src}">
+				<include name="**/web.xml"/>
+			</fileset>
+		</copy>
+                <copy todir="${dest}/loginUsingLog/WEB-INF/classes" flatten="true">
+			<fileset dir="${src}">
+				<include name="**/mylog4j.properties"/>
+                                <include name="**/loging.log"/>
+			</fileset>
+		</copy>
+
+	</target>
+	<path id="compile.classpath">
+			<fileset dir="${dest}/loginUsingLog/WEB-INF/lib">
+				<include name="**/*.jar"/>
+			</fileset>
+	</path>
+	<target name="compile" depends="copy">
+		<javac srcdir="${dest}/loginUsingLog/WEB-INF/src" destdir="${dest}/loginUsingLog/WEB-INF/classes"  debug="true" includejavaruntime="true" includeantruntime="true">
+			<classpath refid="compile.classpath"/>
+		</javac>
+                <copy todir="${dest}/loginUsingLog/WEB-INF/classes">
+                        <fileset dir="${dest}/loginUsingLog/WEB-INF/src">
+                                <include name="**/user.properties"/>
+                        </fileset>                
+                </copy>
+	</target>
+	
+	<target name="war" depends="compile">
+	    <war destfile="${dest}/dist/loginUsingLogWAR.war" webxml="${dest}/loginUsingLog/WEB-INF/web.xml">
+	        <fileset dir="${dest}/loginUsingLog/">
+	        	<include name="**/*.jsp"/>
+	        	<include name="**/*.html"/>
+	        	<include name="**/*.css"/>
+	        	<include name="**/images"/>
+	        	<include name="**/images/*.*"/>
+	        </fileset>
+	        <lib dir="${dest}/loginUsingLog/WEB-INF/lib"/>
+	        <classes dir="${dest}/loginUsingLog/WEB-INF/classes"/>
+                <fileset dir="${dest}/loginUsingLog/WEB-INF/classes">
+                        <include name="**/src/user.properties"/>
+                </fileset>   
+	    </war>
+	</target>
+
+</project>

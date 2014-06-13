@@ -1,0 +1,22 @@
+At contextInitialized()....
+Checking property file existance :true
+At ContextListener class..
+DEBUG http-bio-15554-exec-3 com.filters.LoginFil 2014-06-12 18:44:07,165 - DEBUG message
+INFO http-bio-15554-exec-3 com.filters.LoginFil 2014-06-12 18:44:07,165 - At loginfilter
+WARN http-bio-15554-exec-3 com.filters.LoginFil 2014-06-12 18:44:07,165 - this is warning
+INFO http-bio-15554-exec-3 com.listners.SessionTime 2014-06-12 18:44:07,170 - session Created:
+INFO http-bio-15554-exec-3 com.listners.SessionTime 2014-06-12 18:44:07,170 - ID=37C91089C66DF28D65AA553999BD889B MaxInactiveInterval=600
+INFO http-bio-15554-exec-3 com.filters.LoginFil 2014-06-12 18:44:07,172 - checking settrue
+INFO http-bio-15554-exec-3 com.filters.SessionFil 2014-06-12 18:44:07,172 - At SessionFil class doFilter()...
+INFO http-bio-15554-exec-3 com.servlets.DisplayDetailsServlet 2014-06-12 18:44:07,172 - at LoginServ class
+DEBUG http-bio-15554-exec-4 com.filters.LoginFil 2014-06-12 18:44:14,763 - DEBUG message
+INFO http-bio-15554-exec-4 com.filters.LoginFil 2014-06-12 18:44:14,763 - At loginfilter
+WARN http-bio-15554-exec-4 com.filters.LoginFil 2014-06-12 18:44:14,763 - this is warning
+INFO http-bio-15554-exec-4 com.filters.LoginFil 2014-06-12 18:44:14,764 - checking settrue
+INFO http-bio-15554-exec-4 com.filters.SessionFil 2014-06-12 18:44:14,764 - At SessionFil class doFilter()...
+INFO http-bio-15554-exec-4 com.servlets.DisplayDetailsServlet 2014-06-12 18:44:14,764 - got output!!
+DEBUG http-bio-15554-exec-5 com.filters.LoginFil 2014-06-12 18:44:17,048 - DEBUG message
+INFO http-bio-15554-exec-5 com.filters.LoginFil 2014-06-12 18:44:17,048 - At loginfilter
+WARN http-bio-15554-exec-5 com.filters.LoginFil 2014-06-12 18:44:17,048 - this is warning
+INFO http-bio-15554-exec-5 com.filters.LoginFil 2014-06-12 18:44:17,049 - checking settrue
+INFO http-bio-15554-exec-5 com.filters.SessionFil 2014-06-12 18:44:17,049 - At SessionFil class doFilter()...

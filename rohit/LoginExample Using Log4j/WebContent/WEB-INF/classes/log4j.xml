@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+<appender name="CA" class="org.apache.log4j.FileAppender">
+<param name="Target" value="System.out"/>
+<param name="File" value="./logfile.log"/>
+<layout class="org.apache.log4j.PatternLayout">
+<param name="conversionPattern" value="%d{ABSOLUTE} %C %L - %m%n"/>
+</layout>
+</appender>
+<root>
+<level value="DEBUG"></level>
+<appender-ref ref="CA"/>
+</root>
+</log4j:configuration>
