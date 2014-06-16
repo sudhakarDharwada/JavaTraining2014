@@ -13,6 +13,16 @@
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
 	<servlet>
+		<servlet-name>Servlet</servlet-name>
+		<servlet-class>com.log.logger.Logout</servlet-class>
+		
+     	</servlet>
+	<servlet-mapping>
+		<servlet-name>Servlet</servlet-name>
+		<url-pattern>/Logout</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>details</servlet-name>
 		<servlet-class>com.log.logger.Display</servlet-class>
 	</servlet>
