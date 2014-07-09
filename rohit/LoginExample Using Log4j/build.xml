@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Web-Application" basedir="." default="war">
+	<property file="build.properties"></property>
+	<path id="class-path">
+		<fileset dir="${JARS}">
+			<include name="servlet-api.jar"/>
+			<include name="log4j-1.2.17.jar"/>
+		</fileset>
+	</path>
+	<target name="clean">
+		<delete dir="${WEB-INF}/Classes"></delete>
+	</target>
+	<target name="create" depends="clean">
+		<mkdir dir="${WEB-INF}/Classes"/>
+	</target>
+	<target name="war" depends="compile">
+		<war warfile="WebApp6.war" webxml="${base}/WebContent/WEB-INF/web.xml">
+			<fileset dir="${source}">
+				<include name="**/*.properties"/>
+			</fileset>
+			<fileset dir="${base}/WebContent/">
+			</fileset>
+		</war>
+	</target>
+	<target name="compile" depends="create">
+		<javac srcdir="${source}" destdir="${WEB-INF}/Classes">
+			<classpath refid="class-path"></classpath>
+		</javac>
+	</target>
+	<target name="deployment" >
+		<copy file="${base}/WebApp6.war" todir="${tomcat.deployment}"/>
+	</target>
+	<target name="startTomcat">
+		<exec executable="${tomcat.bin}/startup.sh"></exec>
+	</target>
+	<target name="stopTomcat">
+		<exec executable="${tomcat.bin}/shutdown.sh"></exec>
+	</target>
+</project>
