@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+ 
+<project name="RestEx1" basedir="." default="war" >
+   <property file="build.properties"/>
+    <target name="compile" description="Compiles the Task">
+		<mkdir dir="${classes.dir}"/>
+		<javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false" debug="true">
+            <classpath>
+                <fileset dir="${rest.lib.dir}" includes="**/*.jar"/>
+            </classpath>
+        </javac>
+	</target>
+
+    <!-- Create REST War file -->
+    <target name="war" description="Create War file" depends="compile">
+        <war destfile="${lib.dir}/ex1.war" webxml="${xml.dir}/web.xml"> 
+            <classes dir="${classes.dir}"/>
+            <lib dir="${rest.lib.dir}" includes="**/*.jar"/>
+        </war>
+    </target>
+
+
+    <!-- Cleanup -->
+    <target name="clean" description="Remove all generated files">
+        <delete>
+            <fileset dir="${classes.dir}"/>
+            <fileset dir="${lib.dir}"/>
+        </delete>
+    </target>
+</project>
