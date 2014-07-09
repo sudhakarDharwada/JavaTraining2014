@@ -27,4 +27,14 @@
             <fileset dir="${lib.dir}"/>
         </delete>
     </target>
+
+    <!-- Run Test -->
+    <target name="runtest" depends="compile">
+        <java classname="sud.ex1.Test">
+        <classpath>
+            <fileset dir="${rest.lib.dir}" includes="**/*.jar"/>
+            <pathelement path="${classes.dir}"/>
+        </classpath>
+        </java>
+    </target>
 </project>
