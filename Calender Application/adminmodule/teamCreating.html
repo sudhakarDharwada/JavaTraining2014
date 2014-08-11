@@ -1,0 +1,188 @@
+<html>
+<head>
+<title> Team Creation</title>
+ <SCRIPT language="javascript">
+ $('form').change(function(){
+    $('form').submit();
+    });
+    function validLogin(){
+      if (document.form.eid.value == ""){
+             alert ( "Please enter Employee Id." );
+              document.form.eid.focus();
+              return false;
+     }
+    if (document.form.ename.value == ""){
+             alert ( "Please enter Employee Name." );
+             document.form.ename.focus();
+            return false;
+     }
+     alert ( "Inserted Successfully" );
+     return true;
+}
+
+    function addRow(tableID) {
+
+        var table = document.getElementById(tableID);
+
+       // rowCount = table.rows.length;
+        var row = table.insertRow(1);
+
+        var colCount = table.rows[2].cells.length;
+
+        for(var i=0; i<colCount; i++) {
+
+            var newcell = row.insertCell(i);
+
+            newcell.innerHTML = table.rows[2].cells[i].innerHTML;
+            //alert(newcell.childNodes);
+            switch(newcell.childNodes[0].type) {
+                case "text":
+                        newcell.childNodes[0].value = " ";
+                        break;
+                case "checkbox":
+                        newcell.childNodes[0].checked = false;
+                        break;
+                case "select-one":
+                        newcell.childNodes[0].selectedIndex = 0;
+                        break;
+                case "value":
+                    newcell.childNodes[0].value=0;
+            }
+        }
+    }
+
+    function deleteRow(tableID) {
+        try {
+        var table = document.getElementById(tableID);
+        var rowCount = table.rows.length;
+
+        for(var i=1; i<rowCount; i++) {
+            var row = table.rows[i];
+            var chkbox = row.cells[0].childNodes[0];
+            if(null != chkbox && true == chkbox.checked) {
+                 if(rowCount <= 2) {
+                    alert("Cannot delete all the rows.");
+                    break;
+                } 
+                table.deleteRow(i);
+                rowCount--;
+                i--;
+            }
+
+
+        }
+        }catch(e) {
+            alert(e);
+        }
+    }
+
+    function getColumnCount()
+    {
+        return document.getElementById('dataTable').getElementsByTagName('tr')       [1].getElementsByTagName('td').length;         
+    }
+
+    function getRowCount()
+    {
+        return document.getElementById('dataTable').rows.length;
+    }
+
+    function doAdd(ths)
+    {
+        //alert(ths.parentNode.cellIndex);
+        //alert(getColumnCount());
+        var lastCol = getColumnCount()-1;
+        var lastRow = getRowCount()-1;
+        //for Column Sum
+         var table = document.getElementById("dataTable");
+        var row = table.rows[ths.parentNode.parentNode.rowIndex];
+        var colSum=0;
+        for(var i=4;i<lastCol;i++)
+            colSum=eval(colSum) + eval(row.cells[i].childNodes[0].value);
+        row.cells[lastCol].innerHTML = colSum;
+
+        //for Row Sum
+        var cIndex = ths.parentNode.cellIndex;
+        //alert(cIndex);
+        var rowSum = 0;
+        for(var i=1;i<lastRow;i++)
+            rowSum = eval(rowSum) +   parseInt(table.rows[i].cells[cIndex].childNodes[0].value);
+        table.rows[lastRow].cells[cIndex].innerHTML = rowSum;
+        //grand Total
+        var finSum = 0;
+
+        for(var i=1;i<lastRow;i++)
+            finSum = eval(finSum) + parseInt(table.rows[i].cells[lastCol].innerHTML);
+
+        table.rows[lastRow].cells[lastCol].innerHTML = finSum;
+
+
+    }
+
+
+</SCRIPT>
+
+ </head>
+ <body>
+
+<center> <b> <i>Employees Team Creation </b> </i> </center>
+
+<br>
+ <br>
+
+ <form name="form" action="LoginServlet" method="post" onsubmit="return validLogin();">
+ 
+ Team Name:<input type="text" name="ename"><br><br>
+ Client Name<input type="text"  name="clientname" />
+ Client Location:<input type="text" name="clientlocation">
+ <br>
+<br>
+ <br>
+
+ <table id="dataTable" border="2"  cell padding="1" cell spacing="1">
+
+
+<tr>
+<th style="background-color:white"></th>
+    
+    
+<th>DESIGNATION</th>
+<th > ID </th>
+<th> NAME </th>
+<th> EMAIL ID </th>
+<th> CONTACT NO. </th>
+<th> PASSWORD </th>
+
+
+  </tr>
+
+   <tr>
+<td><INPUT type="checkbox" name="chk"/></td>
+     
+<td><select name="roles">
+    <option value="modulelead">Module Lead</option>
+    <option value="teamlead">Team Lead</option>
+    <option value="scrummaster">Scrum Master</option>
+    <option value="seniorsweng">Senior S/w Eng</option>
+    <option value="sweng">S/w Eng</option>
+    <option value="trainee">Trainee</option>
+    </select></td>
+
+
+     <td><input type="number" name="id"  ></td>
+     <td><input type="text" name="name"  ></td>
+     <td><input type="text" name="emailid"  ></td>
+     <td><input type="number" name="contactno" ></td>
+     <td><input type="text" name="password"  ></td>
+
+     
+</tr>
+     </table>
+
+   <INPUT type="button" value="Add Emp" onclick="addRow('dataTable')" name="addrow" />
+   <INPUT type="button" value="Delete Emp" onclick="deleteRow('dataTable')" />
+   
+   <input type="Submit" name="submit" value="Submit" >
+
+   </form>
+   </body>
+   </html>
