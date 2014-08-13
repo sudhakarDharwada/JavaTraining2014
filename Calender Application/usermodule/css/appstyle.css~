@@ -1,0 +1,107 @@
+body{
+            background-color: #FCF1AA;
+            padding:0 200px 0 100px;
+	    height:1100px;
+            width:1000px;
+}
+.main{
+    width: 1000px;
+	margin: 0 auto;
+	padding: 0 150px;
+}
+#header{
+    height:100px;
+    width:1000px;
+    background-color:#80F2F0;
+}
+#header h1{
+    text-align:center;
+    margin-top:5px;
+    font-size:40px;
+    font-family:comic sans ms;
+}
+#header p{
+    margin-top:-30px;
+    margin-left:520px;
+}
+#menu-container{
+    
+    height: 40px;
+    
+    background-color: #187EAD;
+}
+#menu-container ul {
+    float:right;
+
+}
+#menu-container ul li{
+    display:inline-block;
+    font-size:20px;
+    position:relative;
+    font-family:comic sans ms;
+    margin-top:-25px;
+    padding-right:40px;
+    color:#383D3D
+}
+#menu-container ul li a{
+    text-decoration: none;
+    color:#DEC945;
+
+}
+#menu-container ul li a:hover{
+    color:#8C7B11;
+}
+#menu-container ul li ul {
+  padding: 0;
+  position: absolute;
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  }
+#menu-container ul li ul li { 
+  background: #555; 
+  display: block; 
+  color: #fff;
+  font-size:15px;
+}
+#menu-container ul li ul li:hover { 
+  background: #666;
+
+ }
+#menu-container ul li:hover ul {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+#body{
+   width:700px;
+   height:600px;
+   
+   background-color:#187AAA;
+   float:left;
+}
+#body img{
+   
+   width:690px;
+   height:490px;
+   margin:5px 5px 5px 5px;
+}
+#team_column{
+   
+   width:300px;
+   height:600px;
+
+   background-color:#205E5D;
+   float:left; 
+}
+#footer{
+   height:40px;
+    width:1000px;
+margin-top:620px;
+    background-color:#187EEE;
+}
+#footer p{
+   padding:0 15px;
+   padding-top: 15px;
+   text-align:right;
+}
