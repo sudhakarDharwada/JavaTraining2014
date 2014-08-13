@@ -9,7 +9,7 @@
 <link type="text/css" href="menu-2.css" rel="stylesheet" />
 <link type="text/css" href="menu.js" rel="stylesheet" />
 
-<script type="text/javascript" src="jquery.js"></script>
+
 	<script type="text/javascript" src="menu.js"></script>
 
 
@@ -50,10 +50,11 @@ Admin page
 <div id="sse1">
 <div id="sses1">
 <ul>
-<li><a href="#">Home</a></li>
-<li><a href="#">Teams</a></li>
-<li><a href="#">Add Team</a></li>
-<li><a href="#">Update Team</a></li>
+<li><a href="">Home</a></li>
+<li><a href="#Teams">Teams</a></li>
+<li><a href="#AddTeam">Add Team</a></li>
+<li><a href="#UpdateTeam">Update Team</a></li>
+
 
 </ul>
 
@@ -69,8 +70,37 @@ Admin page
 <div id="calendar"></div>
 <div id="footer" align="center">Copy Right @JavaTraining2014</div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
 
 
+ <script type="text/template" id="NewTeamTemplate">
+		<form method="post" id="forming"><br/>
+			Team Name:<input type="text" id="tname"/><br/>
+			Client Name:<input type="text" id="cname"/><br/>
+			Client Location:<input type="text" id="clocation"/><br/>
+			<br/>
+			<input type="button" value="Add Row" onclick="addRow('dataTable')" />
+			<input type="button" value="Delete Row" onclick="deleteRow('dataTable')" /><br/>
+			<br/>
+			 <table id="dataTable" width="750px" border="1">
+				<tr>
+				<th>&nbsp;</th>
+				<th>ID &nbsp;</th>
+				<th>Name &nbsp;</th> 
+				<th>Email</th> 
+				<th>Contact No</th> 
+				<th>Designation</th>
+				
+				</tr>
+				<tbody>
+					</tbody>
+			 </table><br/>
+			 <br/>
+			 <input type="submit" value="submit" id="NewTeam"/>
+			</form>
+</script>
+<script src="admin.js"></script>
 </body>
 </html>
     
