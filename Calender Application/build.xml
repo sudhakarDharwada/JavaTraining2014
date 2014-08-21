@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Calendar-Application" basedir="." default="war">
+	<property file="build.properties"></property>
+	<path id="master-classpath">
+		<fileset dir="${Servlet-Api}">
+			<include name="servlet-api.jar" />
+		</fileset>
+		<fileset dir="${jdbc}">
+			<include name="ojdbc5.jar" />
+		</fileset>
+	</path>
+	<target name="clean">
+		<delete dir="${Classes}"></delete>
+	</target>
+	<target name="create" depends="clean">
+		<mkdir dir="${Classes}" />
+	</target>
+	<target name="war" depends="compile">
+		<war warfile="Calendar.war" webxml="${base}/WebContent/WEB-INF/web.xml">
+			<fileset dir="${base}/WebContent/">
+			</fileset>
+		</war>
+		<antcall target="deployment" />
+	</target>
+	<target name="compile" depends="create">
+		<javac srcdir="${source}" destdir="${base}/WebContent/WEB-INF/Classes">
+			<classpath refid="master-classpath"></classpath>
+		</javac>
+	</target>
+	<target name="deployment">
+		<copy file="${base}/Calendar.war" todir="${tomcat.deployment}" />
+		<antcall target="startTomcat" />
+	</target>
+	<target name="startTomcat">
+		<exec executable="${tomcat.bin}/startup.sh"></exec>
+	</target>
+	<target name="stopTomcat">
+		<exec executable="${tomcat.bin}/shutdown.sh"></exec>
+	</target>
+</project>
