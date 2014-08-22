@@ -1,10 +1,18 @@
  $('#addteam').click(function(){
     $(".rightcolumn").hide();
-    $(".leftcolumn").css("background-color","#aaa");
+    $(".leftcolumn").css("background-color","#eee");
     $(".leftcolumn").css("width","100%");
-    
-
     });
+ 
+ 
+ $('#teams').click(function(){
+	    $(".leftcolumn").css("width","60%");
+	    $(".rightcolumn").css("width","40%");
+	    $(".rightcolumn").show();
+		$("#calendar").html("");
+		
+	    });
+ 
 function addRow(tableID) {
             var table = document.getElementById(tableID);
             var rowCount = table.rows.length;
@@ -86,12 +94,70 @@ function deleteRow(tableID) {
 		alert(e);
 	}
 }
+//////////////////////////////////////////////////////////////
 
+var Team=Backbone.Model.extend({
+    defaults:{
+        teamName:''
+    }
+});
+
+
+var TeamsCollection = Backbone.Collection.extend({
+	model : Team
+});
+
+
+
+var TeamsCollectionView = Backbone.View.extend({
+	tagName :'ul',
+	 render: function(){
+	      this.collection.each(function(team){
+	          var teamsviews = new TeamsView({ model: team });
+	          this.$el.append(teamsviews.render().el);
+	      }, this);
+
+	      return this;
+	  }
+
+});
+
+
+var TeamsView=Backbone.View.extend({
+	tagName :'li',
+   initialize:function(){
+	 },
+    template1: _.template($("#teamdisplay").html()),
+    render:function(){
+    	console.log("entered teams render");
+    	this.$el.html(this.template1(this.model.toJSON()));
+        return this;
+    }
+});
+
+
+var collectionData = new  TeamsCollection([
+                                           {
+                                        	   teamName:'wallgreens'
+                                        	  },
+                                        	  {
+                                        		  teamName:'wallmart'
+                                        	  },
+                                        	  {
+                                        		  teamName:'core'
+                                        	  }
+                                        	]);
+
+
+var tcv = new TeamsCollectionView({ collection: collectionData });
+
+/////////////////////////////////////////////////////////////
 
 var TeamView=Backbone.View.extend({
 	 initialize:function(){
 	 },
 	render:function(){
+		
 		$("#calendar").html("");
 		var template=_.template($('#NewTeamTemplate').html(),{});
 		$('#calendar').html(template);
@@ -127,6 +193,7 @@ var Client=Backbone.Model.extend({
 	}
 });
 
+
 var ClientList=Backbone.Collection.extend({
 	Model:Client
 });
@@ -146,6 +213,16 @@ Routers=Backbone.Router.extend({
         
         Teams:function(){
 			console.log("team");
+			
+			/*var team=new Team({teamName:"adminteam"});
+			var teamView=new TeamsView({model:team});
+			teamView.render();*/
+			
+			$('#rightcol').append(tcv.render().el);
+			
+			console.log("endteam");
+
+
 		},
 		
 		 AddTeam:function()
@@ -175,7 +252,7 @@ Routers=Backbone.Router.extend({
 					teamList.add(mem);
 				}
 				console.log(teamList);
-			})
+			});
 		},
 		 UpdateTeam:function(){
 			console.log("update team");
@@ -186,4 +263,5 @@ var teamList=new TeamList();
 var clientlist=new ClientList();
 var MyRouter=new Routers();
 Backbone.history.start();
+
 
