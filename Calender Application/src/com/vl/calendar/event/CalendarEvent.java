@@ -7,12 +7,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class CalendarEvent 
 {
+	int Event_id;
 	String Event_name;
 	String Event_location;
 	Date Event_date;
 	
-	public CalendarEvent(String Event_name,String Event_location,Date Event_date)
+	public CalendarEvent(int Event_id,String Event_name,String Event_location,Date Event_date)
 	{
+		this.Event_id = Event_id;
 		this.Event_name = Event_name;
 		this.Event_location = Event_location;
 		this.Event_date = Event_date;
