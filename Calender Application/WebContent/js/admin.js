@@ -112,6 +112,7 @@ var TeamsCollection = Backbone.Collection.extend({
 var TeamsCollectionView = Backbone.View.extend({
 	tagName :'ul',
 	 render: function(){
+		console.log(this.collection.length);
 	      this.collection.each(function(team){
 	          var teamsviews = new TeamsView({ model: team });
 	          this.$el.append(teamsviews.render().el);
@@ -149,7 +150,7 @@ var collectionData = new  TeamsCollection([
                                         	]);
 
 
-var tcv = new TeamsCollectionView({ collection: collectionData });
+//var tcv = new TeamsCollectionView({ collection: collectionData });
 
 /////////////////////////////////////////////////////////////
 
@@ -216,9 +217,8 @@ Routers=Backbone.Router.extend({
 			
 			/*var team=new Team({teamName:"adminteam"});
 			var teamView=new TeamsView({model:team});
-			teamView.render();*/
-			
-			$('#rightcol').append(tcv.render().el);
+			teamView.render();*/			
+			$('#rightcol').html(new TeamsCollectionView({ collection: collectionData }).render().el);
 			
 			console.log("endteam");
 
@@ -227,7 +227,7 @@ Routers=Backbone.Router.extend({
 		
 		 AddTeam:function()
 		 {
-			console.log("New team");
+			console.log("New add team");
 			var viewTeam=new TeamView();
 			viewTeam.render();
 			console.log('render done');
