@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+h1{
+		margin-top:50px;	
+}
+#wrap{
+	margin-top:-20px;
+	margin-left:350px;
+	background-color:#F28080;
+	height:733px;
+	width:1200px;
+}
+.left-div {
+    float: left;
+    width: 1000px;
+    height: 500px;
+    margin-right: -200px;
+    background-image:calender-of-events.jpg.gif;
+}
+.right-div {
+	
+    margin-left: 300px;
+}
+#heading{
+	padding-top: 100px;
+}
+#button{
+	background:#1247E4;
+	color:white;
+	width: 155px;
+	font-weight: bold;
+}
