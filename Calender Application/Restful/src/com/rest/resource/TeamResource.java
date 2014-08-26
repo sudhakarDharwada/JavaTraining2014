@@ -57,8 +57,8 @@ public class TeamResource {
 	//	servletResponse.sendRedirect("../index.html");
 	}
 	@Path("{team}")
-	public TeamsResource getContact(){
+	public TeamsResource getContact(@PathParam("team") String tname){
 		System.out.println("resource 1........................");
-		return new TeamsResource(uriInfo,request);
+		return new TeamsResource(uriInfo,request,tname);
 	}
 }

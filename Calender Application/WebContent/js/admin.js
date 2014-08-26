@@ -5,8 +5,8 @@
     $(".leftcolumn").css("overflow-x", "hidden");
     $(".leftcolumn").css("overflow-y", "auto");
     });
- 
- 
+
+  
  $('#teams').click(function(){
 	    $(".leftcolumn").css("width","60%");
 	    $(".rightcolumn").css("width","40%");
@@ -15,6 +15,18 @@
 		
 	    });
  
+ $('#updateteam').click(function(){
+	    
+	    $(".leftcolumn").css("width","60%");
+	    $(".rightcolumn").css("width","40%");
+	    $(".rightcolumn").show();
+		$("#calendar").html("");
+		
+	    });
+
+$('#updatedetails').click(function(){
+	alert('on clicking update details button...');
+})
  
  
 function addRow(tableID) {
@@ -98,7 +110,7 @@ function deleteRow(tableID) {
 		alert(e);
 	}
 }
-//////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////// Team
 
 var Team=Backbone.Model.extend({
     defaults:{
@@ -115,6 +127,9 @@ var TeamsCollection = Backbone.Collection.extend({
 
 var TeamsCollectionView = Backbone.View.extend({
 	tagName :'ul',
+	initialize : function(){
+		
+	},
 	 render: function(){
 	      this.collection.each(function(team){
 	          var teamsviews = new TeamsView({ model: team });
@@ -122,7 +137,16 @@ var TeamsCollectionView = Backbone.View.extend({
 	      }, this);
 
 	      return this;
+	  },
+	  render1: function(){
+	      this.collection.each(function(team){
+	          var teamsviews = new TeamsView({ model: team });
+	          this.$el.append(teamsviews.render1().el);
+	      }, this);
+
+	      return this;
 	  }
+
 
 });
 
@@ -132,16 +156,49 @@ var TeamsView=Backbone.View.extend({
    initialize:function(){
 	 },
     template1: _.template($("#teamdisplay").html()),
+    events: {
+ 	   'click #getdetails' : 'showAlert',
+ 	   'click #updatedetails' : 'showAlert1'
+
+ 	  },
+
+    	  showAlert: function(){
+    		  console.log('check error here..');
+    	      alert(this.model.get('teamName'));
+    	      
+    	  },
+
     render:function(){
     	console.log("entered teams render");
     	this.$el.html(this.template1(this.model.toJSON()));
         return this;
+    },
+    
+    template2: _.template($("#updateteamdisplay").html()),
+   
+    	  showAlert1: function(){
+    		  
+    		  alert(this.model.get('teamName'));
+    		     		  
+    		  console.log('at update team view...');
+    		  
+    		  
+    		  var newempdetails = new NewEmpDetails({ collection: displayteamscollectionData });
+    		    var tdcv = new TeamDisplayCollectionView({ collection: displayteamscollectionData });
+    		    $('#calendar').html(_.template($("#updateTeam_addEmp").html()));
+    		    $('#calendar').append(tdcv.render().el);
+    		    
+    		  console.log('end of update team view...');
+    	  },
+
+    render1:function(){
+    	console.log("entered teams render1");
+    	this.$el.html(this.template2(this.model.toJSON()));
+        return this;
     }
 });
-
-
 var collectionData = new  TeamsCollection([
-                                           {
+                                              {
                                         	   teamName:'wallgreens'
                                         	  },
                                         	  {
@@ -155,7 +212,140 @@ var collectionData = new  TeamsCollection([
 
 
 
-/////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////// end of Team
+
+
+
+//////////////////////////////////////////////////////////// update Team
+
+
+var TeamDetails = Backbone.Model.extend({
+	defaults:{
+		id : '',
+		name : '',
+		email : '',
+		contactnum : '',
+		designation : ''
+	}
+});
+
+
+var TeamDisplayCollection = Backbone.Collection.extend({
+	model : TeamDetails
+});
+
+
+var TeamDisplayCollectionView = Backbone.View.extend({
+	tagName :'ul',
+	initialize : function(){
+		this.collection.on('add', this.addOne, this);
+	},
+	 render: function(){
+		 console.log('entered TeamDisplaycollectionView render()...');
+		 this.collection.each(this.addOne, this);
+	      console.log('end of  TeamDisplaycollectionView render()...');
+	      return this;
+	  },
+	  addOne: function(person) {
+          var teamdetailsview = new TeamDetailsView({ model: person });
+          this.$el.append(teamdetailsview.render().el);
+      }
+	  
+});
+
+
+var TeamDetailsView=Backbone.View.extend({
+	tagName :'li',
+	 // change template once...put correct name
+    template: _.template($("#empTemplate").html()),
+    
+   initialize:function(){
+	   this.model.on('change', this.render, this);
+       this.model.on('destroy', this.remove, this);
+	 },
+	 events: {
+         'click .edit' : 'editPerson',
+         'click #delete' : 'DestroyPerson'
+     },
+     editPerson: function(){
+    	 alert('at edit function');
+         var newId = prompt("Please enter the new id", this.model.get('id'));
+         var newName=prompt("please enter the new name",this.model.get("name"));
+         var newEmail=prompt("please enter the new Email",this.model.get("email"));
+         var newContactNO=prompt("please enter the new Contact",this.model.get("contactnum"));
+         var newDesignation=prompt("please enter the new Designation",this.model.get("designation"));
+
+         if (!newId) return;
+         this.model.set('id', newId);
+         if(!newName)return;
+         this.model.set('name',newName);
+         if(!newEmail)return;
+         this.model.set('email',newEmail);
+         if(!newContactNO)return;
+         this.model.set('contactnum',newContactNO);
+         if(!newDesignation)return;
+         this.model.set('designation',newDesignation);
+     },
+     DestroyPerson: function(){
+         this.model.destroy();
+     },
+     remove: function(){
+         this.$el.remove();
+     },
+	 
+	
+    
+    render:function(){
+    	console.log("entered team details render");
+    	this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    },
+    
+});
+
+
+     var NewEmpDetails = Backbone.View.extend({
+        el: '#updateTeam_addEmp',
+        events: {
+            'submit #addempsubmit': 'submit'
+        },
+        submit: function(e) {
+        	alert('at add emp submit....');
+            e.preventDefault();
+            var newPersonId = $(e.currentTarget).find('input#ids').val();
+            var newPersonName=$(e.currentTarget).find('input#name').val();
+            var newPersonEmail=$(e.currentTarget).find('input#email').val();
+            var newPersonContactNo=$(e.currentTarget).find('input#contact').val();
+            var newPersonDesignation=$(e.currentTarget).find('input#designation').val();
+            var teamdetails = new TeamDetails({ id: newPersonId,name:newPersonName,email:newPersonEmail,contact: newPersonContactNo,designation:newPersonDesignation });
+            this.collection.add(teamdetails);
+        }
+    });
+      var displayteamscollectionData = new  TeamDisplayCollection([
+                                                                   {
+                                                                	   id:'6279', 
+                                                                	   name : 'srinivas',
+                                                                	   email : 'srinivas.bavirisetty@valuelabs.net',
+                                                                	   contactnum : '9533394727',
+                                                                	   designation : 'software eng'
+                                                                	  },
+                                                                	  {
+                                                                		   id:'6387', 
+                                                                    	   name : 'chandu',
+                                                                    	   email : 'chandrasekhar.kondamuri@valuelabs.net',
+                                                                    	   contactnum : '9014391152',
+                                                                    	   designation : 'software eng'
+                                                                	  },
+                                                                	  {
+                                                               		   id:'687', 
+                                                                   	   name : 'chandu1',
+                                                                   	   email : 'chandrasekhar1.kondamuri@valuelabs.net',
+                                                                   	   contactnum : '90143911521232',
+                                                                   	   designation : 'software eng1'
+                                                               	  }
+                                                                	  
+                                                                	]);
+/////////////////////////////////////////////////////////// end of update Team
 
 var TeamView=Backbone.View.extend({
 	 initialize:function(){
@@ -256,6 +446,10 @@ Routers=Backbone.Router.extend({
 		},
 		 UpdateTeam:function(){
 			console.log("update team");
+			var tcv = new TeamsCollectionView({ collection: collectionData });		
+			$('#rightcol').html(tcv.render1().el);
+			
+			console.log("end updateteam");
 		}
 });
 	
@@ -263,5 +457,4 @@ var teamList=new TeamList();
 var clientlist=new ClientList();
 var MyRouter=new Routers();
 Backbone.history.start();
-
 

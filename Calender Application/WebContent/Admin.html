@@ -30,7 +30,7 @@ Admin page
 <li><a href="" >Home</a></li>
 <li><a href="#Teams" id="teams">Teams</a></li>
 <li><a href="#AddTeam" id="addteam">Add Team</a></li>
-<li><a href="#UpdateTeam">Update Team</a></li>
+<li><a href="#UpdateTeam" id="updateteam">Update Team</a></li>
 </ul>
 </div>
 <button id=logout>logout</button>
@@ -45,12 +45,25 @@ Admin page
 <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore-min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
 
+<!--Display Team  -->
 <script type="text/template" id="teamdisplay"> 
 
-   </label><%=teamName%>   <input type="button" value="GetDetails" id="getdetails" /> 
+   <%=teamName%>   <input type="button" value="GetDetails" id="getdetails" calss="temp"/> 
 
 
 </script>
+
+<!--Update Team name display  -->
+
+<script type="text/template" id="updateteamdisplay"> 
+
+   <%=teamName%>   <input type="button" value="Update Team" id="updatedetails" /> 
+
+
+</script>
+
+<!-- Team details Display  -->
+
  <script type="text/template" id="NewTeamTemplate">
 	<center>	<form method="post" id="forming"><br/>
 			Team Name:<input type="text" id="tname"/><br/>
@@ -79,6 +92,31 @@ Admin page
 			</form> </center>
 </script>
 
+<!--Adding new Emp at update emp -->
+<script type="text/template" id="updateTeam_addEmp">
+
+<form method = "post" id="addnewemp" action=" "> <br/>
+<input type="text" placeholder="Id of the person" id="ids">
+    <input type="text" placeholder="Name of the person" id="name">
+    <input type="text" placeholder="Email of the person" id="email">
+    <input type="text" placeholder="ContactNO of the person" id="contact">
+     <select id="designation">
+        <option value="Manager">Manager</option>
+        <option value="ScrumMaster">ScrumMaster</option>
+        <option value="SnrDeveloper">SnrDeveloper</option>
+        <option value="SnrQA">SnrQA</option>
+    </select>
+    <input type="submit" value="Add Person" id="addempsubmit" >
+</form>
+
+</script>
+
+
+<script id="empTemplate" type="text/template">
+    <span><strong><%= id %> </strong> (<%= name %>) - <%= email %>  -   <%= contactnum %>  - <%= designation %></span>
+    <button class="edit">Edit</button>
+    <button id="delete">Delete</button>
+</script>
 <script src="./js/admin.js"></script>
 </body>
 </html>
