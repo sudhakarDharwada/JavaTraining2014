@@ -168,11 +168,10 @@ var TeamsView=Backbone.View.extend({
     		  console.log(this.model.get('teamName'));
     		  $(".rightcolumn").hide();
     		  $(".leftcolumn").css("width","100%");
-    		
-    		  var tdcv = new TeamDisplayCollectionView({ collection: displayteamscollectionData });
+    		   var tdcv = new TeamDisplayCollectionView({ collection: displayteamscollectionData });
   		      $('#calendar').html(tdcv.render().el);
   		      var newempdetails = new NewEmpDetails({ collection: displayteamscollectionData });
-  		    
+  		      
     	  },
 
     render:function(){
@@ -218,6 +217,67 @@ var collectionData = new  TeamsCollection([
 
 ///////////////////////////////////////////////////////////// end of Team
 
+
+
+/////////////////////////////////////////////////////////////client details
+
+var ClientDetails = Backbone.Model.extend({
+	defaults:{
+		
+		name : '',
+		location : ''
+	}
+});
+var ClientDisplayCollection = Backbone.Collection.extend({
+	model : ClientDetails
+});
+
+var ClientDisplayCollectionView = Backbone.View.extend({
+	tagName :'ul',
+	initialize : function(){
+		this.collection.on('add', this.addOne, this);
+	},
+	 render: function(){
+		 this.collection.each(this.addOne, this);
+		 return this;
+	  },
+	  addOne: function(clientdetails) {
+          
+		  //update code here
+		  var clientdetailsview = new ClientDetailsView({ model: clientdetails });
+          this.$el.append(teamdetailsview.render().el);
+      }
+	  
+});
+
+
+var ClientDetailsView=Backbone.View.extend({
+	tagName :'li',
+    template: _.template($("#clientTemplate").html()),
+    
+   initialize:function(){
+	   this.model.on('change', this.render, this);
+       this.model.on('destroy', this.remove, this);
+	 },
+	          render:function(){
+	        	  $(".edit").hide();
+	    	      $("#delete").hide();
+         	console.log("entered team details render");
+         	this.$el.html(this.template(this.model.toJSON()));
+             return this;
+         }
+});
+
+
+var displayclientscollectionData = new  ClientDisplayCollection([
+                                                             {
+                                                          	    
+                                                          	   name : 'srinivas',
+                                                          	   clientlocation : 'us'
+                                                          	  }                                                          	  
+                                                          	]);
+
+///////////////////////////////////////////////////////////end of client details
 
 
 //////////////////////////////////////////////////////////// update Team

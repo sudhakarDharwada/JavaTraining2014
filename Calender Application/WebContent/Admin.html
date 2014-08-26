@@ -115,6 +115,14 @@ Admin page
 </script>
 
 
+
+<script id="clientTemplate" type="text/template">
+    <span><strong><%= clientname %> </strong>  - <%= clientlocation %> </span>
+    <button class="clientedit">Edit</button>
+    <button id="clientdelete">Delete</button>
+</script>
+
+
 <script id="empTemplate" type="text/template">
     <span><strong><%= id %> </strong> (<%= name %>) - <%= email %>  -   <%= contactnum %>  - <%= designation %></span>
     <button class="edit">Edit</button>
