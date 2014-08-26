@@ -49,8 +49,32 @@ public class TeamStore {
 		}
 		return map;
 	}
-	public static Map DataUpdate(){
+	public static Map DataUpdate(Team team){
 		Connection con=(Connection)DataConnectivity();
+		String cname=team.getCname();
+		String clocation=team.getClocation();
+		String tname=team.getTname();
+		int seq = team.getSequence();
+		System.out.println("debug........................."+seq);
+
+		try {
+			PreparedStatement st=con.prepareStatement("update team_admin set TEAM_NAME=?,CLIENT_NAME=?,CLIENT_LOCATION=? where TEAM_SEQ=?");
+			st.setString(1, tname);
+			st.setString(2, cname);
+			st.setString(3, clocation);
+			st.setInt(4, seq);
+
+			int update=st.executeUpdate();
+			if(update==1)
+				System.out.println("record updated");
+			else
+				System.out.println("record not updated");
+			st.executeQuery("commit");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();		
+		}
+		
 
 		return map;
 	}

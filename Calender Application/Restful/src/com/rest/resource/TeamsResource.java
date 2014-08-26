@@ -38,26 +38,17 @@ public class TeamsResource {
 	}*/
 	
 	@DELETE
-	//@Consumes(MediaType.TEXT_PLAIN)
 	public void getDelete(){
 		Team contact=(Team) TeamStore.DataDelete(tname);
 		if(contact==null)
 			throw new RuntimeException("Delete"+tname+"Not Found");
 	}
-	/*@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	public Response getUpdate(JAXBElement<Team> team){
-		Team c=team.getValue();
-		return getUpdateProcess(c);
+	
+	@PUT
+	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public void getUpdate(Team team){
+		System.out.println("data update..................");
+		System.out.println(team.getClocation()+"   "+team.getCname()+"  "+team.getSequence());
+		TeamStore.DataUpdate(team);
 	}
-	private Response getUpdateProcess(Team team) {
-		Response res;
-		if(TeamStore.getDetailes().containsKey(team.getTname())) {
-			res = Response.noContent().build();
-		} else {
-			res = Response.created(uri.getAbsolutePath()).build();
-		}
-		TeamStore.getDetailes().put(team.getTname(), team);
-		return res;
-	}*/
 }
