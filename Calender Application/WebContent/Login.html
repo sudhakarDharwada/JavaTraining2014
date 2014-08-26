@@ -3,11 +3,18 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Login</title>
+<link rel="stylesheet" type="text/css" href="Login.css"> 
 </head>
-<body bgcolor="gray">
-<div align="center">
-<form action="login" method="post">
-<table>
+<body bgcolor="#C6BEB0">
+<h1><marquee>Please Login Here.........!!</marquee></h1>
+<div id="wrap">
+<div class="left-div">
+<img src="images/calender-of-events.jpg.gif" height="733" width="800"/>
+</div>
+<div class="right-div" align="right">
+<form id="heading" action="login" method="post">
+<div align="center"><h1>Sign In</h1></div>
+<table align="center">
 <tr>
 <td>Email :</td>
 <td><input type="text" name="email"/></td>
@@ -17,10 +24,12 @@
 <td><input type="password" name="pwd"/></td>
 </tr>
 <tr>
-<td><input type="submit" value="Login"/></td>
+<td><a href="ForgotPassword.html">Forgot Password</a>
+<td><input id="button" type="submit" value="Sign in"/></td>
 </tr>
 </table>
 </form>
+</div>
 </div>
 </body>
 </html>
