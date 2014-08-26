@@ -16,10 +16,11 @@
 	    });
  
  $('#updateteam').click(function(){
-	    
+
 	    $(".leftcolumn").css("width","60%");
 	    $(".rightcolumn").css("width","40%");
 	    $(".rightcolumn").show();
+
 		$("#calendar").html("");
 		
 	    });
@@ -164,8 +165,9 @@ var TeamsView=Backbone.View.extend({
 
     	  showAlert: function(){
     		  console.log('check error here..');
-    	      alert(this.model.get('teamName'));
-    	      
+    		  console.log(this.model.get('teamName'));
+    		  $(".rightcolumn").hide();
+    		  $(".leftcolumn").css("width","100%");
     	  },
 
     render:function(){
@@ -177,20 +179,15 @@ var TeamsView=Backbone.View.extend({
     template2: _.template($("#updateteamdisplay").html()),
    
     	  showAlert1: function(){
-    		  
     		  alert(this.model.get('teamName'));
-    		     		  
     		  console.log('at update team view...');
-    		  
-    		  
-    		  var newempdetails = new NewEmpDetails({ collection: displayteamscollectionData });
+    		    
     		    var tdcv = new TeamDisplayCollectionView({ collection: displayteamscollectionData });
     		    $('#calendar').html(_.template($("#updateTeam_addEmp").html()));
     		    $('#calendar').append(tdcv.render().el);
-    		    
+    		    var newempdetails = new NewEmpDetails({ collection: displayteamscollectionData });
     		  console.log('end of update team view...');
     	  },
-
     render1:function(){
     	console.log("entered teams render1");
     	this.$el.html(this.template2(this.model.toJSON()));
@@ -217,8 +214,6 @@ var collectionData = new  TeamsCollection([
 
 
 //////////////////////////////////////////////////////////// update Team
-
-
 var TeamDetails = Backbone.Model.extend({
 	defaults:{
 		id : '',
@@ -228,26 +223,20 @@ var TeamDetails = Backbone.Model.extend({
 		designation : ''
 	}
 });
-
-
 var TeamDisplayCollection = Backbone.Collection.extend({
 	model : TeamDetails
 });
-
-
 var TeamDisplayCollectionView = Backbone.View.extend({
 	tagName :'ul',
 	initialize : function(){
 		this.collection.on('add', this.addOne, this);
 	},
 	 render: function(){
-		 console.log('entered TeamDisplaycollectionView render()...');
 		 this.collection.each(this.addOne, this);
-	      console.log('end of  TeamDisplaycollectionView render()...');
-	      return this;
+		 return this;
 	  },
-	  addOne: function(person) {
-          var teamdetailsview = new TeamDetailsView({ model: person });
+	  addOne: function(teamdetails) {
+          var teamdetailsview = new TeamDetailsView({ model: teamdetails });
           this.$el.append(teamdetailsview.render().el);
       }
 	  
@@ -256,7 +245,6 @@ var TeamDisplayCollectionView = Backbone.View.extend({
 
 var TeamDetailsView=Backbone.View.extend({
 	tagName :'li',
-	 // change template once...put correct name
     template: _.template($("#empTemplate").html()),
     
    initialize:function(){
@@ -282,7 +270,7 @@ var TeamDetailsView=Backbone.View.extend({
          if(!newEmail)return;
          this.model.set('email',newEmail);
          if(!newContactNO)return;
-         this.model.set('contactnum',newContactNO);
+         this.model.set('contact',newContactNO);
          if(!newDesignation)return;
          this.model.set('designation',newDesignation);
      },
@@ -292,32 +280,28 @@ var TeamDetailsView=Backbone.View.extend({
      remove: function(){
          this.$el.remove();
      },
-	 
-	
-    
     render:function(){
     	console.log("entered team details render");
     	this.$el.html(this.template(this.model.toJSON()));
         return this;
     },
-    
 });
 
 
      var NewEmpDetails = Backbone.View.extend({
-        el: '#updateTeam_addEmp',
+        el: '#addnewemp',
         events: {
-            'submit #addempsubmit': 'submit'
+        	 'submit': 'submit'
         },
         submit: function(e) {
-        	alert('at add emp submit....');
+        	console.log("at add emp submit....");
             e.preventDefault();
             var newPersonId = $(e.currentTarget).find('input#ids').val();
             var newPersonName=$(e.currentTarget).find('input#name').val();
             var newPersonEmail=$(e.currentTarget).find('input#email').val();
             var newPersonContactNo=$(e.currentTarget).find('input#contact').val();
-            var newPersonDesignation=$(e.currentTarget).find('input#designation').val();
-            var teamdetails = new TeamDetails({ id: newPersonId,name:newPersonName,email:newPersonEmail,contact: newPersonContactNo,designation:newPersonDesignation });
+            var newPersonDesignation=$(e.currentTarget).find('select#designation').val();
+            var teamdetails = new TeamDetails({ id:newPersonId,name:newPersonName,email:newPersonEmail,contactnum: newPersonContactNo,designation:newPersonDesignation });
             this.collection.add(teamdetails);
         }
     });
@@ -457,4 +441,3 @@ var teamList=new TeamList();
 var clientlist=new ClientList();
 var MyRouter=new Routers();
 Backbone.history.start();
-
