@@ -168,6 +168,11 @@ var TeamsView=Backbone.View.extend({
     		  console.log(this.model.get('teamName'));
     		  $(".rightcolumn").hide();
     		  $(".leftcolumn").css("width","100%");
+    		
+    		  var tdcv = new TeamDisplayCollectionView({ collection: displayteamscollectionData });
+  		      $('#calendar').html(tdcv.render().el);
+  		      var newempdetails = new NewEmpDetails({ collection: displayteamscollectionData });
+  		    
     	  },
 
     render:function(){
@@ -181,11 +186,13 @@ var TeamsView=Backbone.View.extend({
     	  showAlert1: function(){
     		  alert(this.model.get('teamName'));
     		  console.log('at update team view...');
+    		  $(".rightcolumn").hide();
+    		  $(".leftcolumn").css("width","100%");
     		    
-    		    var tdcv = new TeamDisplayCollectionView({ collection: displayteamscollectionData });
-    		    $('#calendar').html(_.template($("#updateTeam_addEmp").html()));
-    		    $('#calendar').append(tdcv.render().el);
-    		    var newempdetails = new NewEmpDetails({ collection: displayteamscollectionData });
+    		  var tdcv = new TeamDisplayCollectionView({ collection: displayteamscollectionData });
+    		  $('#calendar').html(_.template($("#updateTeam_addEmp").html()));
+    		  $('#calendar').append(tdcv.render().el);
+    		  var newempdetails = new NewEmpDetails({ collection: displayteamscollectionData });
     		  console.log('end of update team view...');
     	  },
     render1:function(){
@@ -275,16 +282,15 @@ var TeamDetailsView=Backbone.View.extend({
          this.model.set('designation',newDesignation);
      },
      DestroyPerson: function(){
-         this.model.destroy();
-     },
-     remove: function(){
-         this.$el.remove();
-     },
-    render:function(){
-    	console.log("entered team details render");
-    	this.$el.html(this.template(this.model.toJSON()));
-        return this;
-    },
+    	 this.$el.remove();
+         this.collection.remove(this.model);
+         this.model.destroy();    
+         },
+         render:function(){
+         	console.log("entered team details render");
+         	this.$el.html(this.template(this.model.toJSON()));
+             return this;
+         }
 });
 
 
