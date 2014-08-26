@@ -94,7 +94,7 @@ Admin page
 
 <!--Adding new Emp at update emp -->
 <script type="text/template" id="updateTeam_addEmp">
-
+<center>
 <form method = "post" id="addnewemp" action=" "> <br/>
 <input type="text" placeholder="Id of the person" id="ids">
     <input type="text" placeholder="Name of the person" id="name">
@@ -107,10 +107,19 @@ Admin page
         <option value="SnrQA">SnrQA</option>
     </select>
     
-    <input type="submit" value="Add Emp" id="addempsubmit" >
-   <input type="submit" value="Submit" id="submitalldata" >
+    <input type="submit" value="Add Emp" id="addempsubmit" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   <input type="submit" value="Submit" id="submitAllData" >
 </form>
+</center>
 
+</script>
+
+
+
+<script id="clientTemplate" type="text/template">
+    <span><strong><%= clientname %> </strong>  - <%= clientlocation %> </span>
+    <button class="clientedit">Edit</button>
+    <button id="clientdelete">Delete</button>
 </script>
 
 
