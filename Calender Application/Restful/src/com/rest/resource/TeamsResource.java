@@ -4,13 +4,16 @@ package com.rest.resource;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import javax.xml.bind.JAXBElement;
 
 import com.rest.entity.Team;
 import com.rest.model.TeamStore;
@@ -20,10 +23,12 @@ public class TeamsResource {
 	UriInfo uri;
 	@Context
 	Request request;
+	String tname;
 
-	public TeamsResource(UriInfo uri,Request request){
+	public TeamsResource(UriInfo uri,Request request,String tname){
 		this.uri=uri;
 		this.request=request;
+		this.tname=tname;
 	}
 	/*@GET
 	@Produces(MediaType.TEXT_XML)
@@ -31,17 +36,15 @@ public class TeamsResource {
 		Team team=(Team) TeamStore.DataRetrive().get(tname);
 		return team;
 	}*/
-	@Path("delete")
+	
 	@DELETE
-	@Consumes(MediaType.TEXT_PLAIN)
-	public void getDelete(/*@PathParam("tname") String tname*/){
-		System.out.println("delete resource gggggggggggggggggggggggggggggggggggggggg");
-		/*Team contact=(Team) TeamStore.DataDelete(tname).remove(tname);
+	//@Consumes(MediaType.TEXT_PLAIN)
+	public void getDelete(){
+		Team contact=(Team) TeamStore.DataDelete(tname);
 		if(contact==null)
-			throw new RuntimeException("Delete"+tname+"Not Found");*/
+			throw new RuntimeException("Delete"+tname+"Not Found");
 	}
-	/*
-	@PUT
+	/*@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	public Response getUpdate(JAXBElement<Team> team){
 		Team c=team.getValue();
