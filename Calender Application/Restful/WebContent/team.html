@@ -1,20 +1,61 @@
 <!DOCTYPE html>
 <html>
- <head>
-  <title>Form to create a new resource</title>
- </head>
+<head>
+<title>Form for Restful Webservices</title>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+	function deleteTeam() {
+
+		var tname = $("#tname").val();
+		console.log(tname);
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("DELETE", "http://localhost:8082/RestTeam/rest/team/"
+				+ tname, true);
+		xmlhttp.send();
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.status == 200 && xmlhttp.readyState == 4) {
+				//document.getElementById("div").innerHTML=xmlhttp.responseXML;
+				document.write(xmlhttp.responseText);
+			}
+		}
+	}
+	function updateTeam() {
+		//console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		var team = {
+			tname : $("#tname").val(),
+			cname : $("#cname").val(),
+			clocation : $("#clocation").val(),
+			sequence : $("#id").val()
+		};
+		console.log(team);
+		$.ajax({
+			url : "http://localhost:8082/RestTeam/rest/team/"
+					+ $("#tname").val(),
+			type : "PUT",
+			datatype : "json",
+			contentType : "application/json",
+			data : JSON.stringify(team)
+		});
+	}
+</script>
+</head>
 <body>
-  <form action="../RestTeam/rest/team/insert" method="POST">
-  <label for="tname">TeamName</label>
-  <input name="tname" />
-  <br/>
-  <label for="cname">ClientName</label>
-  <input name="cname" />
-  <br/>
-  <label for="clocation">ClientLocation</label>
-  <input name="clocation" />
-  <br/>
-  <input type="submit" value="Submit" />
-  </form>
+	<form action="../RestTeam/rest/team/insert/" method="POST">
+		<label for="tname">TeamName</label> <input name="tname" /> <br /> <label
+			for="cname">ClientName</label> <input name="cname" /> <br /> <label
+			for="clocation">ClientLocation</label> <input name="clocation" /> <br />
+		<input type="submit" value="Submit" /> <br />
+
+	</form>
+	Enter TeamName to Delete
+	<input type="text" id="tname" />
+	<button onclick="deleteTeam()">Delete</button>
+	<br /> Enter detailes to update: Enter Client_Name:
+	<input type="text" id="cname" /> Enter ID:
+	<input type="text" id="id" /> Enter Client_Location:
+	<input type="text" id="clocation" />
+	<br />
+	<button onclick="updateTeam()">Update</button>
 </body>
-</html> 
+</html>
