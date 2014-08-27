@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+h1{
+	margin-top:50px;	
+}
+#header{
+	padding-top:30px;
+	margin-top:-20px;
+	margin-left:350px;
+	background-color:#FFC0CB;
+	height:733px;
+	width:1200px;
+}
