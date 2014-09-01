@@ -279,7 +279,7 @@ var TeamDetailsView=Backbone.View.extend({
 		if(!newEmail)return;
 		this.model.set('email',newEmail);
 		if(!newContactNO)return;
-		this.model.set('contact',newContactNO);
+		this.model.set('contactnum',newContactNO);
 		if(!newDesignation)return;
 		this.model.set('designation',newDesignation);
 	},
