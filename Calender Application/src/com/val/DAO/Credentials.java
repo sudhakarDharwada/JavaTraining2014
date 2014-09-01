@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class Credentials 
 {
-	 HashMap<String, String> hp=new HashMap<String, String>();
+	 HashMap<String, Login> hp=new HashMap<String, Login>();
 	private static Connection getConnection() 
 	{
 		try
@@ -25,7 +25,7 @@ public class Credentials
 		}
 		return null;
 	}
-	public HashMap<String, String> getCredentials() throws SQLException
+	public HashMap<String, Login> getCredentials() throws SQLException
 	{
 		Connection con=getConnection();
 		Statement st=null;
@@ -38,13 +38,17 @@ public class Credentials
 		{
 			st=con.createStatement();
 			
-			rs=st.executeQuery("select * from MY_LOGIN");
+			rs=st.executeQuery("select * from calendar_user_login");
 			
 			while(rs.next())
 			{
-				String email=rs.getString("Email");
-				String password=rs.getString("Password");
-				hp.put(email, password);
+				String email=rs.getString("EMAIL");
+				String password=rs.getString("PASSWORD");
+				int loginid = rs.getInt("USER_SEQ_ID");
+				Login login = new Login();
+				login.setLoginid(loginid);
+				login.setPassword(password);
+				hp.put(email, login);
 			}
 		}
 		catch(Exception e)

@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet{
 			throws ServletException, IOException 
 	{
 		System.out.println("In servlet");
-		if("admin@cal.com".equals(req.getParameter("email")) && "admin".equals(req.getParameter("pwd")))
+		if("admin".equals(req.getAttribute("check")))
 		{
 			resp.sendRedirect("Admin.html");
 		}
