@@ -262,7 +262,7 @@ var TeamDetailsView=Backbone.View.extend({
 	},
 	events: {
 		'click .edit' : 'editPerson',
-		'click #delete' : 'DestroyPerson'
+		'click .delete' : 'DestroyPerson'
 	},
 	editPerson: function(){
 		alert('at edit function');
