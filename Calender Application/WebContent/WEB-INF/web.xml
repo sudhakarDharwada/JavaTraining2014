@@ -52,4 +52,17 @@
     <filter-name>AuthorizationFilter</filter-name>
     <url-pattern>/logout</url-pattern>
   </filter-mapping>
+  <servlet>
+		<servlet-name>Profile Rest Service</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<init-param>
+			<param-name>com.sun.jersey.config.property.packages</param-name>
+			<param-value>com.vl.calendar.profile</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Profile Rest Service</servlet-name>
+		<url-pattern>/rest/*</url-pattern>
+	</servlet-mapping>
 </web-app>
