@@ -18,10 +18,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.val.DAO.Credentials;
+import com.val.DAO.Login;
 
 public class AuthenticationFilter implements Filter 
 {
-	HashMap<String, String> hp=null;
+	HashMap<String,Login> hp=null;
 	@Override
 	public void destroy() {
 		
@@ -31,11 +32,13 @@ public class AuthenticationFilter implements Filter
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp,
 			FilterChain chain) throws IOException, ServletException {
-		System.out.println("In Filter");
+		System.out.println("In Filter...........");
 		
 		Credentials cd=new Credentials();
 		try 
 		{
+			String filepath=req.getServletContext().getInitParameter("Admin-Credentials");
+			ResourceBundle rb=ResourceBundle.getBundle(filepath);
 			hp=cd.getCredentials();
 			HttpServletRequest request=(HttpServletRequest)req;
 			HttpServletResponse response=(HttpServletResponse)resp;
@@ -46,9 +49,20 @@ public class AuthenticationFilter implements Filter
 			String password=req.getParameter("pwd");
 			if(email!=null && email!="" && hp.containsKey(email))
 			{	
-				if(hp.get(email).equals(password))
+				if(hp.get(email).getPassword().equals(password))
 				{
 					session.setAttribute("login", "true");
+					session.setAttribute("userid",hp.get(email).getLoginid());
+					request.setAttribute("check","user");
+					chain.doFilter(req, resp);
+				}
+			}
+			if(email!=null && email!="" && rb.containsKey(email))
+			{	
+				if(rb.getString(email).equals(password))
+				{
+					session.setAttribute("login", "true");
+					request.setAttribute("check","admin");
 					chain.doFilter(req, resp);
 				}
 			}
