@@ -10,6 +10,9 @@ public class UserProfile
 	private String email;
 	private String phone;
 	private String designation;
+	public UserProfile() {
+		
+	}
 	public UserProfile(String id, String name, String email, String phone,
 			String designation) {
 		this.id = id;

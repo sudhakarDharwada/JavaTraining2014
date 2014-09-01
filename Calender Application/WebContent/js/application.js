@@ -113,7 +113,8 @@ $(function(){
 		email:'',
 	        phone:000,
 		designation:''
-	      }
+	      },
+	      urlRoot:"./rest/profile"
 	    });
 	var ProfileView=Backbone.View.extend({
 	  el:"#body",
@@ -130,8 +131,11 @@ $(function(){
 		  'ProfileView':'showProfile'
 	  },
 	  showProfile:function(){
-		  var profileview=new ProfileView({model:user});
-		  profileview.render();
+		  var user=new User();
+		  user.fetch({success:function(response){
+			  var profileview=new ProfileView({model:response});
+			  profileview.render();
+		  }});
 	  },
 	  home:function(){
 		  window.events = new Events({title:'aaa',eventPlace:'home'});
@@ -139,7 +143,6 @@ $(function(){
 		  //events.fetch();
 	  }
 	});
-	var user=new User({name:'shashikanth',id:6239,email:'shashikanthgoud@yahoo.co.in',phone:123456,designation:'SD'});
 	var approuter=new AppRouter();
 	Backbone.history.start();
 	

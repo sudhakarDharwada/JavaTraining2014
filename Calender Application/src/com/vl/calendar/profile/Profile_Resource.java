@@ -1,7 +1,5 @@
 package com.vl.calendar.profile;
 
-import java.util.Collection;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,12 +12,14 @@ import javax.ws.rs.core.Request;
 public class Profile_Resource 
 {
 	@Context
-	Request req;
+	Request request;
 	ProfileDAO dao=new ProfileDAO();
 	@GET
 	@Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-	public Collection<UserProfile> getall(@Context HttpServletRequest request)
+	@Path("{id}")
+	public UserProfile getall(@Context HttpServletRequest request)
 	{
-		return dao.getUserProfile((Integer)request.getSession().getAttribute("userid")).values();
+		System.out.println((Integer)request.getSession().getAttribute("userid"));
+		return dao.getUserProfile((Integer)request.getSession().getAttribute("userid"));
 	}
 }
