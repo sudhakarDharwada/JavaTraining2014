@@ -33,7 +33,7 @@ Admin page
 <li><a href="#UpdateTeam" id="updateteam">Update Team</a></li>
 </ul>
 </div>
-<button id=logout onclick="location.href='Logoutcalender.html'">logout</button>
+<button id=logout>logout</button>
 </div>
 <!-- </div> -->
 
@@ -118,15 +118,15 @@ Admin page
 
 <script id="clientTemplate" type="text/template">
     <span><strong><%= clientname %> </strong>  - <%= clientlocation %> </span>
-    <button class="clientedit">Edit</button>
-    <button id="clientdelete">Delete</button>
+   <span> <button class="clientedit">Edit</button>
+    <button id="clientdelete">Delete</button> </span>
 </script>
 
 
 <script id="empTemplate" type="text/template">
     <span><strong><%= id %> </strong> (<%= name %>) - <%= email %>  -   <%= contactnum %>  - <%= designation %></span>
     <button class="edit">Edit</button>
-    <button id="delete">Delete</button>
+    <button class="delete">Delete</button>
 </script>
 <script src="./js/admin.js"></script>
 </body>

@@ -168,12 +168,15 @@ var TeamsView=Backbone.View.extend({
     		  console.log(this.model.get('teamName'));
     		  $(".rightcolumn").hide();
     		  $(".leftcolumn").css("width","100%");
-    		
+    		  /*console.log('trying to hide try...');
+    		  $("#try").hide();
+    		  $(".spanclass").hide();*/
+    		  console.log('after hide try...');
     		  var tdcv = new TeamDisplayCollectionView({ collection: displayteamscollectionData });
   		      $('#calendar').html(tdcv.render().el);
   		      var newempdetails = new NewEmpDetails({ collection: displayteamscollectionData });
-  		     /*$(".edit").hide();
-  		     $("#delete").hide();*/
+  		     $(".edit").hide();
+  		     $(".delete").hide();
     	  },
 
     render:function(){
