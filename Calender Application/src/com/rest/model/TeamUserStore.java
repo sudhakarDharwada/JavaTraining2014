@@ -2,55 +2,37 @@ package com.rest.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-
 import com.rest.entity.TeamUser;
 
 public class TeamUserStore {
-
-	//private static Map<String,Contact> map;
 	private static Map<String,TeamUser> map = new HashMap<String,TeamUser>();
+	static Connection con=null;
 
-	/*private ContactStore() {
-
-		Contact contact = new Contact("1", "Learn REST");
-		//contact.setDescription("Read http://www.vogella.com/tutorials/REST/article.html");
-		map.put("1", contact);
-		contact = new Contact("2", "Do something");
-		//contact.setDescription("Read complete http://www.vogella.com");
-		map.put("2", contact);
-
-	}*/
-	/*public static Map<String,TeamUser> getDetailes(){
-		Team contact = new Team("1", "Learn REST");
-		//contact.setDescription("Read http://www.vogella.com/tutorials/REST/article.html");
-		map.put("1", contact);
-		contact = new Team("2", "Do something");
-		//contact.setDescription("Read complete http://www.vogella.com");
-		map.put("2", contact);
-		//DataConnectivity();
-		return map;
-	}*/
 	public static Map DataRetrive(){
-		Statement st=(Statement) DataConnectivity();
+		Connection con=(Connection) DataConnectivity();
+
 		ResultSet rs;
+		//System.out.println("data retrive........................");
 		try {
-			rs = st.executeQuery("select * from TEAM");
+			Statement st=con.createStatement();
+			rs = st.executeQuery("select USERID,UNAME,EMAIL,MOBILE_NUMBER,DESIGNATION,PWD from team_user1");
 			while(rs.next())
 			{
-				String id=rs.getString("id");
-				String name=rs.getString("name");
-				String email=rs.getString("email");
-				int mobile_number=rs.getInt("mobile_number");
-				String designation=rs.getString("designation");
-				String password=rs.getString("password");
-				
+				String id=rs.getString("USERID");
+				String name=rs.getString("UNAME");
+				String email=rs.getString("EMAIL");
+				String mobile_number=rs.getString("MOBILE_NUMBER");
+				String designation=rs.getString("DESIGNATION");
+				String password=rs.getString("PWD");
+
 				TeamUser team=new TeamUser(id,name,email,mobile_number,designation,password);
+				System.out.print(team+"hello");
 				map.put(id, team);
 			}
 		} catch (SQLException e) {
@@ -59,32 +41,97 @@ public class TeamUserStore {
 		}
 		return map;
 	}
-	public static Map DataInsert(){
-		Statement st=(Statement) DataConnectivity();
-		Iterator<?> it=map.entrySet().iterator();
-		while(it.hasNext()){
-			@SuppressWarnings("unchecked")
-			Map.Entry<String, TeamUser>entry=(Map.Entry<String, TeamUser>)it.next();
-			System.out.println(entry.getKey()+" "
-					+ ""+entry.getValue().getName()+" "+entry.getValue().getEmail()+""+entry.getValue().getMobile_number()
-					+""+entry.getValue().getId()+""+entry.getValue().getDesignation()+""+entry.getValue().getPassword());
-			try {
-				st.executeUpdate("insert into TEAMS_USER"+"values(entry.getKey(),entry.getValue().getname(),entry.getValue().getEmail(),entry.getValue().getMobile_number,entry.getValue().getDesignation(),entry.getValue().getPassword(),USER_SEQUENCE.nextval)");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public static Map DataDelete(String id){
+		Connection con=(Connection) DataConnectivity();
+		try {
+			Statement st = con.createStatement();
+			int delete=st.executeUpdate("DELETE FROM team_user1 WHERE USERID = "+id);
+			if(delete==1)
+				System.out.println("record deleted");
+			else
+				System.out.println("record not deleted");
+			//st.executeQuery("commit");
+			con.commit();
+		} 
+		catch (SQLException e) 
+		{
+			e.printStackTrace();
 		}
-		return map;		
+		return map;	
+	}
+	public static void DataInsert(TeamUser team) throws SQLException{
+		Connection con=(Connection) DataConnectivity();
+
+		System.out.println("in datainsert");
+		String uname=team.getName();
+		String id=team.getId();
+		String email=team.getEmail();
+		String mnumber=team.getMobile_number();
+		String designation=team.getDesignation();
+		try{
+			con.commit();
+			PreparedStatement st=con.prepareStatement("insert into team_user1 values(?,?,?,?,?,'valuelabs',USER_SEQ.nextval,290)");
+
+			st.setString(1, id);
+			st.setString(2, uname);
+			st.setString(3, email);
+			st.setString(4, mnumber);
+			st.setString(5, designation);
+			
+			int update=st.executeUpdate();
+			if(update==1)
+				System.out.println("record inserted");
+			else
+				System.out.println("record not inserted");
+			con.commit();
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+		}
+		finally{
+			
+			con.close();
+		}
+	}
+
+	public static Map DataUpdate(TeamUser team){
+		Connection con=(Connection)DataConnectivity();
+		String id=team.getId();
+		String password=team.getPassword();
+		String mnumber=team.getMobile_number();
+		String designation=team.getDesignation();
+		System.out.println("debug........................."+id+" ... num.."+mnumber);
+
+		try {
+			PreparedStatement st=con.prepareStatement("update team_user1 set MOBILE_NUMBER=?,DESIGNATION=? where USERID=?");
+			st.setString(1, mnumber);
+			st.setString(2, designation);
+			//st.setString(3, password);
+			st.setString(3, id);
+			int update=st.executeUpdate();
+			System.out.println(mnumber+" "+designation+ "  ....     "+update);
+			if(update==1)
+				System.out.println("record not updated");
+			else
+				System.out.println("record updated");
+				
+			//st.executeQuery("commit");
+			con.commit();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();		
+		}
+		
+		return map;
 	}
 	public static Object DataConnectivity(){
-		Statement st=null;
+		//PreparedStatement st=null;
+		//System.out.println("debuging............................");
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection con=DriverManager.getConnection("jdbc:oracle:thin:@sfodev01.snapfish.valuelabs.net:1521:SFODEV01", 
+			con=DriverManager.getConnection("jdbc:oracle:thin:@sfodev01.snapfish.valuelabs.net:1521:SFODEV01", 
 					"training", "training");
-			st = con.createStatement();
-			
+
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -92,6 +139,6 @@ public class TeamUserStore {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return st;
+		return con;
 	}
 }

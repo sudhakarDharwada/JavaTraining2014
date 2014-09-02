@@ -1,53 +1,48 @@
 package com.rest.resource;
 
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import javax.xml.bind.JAXBElement;
 
-import com.rest.entity.TeamUser;
-import com.rest.model.TeamUserStore;
+import com.rest.entity.Team;
+import com.rest.model.TeamStore;
 
 public class TeamsResource {
 	@Context
 	UriInfo uri;
 	@Context
 	Request request;
-	String id;
+	String tname;
 
-	public TeamsResource(UriInfo uri,Request request,String id){
-		this.id=id;
+	public TeamsResource(UriInfo uri,Request request,String tname){
 		this.uri=uri;
 		this.request=request;
+		this.tname=tname;
 	}
-	@GET
-	@Produces(MediaType.TEXT_XML)
-	public TeamUser getInfo(){
-		TeamUser team=(TeamUser) TeamUserStore.DataRetrive().get(id);
-		return team;
-	}
-	/*@DELETE
+	
+	@DELETE
 	public void getDelete(){
-		TeamUser contact=TeamUserStore.DataRetrive().remove(id);
+		Team contact=(Team) TeamStore.DataDelete(tname);
 		if(contact==null)
-			throw new RuntimeException("Delete"+id+"Not Found");
+			throw new RuntimeException("Delete"+tname+"Not Found");
 	}
+	
 	@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	public Response getUpdate(JAXBElement<TeamUser> team){
-		TeamUser c=team.getValue();
-		return getUpdateProcess(c);
+	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public void getUpdate(Team team){
+		System.out.println("data update..................");
+		System.out.println(team.getClocation()+"   "+team.getCname()+"  "+team.getSequence());
+		TeamStore.DataUpdate(team);
 	}
-	private Response getUpdateProcess(TeamUser team) {
-		Response res;
-		if(TeamUserStore.getDetailes().containsKey(team.getId())) {
-			res = Response.noContent().build();
-		} else {
-			res = Response.created(uri.getAbsolutePath()).build();
-		}
-		TeamUserStore.getDetailes().put(team.getId(), team);
-		return res;
-	}*/
 }

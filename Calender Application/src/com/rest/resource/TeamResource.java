@@ -1,6 +1,7 @@
 package com.rest.resource;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +18,10 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.UriInfo;
 
-import com.rest.entity.TeamUser;
-import com.rest.model.TeamUserStore;
+import com.rest.entity.Team;
+import com.rest.model.TeamStore;
 
-
-
-@Path("/teamuser")
+@Path("/team")
 public class TeamResource {
 
 	@Context
@@ -33,34 +32,32 @@ public class TeamResource {
 	@GET
 	@Path("count")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String getCount(){
-		int count=TeamUserStore.DataRetrive().size();
+	public String getCount() throws SQLException{
+		int count=TeamStore.DataRetrive().size();
 		return String.valueOf(count);
 	}
 	@SuppressWarnings("unchecked")
 	@GET
 	@Produces(MediaType.TEXT_XML)
-	public List<TeamUser> getContactsBrowser() {
-		List<TeamUser> team = new ArrayList<TeamUser>();
-		team.addAll(TeamUserStore.DataRetrive().values());
+	public List<Team> getContactsBrowser() throws SQLException {
+		List<Team> team = new ArrayList<Team>();
+		team.addAll(TeamStore.DataRetrive().values());
 		return team; 
 	}
-	@SuppressWarnings("unchecked")
 	@POST
 	@Produces(MediaType.TEXT_HTML)
-	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public void newContact(@FormParam("id") String id,
-			@FormParam("name")String name,@FormParam("email") String email,
-			@FormParam("mobile_number") int mobile_number,
-			@FormParam("designation") String designation,@FormParam("password") String password,
-			@Context HttpServletResponse servletResponse) throws IOException{
-		TeamUser team=new TeamUser(id,name,email,mobile_number,designation,password);
-		TeamUserStore.DataInsert().put(id, team);
+	
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void newContact(Team t) throws IOException{
+		System.out.println("team store method called"+t.getCname());
+		
+		TeamStore.DataInsert(t);
+		
 	//	servletResponse.sendRedirect("../index.html");
 	}
-	@Path("{teamuser}")
-	public TeamsResource getContact(@PathParam("teamuser")String id){
-		return new TeamsResource(uriInfo,request,id);
+	@Path("{team}")
+	public TeamsResource getContact(@PathParam("team") String tname){
+		System.out.println("resource 1........................");
+		return new TeamsResource(uriInfo,request,tname);
 	}
-
 }

@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Team {
 	
-	//public int sequence;
+	public int sequence;
 	private String tname;
 	private String cname;
 	private String clocation;
@@ -21,12 +21,12 @@ public class Team {
 		this.clocation=clocation;
 		this.cname=cname;
 	}
-	/*public int getSequence() {
+	public int getSequence() {
 		return sequence;
 	}
-	public void setSequence(int sequence) {
-		this.sequence = sequence;
-	}*/
+	public void setSequence(String sequence) {
+		this.sequence = Integer.parseInt(sequence);
+	}
 	public String getTname() {
 		return tname;
 	}

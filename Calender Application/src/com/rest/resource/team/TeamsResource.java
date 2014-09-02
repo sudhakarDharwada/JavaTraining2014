@@ -8,51 +8,41 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import javax.xml.bind.JAXBElement;
 
-import com.rest.entity.Team;
-import com.rest.model.TeamStore;
+import com.rest.entity.TeamUser;
+import com.rest.model.TeamUserStore;
 
 public class TeamsResource {
 	@Context
 	UriInfo uri;
 	@Context
 	Request request;
-	String tname;
+	String id;
 
-	public TeamsResource(UriInfo uri,Request request,String tname){
-		this.tname=tname;
+	public TeamsResource(UriInfo uri,Request request,String id){
+		this.id=id;
 		this.uri=uri;
 		this.request=request;
 	}
 	@GET
 	@Produces(MediaType.TEXT_XML)
-	public Team getInfo(){
-		Team team=(Team) TeamStore.DataRetrive().get(tname);
+	public TeamUser getInfo(){
+		TeamUser team=(TeamUser) TeamUserStore.DataRetrive().get(id);
 		return team;
 	}
-	/*@DELETE
+	@DELETE
 	public void getDelete(){
-		Team contact=TeamStore.getDetailes().remove(tname);
-		if(contact==null)
-			throw new RuntimeException("Delete"+tname+"Not Found");
+		TeamUser contact=(TeamUser)TeamUserStore.DataDelete(id);
+		/*if(contact==null)
+			throw new RuntimeException("Delete"+id+"Not Found");*/
 	}
 	@PUT
-	@Consumes(MediaType.APPLICATION_XML)
-	public Response getUpdate(JAXBElement<Team> team){
-		Team c=team.getValue();
-		return getUpdateProcess(c);
+	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})
+	public void getUpdate(TeamUser team){
+		System.out.println(team.getDesignation()+" "+team.getMobile_number()+" "+team.getId());
+		TeamUserStore.DataUpdate(team); 
+		
 	}
-	private Response getUpdateProcess(Team team) {
-		Response res;
-		if(TeamStore.getDetailes().containsKey(team.getTname())) {
-			res = Response.noContent().build();
-		} else {
-			res = Response.created(uri.getAbsolutePath()).build();
-		}
-		TeamStore.getDetailes().put(team.getTname(), team);
-		return res;
-	}*/
+	
 }

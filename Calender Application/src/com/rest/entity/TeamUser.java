@@ -11,17 +11,25 @@ public class TeamUser {
 	private String id;
 	private String name;
 	private String email;
-	private int mobile_number;
+	private String mobile_number;
 	private String designation;
 	private String password;
+	private int useq;
 	
 	public TeamUser() {	
 	}
-	public TeamUser(String id,String name,String email,int mobile_number,String designation,String password){
+	public int getUseq() {
+		return useq;
+	}
+	public void setUseq(int useq) {
+		this.useq = useq;
+	}
+	public TeamUser(String id,String name,String email,String mobile_number,String designation,String password){
 		this.id=id;
 		this.name=name;
 		this.email=email;
 		this.mobile_number=mobile_number;
+		this.designation=designation;
 		this.password=password;
 	}
 	
@@ -43,10 +51,10 @@ public class TeamUser {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getMobile_number() {
+	public String getMobile_number() {
 		return mobile_number;
 	}
-	public void setMobile_number(int mobile_number) {
+	public void setMobile_number(String mobile_number) {
 		this.mobile_number = mobile_number;
 	}
 	public String getDesignation() {
