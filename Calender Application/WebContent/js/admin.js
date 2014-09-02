@@ -463,7 +463,7 @@ Routers = Backbone.Router
 													id : table.rows[i].cells[1].firstChild.value,
 													name : table.rows[i].cells[2].firstChild.value,
 													email : table.rows[i].cells[3].firstChild.value,
-													contactno : table.rows[i].cells[4].firstChild.value,
+													mobile_number : table.rows[i].cells[4].firstChild.value,
 													designation : table.rows[i].cells[5].firstChild.value
 												});
 
