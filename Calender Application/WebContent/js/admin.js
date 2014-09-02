@@ -255,15 +255,19 @@ var TeamDetailsView = Backbone.View.extend({
 	editPerson : function() {
 		alert('at edit function');
 		
-		
-		var newEmail = prompt("please enter the new Email", this.model
-				.get("email"));
-		var newContactNO = prompt("please enter the new Contact", this.model
-				.get("mobile_number"));
-		var newDesignation = prompt("please enter the new Designation",
-				this.model.get("designation"));
+		var newId = prompt("please enter the new id",this.model.get("id"));
+		var newName = prompt("please enter the new name",this.model.get("name"));
+		var newEmail = prompt("please enter the new Email", this.model.get("email"));
+		var newContactNO = prompt("please enter the new Contact", this.model.get("mobile_number"));
+		var newDesignation = prompt("please enter the new Designation",this.model.get("designation"));
 
 		
+		if (!newName)
+			return;
+		this.model.set('name', newNmail);
+		if (!newID)
+			return;
+		this.model.set('id', newId);
 		if (!newEmail)
 			return;
 		this.model.set('email', newEmail);
@@ -471,13 +475,10 @@ Routers = Backbone.Router
 											var req = new XMLHttpRequest();
 											console.log("jquery");
 											req.open("POST","http://localhost:8080/Project/rest2/teamuser",true);
-											req.setRequestHeader(
-													"Content-Type",
-													"application/json");
+											req.setRequestHeader("Content-Type","application/json");
 											req.send(JSON.stringify(mem));
 											req.onreadystatechange = function() {
-												if (req.status == 200
-														&& req.readyState == 4)
+												if (req.status == 200 && req.readyState == 4)
 													console.log("updated");
 											}
 										}
