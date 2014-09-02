@@ -259,7 +259,7 @@ var TeamDetailsView = Backbone.View.extend({
 		var newEmail = prompt("please enter the new Email", this.model
 				.get("email"));
 		var newContactNO = prompt("please enter the new Contact", this.model
-				.get("contactnum"));
+				.get("mobile_number"));
 		var newDesignation = prompt("please enter the new Designation",
 				this.model.get("designation"));
 
@@ -319,7 +319,7 @@ var NewEmpDetails = Backbone.View
 					id : newPersonId,
 					name : newPersonName,
 					email : newPersonEmail,
-					contactnum : newPersonContactNo,
+					mobile_number : newPersonContactNo,
 					designation : newPersonDesignation
 				});
 				this.collection.add(teamdetails);
@@ -329,19 +329,19 @@ var displayteamscollectionData = new TeamDisplayCollection([ {
 	id : '6279',
 	name : 'srinivas',
 	email : 'srinivas.bavirisetty@valuelabs.net',
-	contactnum : '9533394727',
+	mobile_number : '9533394727',
 	designation : 'software eng'
 }, {
 	id : '6387',
 	name : 'chandu',
 	email : 'chandrasekhar.kondamuri@valuelabs.net',
-	contactnum : '9014391152',
+	mobile_number : '9014391152',
 	designation : 'software eng'
 }, {
 	id : '687',
 	name : 'chandu1',
 	email : 'chandrasekhar1.kondamuri@valuelabs.net',
-	contactnum : '90143911521232',
+	mobile_number : '90143911521232',
 	designation : 'software eng1'
 }
 
