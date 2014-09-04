@@ -7,11 +7,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -44,7 +44,7 @@ public class TeamResource {
 	
 	@SuppressWarnings("unchecked")
 	@GET
-	@Produces(MediaType.TEXT_XML)
+	@Produces({"application/xml", "application/json"})
 	public List<TeamUser> getContactsBrowser() {
 		System.out.print("getcontactbrowser is called");
 		List<TeamUser> team = new ArrayList<TeamUser>();
@@ -55,11 +55,12 @@ public class TeamResource {
 	
 	@SuppressWarnings("unchecked")
 	@POST
+	@Path("/team/{tname}")
 	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public void newContact(TeamUser user,@Context HttpServletResponse servletResponse) throws IOException, SQLException{
-		System.out.println(user);
-		TeamUserStore.DataInsert(user);
+	public void newContact(TeamUser user,@PathParam("tname")String tname) throws IOException, SQLException{
+		System.out.println(user+"  team name is "+ tname);
+		TeamUserStore.DataInsert(user,tname);
 	}
 	
 	@Path("{teamuser}")

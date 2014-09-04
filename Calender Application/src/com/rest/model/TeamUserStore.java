@@ -59,24 +59,38 @@ public class TeamUserStore {
 		}
 		return map;	
 	}
-	public static void DataInsert(TeamUser team) throws SQLException{
-		Connection con=(Connection) DataConnectivity();
-
-		System.out.println("in datainsert");
+	public static void DataInsert(TeamUser team, String tname) throws SQLException{
+		Connection con=null;
+		Connection con1=null;
+		Statement st1=null ;
+		System.out.println("in datainsert...");
 		String uname=team.getName();
 		String id=team.getId();
 		String email=team.getEmail();
 		String mnumber=team.getMobile_number();
 		String designation=team.getDesignation();
+		
 		try{
+			con=(Connection) DataConnectivity();
+			con1=(Connection) DataConnectivity();
 			con.commit();
-			PreparedStatement st=con.prepareStatement("insert into team_user1 values(?,?,?,?,?,'valuelabs',USER_SEQ.nextval,290)");
+			System.out.print(tname + " in data insert.....123");
+			String sql1 = "select TEAM_SEQ from TEAM_ADMIN where team_name='"+tname+"'";
+			st1=con1.createStatement();
+			ResultSet rs = st1.executeQuery(sql1);
+			PreparedStatement st=con.prepareStatement("insert into team_user1 values(?,?,?,?,?,'valuelabs',USER_SEQ.nextval,?)");
 
 			st.setString(1, id);
 			st.setString(2, uname);
 			st.setString(3, email);
 			st.setString(4, mnumber);
 			st.setString(5, designation);
+			while (rs.next()) {
+				st.setInt(6, rs.getInt("TEAM_SEQ"));
+				
+			}
+				
+			
 			
 			int update=st.executeUpdate();
 			if(update==1)

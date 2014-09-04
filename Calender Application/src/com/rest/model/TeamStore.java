@@ -121,7 +121,8 @@ public class TeamStore {
 			st.setString(3, clocation);
 
 			st.executeUpdate();
-		//	con.commit();
+			System.out.println("record added");
+			con.commit();
 			//st.executeQuery("commit");
 		}
 		catch(SQLException e){

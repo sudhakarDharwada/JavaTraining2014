@@ -33,9 +33,7 @@ public class TeamsResource {
 	}
 	@DELETE
 	public void getDelete(){
-		TeamUser contact=(TeamUser)TeamUserStore.DataDelete(id);
-		/*if(contact==null)
-			throw new RuntimeException("Delete"+id+"Not Found");*/
+		TeamUserStore.DataDelete(id);
 	}
 	@PUT
 	@Consumes({MediaType.APPLICATION_XML,MediaType.APPLICATION_JSON})

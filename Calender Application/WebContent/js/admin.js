@@ -255,19 +255,10 @@ var TeamDetailsView = Backbone.View.extend({
 	editPerson : function() {
 		alert('at edit function');
 		
-		var newId = prompt("please enter the new id",this.model.get("id"));
-		var newName = prompt("please enter the new name",this.model.get("name"));
 		var newEmail = prompt("please enter the new Email", this.model.get("email"));
 		var newContactNO = prompt("please enter the new Contact", this.model.get("mobile_number"));
 		var newDesignation = prompt("please enter the new Designation",this.model.get("designation"));
 
-		
-		if (!newName)
-			return;
-		this.model.set('name', newNmail);
-		if (!newID)
-			return;
-		this.model.set('id', newId);
 		if (!newEmail)
 			return;
 		this.model.set('email', newEmail);
@@ -277,27 +268,36 @@ var TeamDetailsView = Backbone.View.extend({
 		if (!newDesignation)
 			return;
 		this.model.set('designation', newDesignation);
+		
 	},
 	DestroyPerson : function() {
 		this.$el.remove();
 		this.collection.remove(this.model);
-		this.model.destroy();
+		console.log("model is detroyed")
+		var req = new XMLHttpRequest();
+		req.open("DELETE","http://localhost:8080/Project/rest2/teamuser/"+this.model.id,true);
+		req.setRequestHeader("Content-Type","application/json");
+		req.send(JSON.stringify(this.model));
+		req.onreadystatechange = function()
+		{
+			if(req.status == 200&&req.readyState==4)
+				console.log("deleted....");
+		};
 	},
 
 	render : function() {
 		console.log("entered team details render");
 		this.$el.html(this.template(this.model.toJSON()));
 		var req = new XMLHttpRequest();
-		console.log("jquery");
+		console.log("jquery in delete");
 		req.open("PUT","http://localhost:8080/Project/rest2/teamuser/"+this.model.id,true);
 		req.setRequestHeader("Content-Type","application/json");
 		req.send(JSON.stringify(this.model) );
 		req.onreadystatechange = function()
 		{
 			if(req.status == 200&&req.readyState==4)
-				//document.write(req.responseXML.toLocaleString());
-			console.log("updated");
-		}
+				console.log("updated");
+		};
 		return this;
 	},
 });
@@ -350,7 +350,6 @@ var displayteamscollectionData = new TeamDisplayCollection([ {
 }
 
 ]);
-// ///////////////////////////////////////////////////////// end of update Team
 
 var TeamView = Backbone.View.extend({
 	initialize : function() {
@@ -364,12 +363,12 @@ var TeamView = Backbone.View.extend({
 });
 
 var TeamMember = Backbone.Model.extend({
-	urlRoot : "rest2/teamuser",
+	urlRoot : "http://localhost:8080/Project/rest2/teamuser",
 	defaults : {
 		id : "",
 		name : "",
 		email : "",
-		contactno : "",
+		mobile_number : "",
 		designation : ""
 	},
 	initialize : function() {
@@ -377,15 +376,18 @@ var TeamMember = Backbone.Model.extend({
 	}
 });
 
-var TeamList = Backbone.Collection.extend({
+
+TeamList = Backbone.Collection.extend({
 	Model : TeamMember,
-	url : "rest2/teamuser",
-	initialize : function() {
-	}
+	url : "http://localhost:8080/Project/rest2/teamuser"
+	
 });
 
+var ClientListView=Backbone.View.extend({
+	
+});
 var Client = Backbone.Model.extend({
-	urlRoot : "rest1/team",
+	
 	defaults : {
 		tname : '',
 		cname : '',
@@ -398,9 +400,8 @@ var ClientList = Backbone.Collection.extend({
 	url : "rest1/team"
 });
 
-Routers = Backbone.Router
-		.extend({
-			routes : {
+Routers = Backbone.Router.extend({
+	routes : {
 				"" : "HomePage",
 				"Teams" : "Teams",
 				"AddTeam" : "AddTeam",
@@ -413,13 +414,17 @@ Routers = Backbone.Router
 			},
 
 			Teams : function() {
+				console.log("in list tem....");
+				
 				console.log("team");
+				
+				
 				var tcv = new TeamsCollectionView({
 					collection : collectionData
 				});
 				$('#rightcol').html(tcv.render().el);
-
 				console.log("endteam");
+				console.log(TeamList);
 
 			},
 
@@ -458,14 +463,13 @@ Routers = Backbone.Router
 									var rowLength = table.rows.length;
 									var totalCol = 6;
 									for (i = 1; i < rowLength; i++) {
-										var mem = new TeamMember(
-												{
-													id : table.rows[i].cells[1].firstChild.value,
-													name : table.rows[i].cells[2].firstChild.value,
-													email : table.rows[i].cells[3].firstChild.value,
-													mobile_number : table.rows[i].cells[4].firstChild.value,
-													designation : table.rows[i].cells[5].firstChild.value
-												});
+										var mem = new TeamMember({
+											id : table.rows[i].cells[1].firstChild.value,
+											name : table.rows[i].cells[2].firstChild.value,
+											email : table.rows[i].cells[3].firstChild.value,
+											mobile_number : table.rows[i].cells[4].firstChild.value,
+											designation : table.rows[i].cells[5].firstChild.value
+										});
 
 										if (mem != null) {
 											console.log("in create")
@@ -474,11 +478,15 @@ Routers = Backbone.Router
 											console.log(this.model);
 											var req = new XMLHttpRequest();
 											console.log("jquery");
-											req.open("POST","http://localhost:8080/Project/rest2/teamuser",true);
-											req.setRequestHeader("Content-Type","application/json");
+											req.open("POST","http://localhost:8080/Project/rest2/teamuser/team/"+$('#tname').val(),true);
+										
+											req.setRequestHeader(
+													"Content-Type",
+													"application/json");
 											req.send(JSON.stringify(mem));
 											req.onreadystatechange = function() {
-												if (req.status == 200 && req.readyState == 4)
+												if (req.status == 200
+														&& req.readyState == 4)
 													console.log("updated");
 											}
 										}
