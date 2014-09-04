@@ -1,30 +1,40 @@
 package com.vl.calendar.event;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Event_DAO 
 {
 	@SuppressWarnings("null")
-	public Map<Integer,CalendarEvent> getevents(int teamid) 
+	public Map<Integer,CalendarEvent> getevents(int userid) 
 	{
 		Connection con =null;
-		Map<Integer,CalendarEvent> eventsmap = null;
+		
+		Map<Integer,CalendarEvent> eventsmap =new HashMap<Integer, CalendarEvent>();
 		try {
 			con = DbConnection.getConnection();
-			String sql = "select * from Events where TEAM_SEQUENCE=?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			//ps.executeQuery();
-			ps.setInt(1,teamid);
+			String sql1="select TEAM_SEQUENCE from calendar_teams_user where TEAMS_USER_SEQID=?";
+			PreparedStatement ps = con.prepareStatement(sql1);
+			ps.setInt(1, userid);
 			ResultSet rs = ps.executeQuery();
+			String sql = "select * from calendar_events where TEAM_SEQUENCE=?";
+			PreparedStatement ps1 = con.prepareStatement(sql);
+			//ps.executeQuery();
 			while(rs.next())
 			{
-				CalendarEvent event = new CalendarEvent(rs.getInt("EVENT_SEQUENCE_ID"),rs.getNString("EVENT_TITLE"),rs.getString("EVENT_PLACE"),rs.getDate("EVENT_DATE"));
-				eventsmap.put(rs.getInt("EVENT_SEQUENCE_ID"),event );
+				ps1.setInt(1,rs.getInt("TEAM_SEQUENCE"));
+			}
+			ResultSet rs1 = ps1.executeQuery();
+			while(rs1.next())
+			{
+				CalendarEvent event = new CalendarEvent(rs1.getInt("EVENT_SEQUENCE_ID"),rs1.getString("EVENT_TITLE"),rs1.getString("EVENT_PLACE"),rs1.getDate("EVENT_DATE").toString());
+				eventsmap.put(rs1.getInt("EVENT_SEQUENCE_ID"),event );
 			}
 			
 		} catch (SQLException e) {
@@ -38,20 +48,30 @@ public class Event_DAO
 	public CalendarEvent addevent(CalendarEvent event,int userid) 
 	{
 		Connection con = null;
-		Statement st = null ;
+		
 		try {
 			con = DbConnection.getConnection();
-			String sql1 = "select TEAM_SEQUENCE from TEAMS_USER where TEAMS_USER_SEQID=userid";
-			String sql = "insert into Events values (?,?,?,?,?,EVENT_SEQUENCE.nextval) ";
+			String sql1 = "select TEAM_SEQUENCE from calendar_teams_user where TEAMS_USER_SEQID=?";
+			PreparedStatement ps = con.prepareStatement(sql1);
+			ps.setInt(1, userid);
+			ResultSet rs = ps.executeQuery();
+			String sql = "insert into calendar_events values (?,?,?,?,?,calendar_EVENT_SEQUENCE.nextval) ";
 			@SuppressWarnings("null")
-			ResultSet rs = st.executeQuery(sql1);
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, event.getEvent_name());
-            ps.setDate(2, event.getEvent_date());
-            ps.setString(3, event.getEvent_location());
-            ps.setInt(4, userid);
-            ps.setInt(5,rs.getInt("TEAM_SEQUENCE"));
-            ps.executeUpdate();
+			int teamsequence=0;
+			PreparedStatement ps1 = con.prepareStatement(sql);
+			ps1.setString(1, event.getTitle());
+            ps1.setDate(2, Date.valueOf(event.getStart()));
+            ps1.setString(3, event.getEventPlace());
+            while(rs.next())
+            {
+            	
+            	teamsequence=rs.getInt("TEAM_SEQUENCE");
+            }
+            System.out.println("teamsequence "+teamsequence);
+            ps1.setInt(4,teamsequence);
+            ps1.setInt(5, userid);
+            ps1.executeUpdate();
+            
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -65,11 +85,11 @@ public class Event_DAO
 		Connection con = null;
 		try {
 			con = DbConnection.getConnection();
-			String sql = "update events set EVENT_TITLE=?,EVENT_DATE=?,EVENT_PLACE=? where EVENT_SEQUENCE_ID=?";
+			String sql = "update calendar_events set EVENT_TITLE=?,EVENT_DATE=?,EVENT_PLACE=? where EVENT_SEQUENCE_ID=?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1,event.getEvent_name());
-			ps.setDate(2,event.getEvent_date());
-			ps.setString(3,event.getEvent_location());
+			ps.setString(1,event.getTitle());
+			ps.setDate(2,Date.valueOf(event.getStart()));
+			ps.setString(3,event.getEventPlace());
 			ps.setInt(4, eventid);
 			ps.executeUpdate();
 		} catch (SQLException e) {
@@ -84,7 +104,7 @@ public class Event_DAO
 		Connection con = null;
 		try {
 			con = DbConnection.getConnection();
-			String sql = "delete from events where EVENT_SEQUENCE_ID=?";
+			String sql = "delete from calendar_events where EVENT_SEQUENCE_ID=?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1,eventid);
 			ps.executeUpdate();

@@ -1,41 +1,57 @@
 package com.vl.calendar.event;
 
-import java.sql.Date;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 public class CalendarEvent 
 {
-	int Event_id;
-	String Event_name;
-	String Event_location;
-	Date Event_date;
-	
-	public CalendarEvent(int Event_id,String Event_name,String Event_location,Date Event_date)
+
+	int id;
+	String title;
+	String eventPlace;
+	String start;
+	public CalendarEvent() {
+
+	}
+
+	public CalendarEvent(int id,String title,String eventPlace,String start)
 	{
-		this.Event_id = Event_id;
-		this.Event_name = Event_name;
-		this.Event_location = Event_location;
-		this.Event_date = Event_date;
+		this.id = id;
+		this.title = title;
+		this.eventPlace = eventPlace;
+		this.start = start;
 	}
-	public String getEvent_name() {
-		return Event_name;
+
+	public int getId() {
+		return id;
 	}
-	public void setEvent_name(String event_name) {
-		Event_name = event_name;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getEvent_location() {
-		return Event_location;
+
+	public String getTitle() {
+		return title;
 	}
-	public void setEvent_location(String event_location) {
-		Event_location = event_location;
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public Date getEvent_date() {
-		return Event_date;
+
+	public String getEventPlace() {
+		return eventPlace;
 	}
-	public void setEvent_date(Date event_date) {
-		Event_date = event_date;
+
+	public void setEventPlace(String eventPlace) {
+		this.eventPlace = eventPlace;
+	}
+
+	public String getStart() {
+		return start;
+	}
+
+	public void setStart(String start) {
+		this.start = start;
 	}
 
 }
